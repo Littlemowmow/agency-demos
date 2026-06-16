@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rana Web &amp; Voice — Website Demos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0e1116;--panel:#171b22;--ink:#e8ecf2;--mut:#9aa4b2;--line:#262c36}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Inter,system-ui,sans-serif;line-height:1.5}
+  header{padding:56px 24px 24px;max-width:1180px;margin:0 auto}
+  h1{font-family:Fraunces,serif;font-weight:700;font-size:clamp(28px,4vw,44px);margin:0 0 8px}
+  header p{color:var(--mut);max-width:62ch;margin:0}
+  .grid{max-width:1180px;margin:0 auto;padding:24px;display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:24px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    display:flex;flex-direction:column;text-decoration:none;color:inherit;
+    transition:transform .2s,border-color .2s}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .shot{aspect-ratio:1440/1100;overflow:hidden;background:#0a0c10;border-bottom:1px solid var(--line)}
+  .shot img{width:100%;display:block}
+  .meta{padding:16px 18px 20px}
+  .meta h2{font-family:Fraunces,serif;font-size:20px;margin:0 0 2px}
+  .type{color:var(--accent);font-weight:600;font-size:13px;margin:0 0 12px}
+  .go{font-size:14px;font-weight:600;color:var(--accent)}
+  footer{max-width:1180px;margin:0 auto;padding:8px 24px 64px;color:var(--mut);font-size:13px}
+</style></head>
+<body>
+  <header>
+    <h1>Website Demos</h1>
+    <p>Free preview sites built by <strong>Rana Web &amp; Voice</strong> for local businesses.
+       Each is a real, working demo of what your site could look like — live this week if you like it.</p>
+  </header>
+  <main class="grid">
+      <a class="card" href="./jativa-family-dental/" style="--accent:#1B9E8F">
+        <div class="shot"><img src="screenshots/jativa-family-dental-desktop.png" alt="Jativa Family Dental website preview" loading="lazy"></div>
+        <div class="meta">
+          <h2>Jativa Family Dental</h2>
+          <p class="type">Dental practice · Clinton, MI</p>
+          <span class="go">View demo →</span>
+        </div>
+      </a>
+      <a class="card" href="./annes-cuts/" style="--accent:#B5654A">
+        <div class="shot"><img src="screenshots/annes-cuts-desktop.png" alt="Anne's Cuts & More website preview" loading="lazy"></div>
+        <div class="meta">
+          <h2>Anne's Cuts & More</h2>
+          <p class="type">Hair salon · Clinton, MI</p>
+          <span class="go">View demo →</span>
+        </div>
+      </a>
+      <a class="card" href="./kleanthous-foot-clinic/" style="--accent:#2F5FA6">
+        <div class="shot"><img src="screenshots/kleanthous-foot-clinic-desktop.png" alt="Kleanthous Family Foot Clinic website preview" loading="lazy"></div>
+        <div class="meta">
+          <h2>Kleanthous Family Foot Clinic</h2>
+          <p class="type">Podiatry clinic · Chelsea, MI</p>
+          <span class="go">View demo →</span>
+        </div>
+      </a>
+      <a class="card" href="./zou-zous-cafe/" style="--accent:#6F4E2E">
+        <div class="shot"><img src="screenshots/zou-zous-cafe-desktop.png" alt="Zou Zou's Café website preview" loading="lazy"></div>
+        <div class="meta">
+          <h2>Zou Zou's Café</h2>
+          <p class="type">Café & coffeehouse · Chelsea, MI</p>
+          <span class="go">View demo →</span>
+        </div>
+      </a>
+      <a class="card" href="./mickeys-dairy-twist/" style="--accent:#FF7AA2">
+        <div class="shot"><img src="screenshots/mickeys-dairy-twist-desktop.png" alt="Mickey's Dairy Twist website preview" loading="lazy"></div>
+        <div class="meta">
+          <h2>Mickey's Dairy Twist</h2>
+          <p class="type">Ice cream shop · Saline, MI</p>
+          <span class="go">View demo →</span>
+        </div>
+      </a>
+  </main>
+  <footer>Demo previews · not the businesses' official sites · Rana Web &amp; Voice</footer>
+</body></html>
