@@ -1,4 +1,6 @@
 <!-- Jativa Family Dental | Generated for outreach demo | 2026-06-16 -->
+<!-- Design Read: Reading this as a local dental-practice landing for anxious families, calm/clinical-but-warm language, leaning toward an editorial whitespace-led layout with one distinctive grotesk in committed weight contrast. -->
+<!-- Dials: VARIANCE 5 (calm, intentional asymmetry, not chaos) / MOTION 4 (subtle reveal + hover, 150-300ms ease-out) / DENSITY 3 (airy, generous section gaps). -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,1349 +9,634 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Jativa Family Dental — Gentle, modern dentistry for the whole family in Clinton, MI. New patients welcome. Book online or call (517) 456-7471." />
+  <meta name="description" content="Jativa Family Dental: gentle, modern dentistry for the whole family in Clinton, MI. New patients welcome. Book online or call (517) 456-7471." />
   <title>Jativa Family Dental | Clinton, MI</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
 
   <style>
     /* ── Design tokens ─────────────────────────────────────── */
     :root {
-      --bg:       #F7FBFB;
-      --ink:      #0F2C33;
-      --primary:  #1B9E8F;
+      --paper:    #F7FBFB;
+      --surface:  #FFFFFF;
+      --ink:      #0E2A30;   /* near-black teal, body + headings */
+      --ink-2:    #355A61;   /* secondary copy, passes 4.5:1 on paper */
+      --ink-3:    #4E767D;   /* meta / captions, used >=14px only */
+      --primary:  #16887A;   /* derived shade of brand teal, 4.5:1 on white for text */
+      --primary-strong: #0F6B60;
+      --primary-bright: #1B9E8F; /* brand teal, large/UI surfaces only */
       --accent:   #7FD1C4;
       --soft:     #E6F4F1;
-      --ink-mid:  #2E5A63;
-      --ink-lite: #5A8A93;
-      --white:    #FFFFFF;
-      --border:   rgba(27,158,143,.18);
+      --soft-2:   #D7ECE7;
+      --line:     #DCEAE7;       /* neutral-ish hairline */
+      --line-soft: #E9F2F0;
 
-      --f-display: 'Fraunces', Georgia, serif;
-      --f-body:    'Figtree', system-ui, sans-serif;
+      --f-body: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
 
-      --radius:   14px;
-      --radius-sm:  8px;
-      --shadow:   0 2px 16px rgba(15,44,51,.07);
-      --shadow-hover: 0 8px 32px rgba(27,158,143,.18);
-      --transition: .28s cubic-bezier(.4,0,.2,1);
+      --r-sm: 6px;
+      --r-md: 14px;
+      --r-lg: 22px;
+      --r-pill: 999px;
+
+      /* one soft, layered, low-alpha neutral elevation scale */
+      --e1: 0 1px 2px rgba(14,42,48,.05), 0 1px 1px rgba(14,42,48,.04);
+      --e2: 0 1px 2px rgba(14,42,48,.05), 0 10px 26px rgba(14,42,48,.07);
+      --e3: 0 2px 4px rgba(14,42,48,.05), 0 22px 48px rgba(14,42,48,.10);
+
+      --ease: cubic-bezier(.22,1,.36,1);
+      --dur: .22s;
     }
 
-    /* ── Reset ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       font-family: var(--f-body);
-      background: var(--bg);
+      background: var(--paper);
       color: var(--ink);
-      font-size: 1rem;
+      font-size: 1.0625rem;
       line-height: 1.6;
+      font-feature-settings: "ss01";
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       overflow-x: hidden;
     }
-    img, svg { display: block; max-width: 100%; }
+    svg { display: block; }
+    img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
-    ul { list-style: none; }
-    button { cursor: pointer; font-family: var(--f-body); border: none; }
+    ul, ol { list-style: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; color: inherit; }
+    h1, h2, h3 { line-height: 1.08; letter-spacing: -.025em; font-weight: 600; text-wrap: balance; }
+    p { text-wrap: pretty; }
+    .tnum { font-variant-numeric: tabular-nums; }
 
-    /* ── Utility ───────────────────────────────────────────── */
-    .container {
-      width: min(90%, 1120px);
-      margin-inline: auto;
-    }
-    .visually-hidden {
-      position: absolute;
-      width: 1px; height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      white-space: nowrap;
-    }
+    .wrap { width: min(92%, 1180px); margin-inline: auto; }
+    .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    /* ── Focus states ──────────────────────────────────────── */
     :focus-visible {
-      outline: 2.5px solid var(--primary);
+      outline: 2.5px solid var(--primary-strong);
       outline-offset: 3px;
-      border-radius: var(--radius-sm);
+      border-radius: var(--r-sm);
     }
 
-    /* ── Scroll-reveal ─────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .55s ease, transform .55s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-    .reveal-delay-4 { transition-delay: .4s; }
-
-    /* ═══════════════════════════════════════════════════════
-       HEADER
-    ═══════════════════════════════════════════════════════ */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247,251,251,.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: box-shadow var(--transition);
-    }
-    .site-header.scrolled { box-shadow: 0 2px 20px rgba(15,44,51,.08); }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 68px;
-      gap: 1rem;
+    /* ── reveal ─────────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: .07s; } .d2 { transition-delay: .14s; }
+    .d3 { transition-delay: .21s; } .d4 { transition-delay: .28s; } .d5 { transition-delay: .35s; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
     }
 
-    /* Wordmark */
-    .wordmark {
-      display: flex;
-      align-items: center;
-      gap: .65rem;
-      flex-shrink: 0;
+    /* ═══ HEADER ═══ */
+    .head {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(247,251,251,.86);
+      backdrop-filter: blur(14px) saturate(1.4);
+      -webkit-backdrop-filter: blur(14px) saturate(1.4);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
     }
-    .wordmark-text {
-      font-family: var(--f-display);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--ink);
-      letter-spacing: -.01em;
-      line-height: 1.1;
-    }
-    .wordmark-text span {
-      display: block;
-      font-size: .72rem;
-      font-family: var(--f-body);
-      font-weight: 500;
-      color: var(--ink-lite);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      margin-top: .08rem;
+    .head.stuck { border-bottom-color: var(--line); box-shadow: var(--e1); }
+    .head-in { display: flex; align-items: center; justify-content: space-between; height: 74px; gap: 1rem; }
+
+    .brand { display: inline-flex; align-items: center; gap: .7rem; }
+    .brand .mark { width: 38px; height: 38px; flex-shrink: 0; }
+    .brand .name { font-size: 1.1rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); line-height: 1; }
+    .brand .name b { display: block; font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin-top: .32rem; }
+
+    .nav { display: none; }
+    @media (min-width: 860px) {
+      .nav { display: flex; align-items: center; gap: 2.2rem; }
+      .nav a { font-size: .95rem; font-weight: 500; color: var(--ink-2); position: relative; transition: color var(--dur) var(--ease); }
+      .nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; height: 2px; right: 0; background: var(--primary); transform: scaleX(0); transform-origin: left; border-radius: 2px; transition: transform var(--dur) var(--ease); }
+      .nav a:hover { color: var(--primary-strong); }
+      .nav a:hover::after { transform: scaleX(1); }
     }
 
-    /* Nav */
-    .site-nav {
-      display: none;
-    }
-    @media (min-width: 768px) {
-      .site-nav {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-      }
-      .site-nav a {
-        font-size: .9rem;
-        font-weight: 500;
-        color: var(--ink-mid);
-        position: relative;
-        transition: color var(--transition);
-      }
-      .site-nav a::after {
-        content: '';
-        position: absolute;
-        bottom: -2px; left: 0;
-        width: 0; height: 2px;
-        background: var(--primary);
-        border-radius: 1px;
-        transition: width var(--transition);
-      }
-      .site-nav a:hover { color: var(--primary); }
-      .site-nav a:hover::after { width: 100%; }
-    }
-
-    /* Header CTAs */
-    .header-ctas {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-    }
+    .head-cta { display: flex; align-items: center; gap: .6rem; }
     .btn {
-      display: inline-flex;
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      font-size: .94rem; font-weight: 600; border-radius: var(--r-pill);
+      padding: .62rem 1.3rem; white-space: nowrap;
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-ghost { color: var(--primary-strong); border: 1.5px solid var(--line); background: var(--surface); }
+    .btn-ghost:hover { border-color: var(--accent); box-shadow: var(--e1); transform: translateY(-1px); }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: var(--e1); }
+    .btn-primary:hover { background: var(--primary-strong); box-shadow: var(--e2); transform: translateY(-1px); }
+    .btn-lg { padding: .85rem 1.7rem; font-size: 1rem; }
+
+    .burger { display: inline-flex; flex-direction: column; gap: 5px; width: 42px; height: 42px; align-items: center; justify-content: center; }
+    .burger span { width: 20px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease); }
+    @media (min-width: 860px) { .burger { display: none; } }
+
+    .drawer { display: none; flex-direction: column; border-top: 1px solid var(--line); background: var(--paper); }
+    .drawer.open { display: flex; }
+    .drawer a { padding: 1rem 4%; font-weight: 500; color: var(--ink-2); border-bottom: 1px solid var(--line-soft); transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+    .drawer a:hover { color: var(--primary-strong); background: var(--soft); }
+
+    /* ═══ HERO ═══ */
+    .hero { position: relative; overflow: hidden; isolation: isolate; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 6vw, 4rem);
       align-items: center;
-      justify-content: center;
-      gap: .4rem;
-      font-size: .875rem;
-      font-weight: 600;
-      border-radius: 100px;
-      padding: .55rem 1.25rem;
-      transition: background var(--transition), color var(--transition), box-shadow var(--transition), transform var(--transition);
-      white-space: nowrap;
+      padding-block: clamp(56px, 9vw, 116px);
     }
-    .btn:active { transform: scale(.97); }
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid var(--primary);
-      color: var(--primary);
-    }
-    .btn-outline:hover {
-      background: var(--soft);
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: var(--white);
-      box-shadow: 0 2px 10px rgba(27,158,143,.25);
-    }
-    .btn-primary:hover {
-      background: #178a7c;
-      box-shadow: 0 4px 18px rgba(27,158,143,.35);
-    }
-    .btn-lg {
-      font-size: 1rem;
-      padding: .75rem 1.75rem;
+    @media (min-width: 940px) {
+      .hero-grid { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr); }
     }
 
-    /* Mobile menu button */
-    .menu-toggle {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 36px;
-      height: 36px;
-      background: none;
-      border: none;
-      padding: 4px;
-      flex-shrink: 0;
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .82rem; font-weight: 600; color: var(--primary-strong);
+      letter-spacing: .02em; margin-bottom: 1.5rem;
     }
-    .menu-toggle span {
-      display: block;
-      height: 2px;
-      background: var(--ink);
-      border-radius: 2px;
-      transition: transform var(--transition), opacity var(--transition);
-    }
-    @media (min-width: 768px) {
-      .menu-toggle { display: none; }
-    }
+    .eyebrow .tick { width: 26px; height: 1.5px; background: var(--primary); border-radius: 2px; }
 
-    /* Mobile drawer */
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
-      gap: 0;
-      border-top: 1px solid var(--border);
-      background: var(--bg);
+    .hero h1 {
+      font-size: clamp(2.7rem, 6.2vw, 4.6rem);
+      font-weight: 300; line-height: 1.04; letter-spacing: -.035em;
+      color: var(--ink); margin-bottom: 1.4rem; max-width: 13ch;
     }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      padding: 1rem 1.5rem;
-      font-weight: 500;
-      color: var(--ink-mid);
-      border-bottom: 1px solid var(--border);
-      transition: background var(--transition), color var(--transition);
-    }
-    .mobile-nav a:hover { background: var(--soft); color: var(--primary); }
+    .hero h1 strong { font-weight: 700; color: var(--primary-strong); }
+    .hero-sub { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--ink-2); max-width: 46ch; line-height: 1.62; margin-bottom: 2.1rem; }
 
-    /* ═══════════════════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════════════════ */
-    .hero {
-      position: relative;
-      min-height: clamp(520px, 80vh, 780px);
-      display: flex;
-      align-items: center;
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+
+    .hero-rail { display: flex; flex-wrap: wrap; gap: 1.4rem 2rem; margin-top: 2.6rem; padding-top: 1.9rem; border-top: 1px solid var(--line); }
+    .rail-item { display: flex; align-items: center; gap: .6rem; font-size: .9rem; font-weight: 500; color: var(--ink-2); }
+    .rail-item svg { flex-shrink: 0; color: var(--primary); }
+
+    /* identity device panel (right) */
+    .hero-art { position: relative; }
+    .art-card {
+      position: relative; background: var(--surface);
+      border: 1px solid var(--line); border-radius: var(--r-lg);
+      box-shadow: var(--e3); padding: clamp(1.5rem, 3vw, 2.4rem);
       overflow: hidden;
-      isolation: isolate;
     }
-
-    /* Gradient mesh background */
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-    }
-    .hero-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+    .art-card::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 60% at 80% 30%, rgba(127,209,196,.32) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(27,158,143,.14) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 60% 70%, rgba(230,244,241,.8) 0%, transparent 50%);
-      background-color: var(--bg);
+        radial-gradient(120% 90% at 88% 8%, rgba(127,209,196,.22), transparent 58%),
+        radial-gradient(90% 80% at 4% 96%, rgba(22,136,122,.10), transparent 60%);
     }
+    .art-svg { position: relative; z-index: 1; width: 100%; height: auto; }
+    .art-cap { position: relative; z-index: 1; margin-top: 1.4rem; display: flex; align-items: center; gap: .7rem; }
+    .art-cap .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); flex-shrink: 0; position: relative; }
+    .art-cap .dot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--accent); opacity: .55; transform: scale(.6); animation: ring 2.6s var(--ease) infinite; }
+    @keyframes ring { 0% { opacity: .55; transform: scale(.6);} 70%,100% { opacity: 0; transform: scale(1.15);} }
+    .art-cap p { font-size: .9rem; color: var(--ink-2); line-height: 1.45; }
+    .art-cap b { color: var(--ink); font-weight: 600; }
 
-    /* Tooth curve motif — large abstract soft shape */
-    .hero-motif {
-      position: absolute;
-      right: -60px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: min(480px, 50vw);
-      opacity: .55;
-      pointer-events: none;
-    }
-    @media (max-width: 767px) {
-      .hero-motif {
-        width: 260px;
-        right: -40px;
-        opacity: .3;
-      }
-    }
+    /* ═══ section scaffolding ═══ */
+    section.band { padding-block: clamp(64px, 10vw, 128px); }
+    .sec-head { max-width: 60ch; margin-bottom: clamp(2.4rem, 5vw, 3.6rem); }
+    .kicker { font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--primary-strong); margin-bottom: 1rem; }
+    .sec-title { font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 600; letter-spacing: -.028em; color: var(--ink); margin-bottom: .9rem; }
+    .sec-lead { font-size: 1.1rem; color: var(--ink-2); line-height: 1.6; max-width: 54ch; }
 
-    .hero-content {
-      position: relative;
-      padding-block: clamp(60px, 10vw, 120px);
-      max-width: 640px;
+    /* ═══ SERVICES (editorial list, not identical cards) ═══ */
+    .svc-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--e2); }
+    @media (min-width: 720px) { .svc-grid { grid-template-columns: 1fr 1fr; } }
+    .svc {
+      background: var(--surface); padding: clamp(1.6rem, 3vw, 2.3rem);
+      transition: background-color var(--dur) var(--ease);
     }
+    .svc:hover { background: #FBFEFE; }
+    .svc.lead { grid-column: 1 / -1; background: linear-gradient(120deg, var(--ink) 0%, #143C42 100%); color: #EAF6F4; }
+    @media (min-width: 720px) { .svc.lead { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; gap: 1.4rem 2rem; align-items: center; } }
+    .svc-ic { width: 30px; height: 30px; color: var(--primary); margin-bottom: 1rem; }
+    .svc.lead .svc-ic { color: var(--accent); }
+    .svc h3 { font-size: 1.22rem; font-weight: 600; letter-spacing: -.02em; margin-bottom: .45rem; color: var(--ink); }
+    .svc.lead h3 { color: #fff; font-size: clamp(1.4rem, 2.2vw, 1.7rem); }
+    .svc p { font-size: .96rem; color: var(--ink-2); line-height: 1.55; }
+    .svc.lead p { color: rgba(234,246,244,.86); max-width: 52ch; }
+    .svc-body { display: flex; flex-direction: column; }
+    .svc.lead .svc-cta { margin-top: 0; }
+    .svc-cta { margin-top: 1rem; }
 
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .8rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 1.4rem;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 28px;
-      height: 2px;
-      background: var(--primary);
-      border-radius: 1px;
-    }
-
-    .hero-headline {
-      font-family: var(--f-display);
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -.025em;
-      color: var(--ink);
-      margin-bottom: 1.2rem;
-    }
-    .hero-headline em {
-      font-style: italic;
-      color: var(--primary);
-    }
-
-    .hero-sub {
-      font-size: clamp(.95rem, 1.5vw, 1.1rem);
-      color: var(--ink-mid);
-      max-width: 480px;
-      margin-bottom: 2.2rem;
-      line-height: 1.7;
-    }
-
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .85rem;
-      align-items: center;
-    }
-
-    .hero-trust {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.4rem;
-      margin-top: 2.8rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-    .hero-trust-item {
-      display: flex;
-      align-items: center;
-      gap: .55rem;
-      font-size: .82rem;
-      font-weight: 500;
-      color: var(--ink-mid);
-    }
-    .hero-trust-item svg {
-      flex-shrink: 0;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       SECTION HEADER
-    ═══════════════════════════════════════════════════════ */
-    .section-label {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: .8rem;
-    }
-    .section-title {
-      font-family: var(--f-display);
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 400;
-      letter-spacing: -.02em;
-      line-height: 1.2;
-      color: var(--ink);
-      margin-bottom: .9rem;
-    }
-    .section-body {
-      font-size: 1.05rem;
-      color: var(--ink-mid);
-      max-width: 52ch;
-      line-height: 1.7;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       SERVICES
-    ═══════════════════════════════════════════════════════ */
-    .services {
-      padding-block: clamp(60px, 8vw, 100px);
-    }
-
-    .services-header {
-      margin-bottom: clamp(2.5rem, 5vw, 4rem);
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.2rem;
-    }
-    @media (min-width: 540px) {
-      .services-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (min-width: 900px) {
-      .services-grid { grid-template-columns: repeat(3, 1fr); }
-      /* Fifth card: span center in last row */
-      .service-card:nth-child(4) { /* stays naturally */ }
-      .service-card:nth-child(5) {
-        grid-column: 2 / 3;
-      }
-    }
-
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: clamp(1.4rem, 3vw, 2rem);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      box-shadow: var(--shadow);
-      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
-    }
-    .service-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-4px);
-      border-color: rgba(27,158,143,.35);
-    }
-
-    .service-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background var(--transition);
-    }
-    .service-card:hover .service-icon {
-      background: var(--accent);
-    }
-
-    .service-name {
-      font-family: var(--f-display);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.25;
-    }
-
-    .service-desc {
-      font-size: .9rem;
-      color: var(--ink-lite);
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       ABOUT
-    ═══════════════════════════════════════════════════════ */
-    .about {
-      padding-block: clamp(60px, 8vw, 100px);
-      background: var(--soft);
-      position: relative;
-      overflow: hidden;
-    }
-    .about::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -80px;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(27,158,143,.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .about-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: clamp(2.5rem, 6vw, 5rem);
-      align-items: start;
-    }
-    @media (min-width: 768px) {
-      .about-inner { grid-template-columns: 1fr 1fr; }
-    }
-
-    .about-copy p {
-      font-size: 1.02rem;
-      color: var(--ink-mid);
-      line-height: 1.75;
-      margin-bottom: 1.1rem;
-    }
+    /* ═══ ABOUT ═══ */
+    .about { background: var(--soft); position: relative; overflow: hidden; }
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2.6rem, 6vw, 5rem); align-items: start; }
+    @media (min-width: 900px) { .about-grid { grid-template-columns: 1.05fr .95fr; } }
+    .about-copy p { font-size: 1.08rem; color: var(--ink-2); line-height: 1.72; margin-bottom: 1.15rem; }
     .about-copy p:last-child { margin-bottom: 0; }
+    .about-copy strong { color: var(--ink); font-weight: 600; }
+    .pull { font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 300; line-height: 1.3; letter-spacing: -.02em; color: var(--ink); margin-bottom: 1.6rem; }
+    .pull b { font-weight: 700; color: var(--primary-strong); }
 
-    .about-copy strong {
-      color: var(--ink);
-      font-weight: 600;
-    }
+    .trust { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--e2); }
+    .trust-row { background: var(--surface); padding: 1.4rem 1.6rem; display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+    .trust-row:hover { background: #FBFEFE; }
+    .trust-ic { width: 26px; height: 26px; color: var(--primary); }
+    .trust-row h3 { font-size: 1.04rem; font-weight: 600; color: var(--ink); margin-bottom: .25rem; letter-spacing: -.015em; }
+    .trust-row p { font-size: .92rem; color: var(--ink-2); line-height: 1.5; }
 
-    .trust-signals {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
+    /* ═══ CONTACT ═══ */
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2.4rem, 5vw, 3.6rem); }
+    @media (min-width: 880px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
 
-    .trust-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 1.5rem 1.75rem;
-      border: 1px solid var(--border);
-      display: flex;
-      gap: 1.1rem;
-      align-items: flex-start;
-      box-shadow: var(--shadow);
-      transition: box-shadow var(--transition), transform var(--transition);
-    }
-    .trust-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateX(4px);
-    }
-    .trust-card-icon {
-      width: 40px; height: 40px;
-      background: var(--soft);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .trust-card-body h3 {
-      font-family: var(--f-display);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: .3rem;
-    }
-    .trust-card-body p {
-      font-size: .875rem;
-      color: var(--ink-lite);
-      line-height: 1.55;
-    }
+    .info { display: flex; flex-direction: column; gap: 2rem; }
+    .info-block .lbl { font-size: .76rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: .65rem; }
 
-    /* ═══════════════════════════════════════════════════════
-       BOOKING / CONTACT
-    ═══════════════════════════════════════════════════════ */
-    .contact {
-      padding-block: clamp(60px, 8vw, 100px);
+    .call-big {
+      display: inline-flex; align-items: center; gap: .85rem;
+      font-size: clamp(1.4rem, 2.4vw, 1.75rem); font-weight: 700; letter-spacing: -.02em;
+      color: var(--primary-strong); background: var(--surface);
+      border: 1px solid var(--line); border-radius: var(--r-md); padding: 1rem 1.4rem;
+      box-shadow: var(--e1); width: fit-content;
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
     }
+    .call-big:hover { transform: translateY(-2px); box-shadow: var(--e2); border-color: var(--accent); }
+    .call-big svg { color: var(--primary); flex-shrink: 0; }
 
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: clamp(2.5rem, 6vw, 4.5rem);
-    }
-    @media (min-width: 768px) {
-      .contact-inner { grid-template-columns: 1fr 1fr; }
-    }
+    .addr { display: flex; gap: .7rem; align-items: flex-start; }
+    .addr svg { color: var(--primary); flex-shrink: 0; margin-top: .15rem; }
+    .addr address { font-style: normal; font-size: 1.06rem; color: var(--ink); line-height: 1.5; font-weight: 500; }
 
-    /* Left column */
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
+    .hours { width: 100%; border-collapse: collapse; font-size: .96rem; }
+    .hours td { padding: .6rem .2rem; border-bottom: 1px solid var(--line-soft); }
+    .hours tr:last-child td { border-bottom: none; }
+    .hours td:first-child { font-weight: 600; color: var(--ink); }
+    .hours td:last-child { color: var(--ink-2); text-align: right; }
+    .hours .cl { color: var(--ink-3); }
+    .hours-note { font-size: .76rem; color: var(--ink-3); margin-top: .6rem; font-style: italic; }
 
-    .contact-block {
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
+    .book {
+      position: relative; overflow: hidden;
+      background: linear-gradient(150deg, var(--primary-strong) 0%, var(--primary-bright) 100%);
+      color: #fff; border-radius: var(--r-lg); padding: clamp(2rem, 4.5vw, 3rem);
+      display: flex; flex-direction: column; gap: 1.3rem; box-shadow: var(--e3);
     }
-    .contact-block-label {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink-lite);
+    .book::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(80% 70% at 92% 6%, rgba(255,255,255,.16), transparent 60%); }
+    .book > * { position: relative; }
+    .book h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.12; }
+    .book p { font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,.9); max-width: 42ch; }
+    .book .btn-book {
+      align-self: flex-start; background: #fff; color: var(--primary-strong);
+      font-size: 1rem; font-weight: 700; border-radius: var(--r-pill); padding: .9rem 1.9rem;
+      display: inline-flex; align-items: center; gap: .55rem; box-shadow: var(--e2);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease);
     }
-    .contact-block-value {
-      font-size: 1.05rem;
-      font-weight: 500;
-      color: var(--ink);
-      line-height: 1.45;
-    }
+    .book .btn-book:hover { transform: translateY(-2px); box-shadow: var(--e3); background: var(--soft); }
+    .book .btn-book svg { color: var(--primary-strong); }
+    .ai-note { display: flex; align-items: center; gap: .6rem; font-size: .9rem; color: rgba(255,255,255,.85); padding-top: .3rem; border-top: 1px solid rgba(255,255,255,.18); margin-top: .2rem; }
+    .ai-note svg { flex-shrink: 0; color: rgba(255,255,255,.92); }
 
-    .address-line {
-      display: flex;
-      gap: .6rem;
-      align-items: flex-start;
-    }
-
-    .call-btn-large {
-      display: inline-flex;
-      align-items: center;
-      gap: .75rem;
-      font-family: var(--f-display);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--primary);
-      background: var(--soft);
-      border: 1.5px solid rgba(27,158,143,.3);
-      border-radius: var(--radius);
-      padding: 1rem 1.5rem;
-      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
-      width: fit-content;
-    }
-    .call-btn-large:hover {
-      background: rgba(27,158,143,.12);
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-2px);
-    }
-
-    /* Hours table */
-    .hours-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .9rem;
-    }
-    .hours-table tr {
-      border-bottom: 1px solid var(--border);
-    }
-    .hours-table tr:last-child { border-bottom: none; }
-    .hours-table td {
-      padding: .6rem .3rem;
-      color: var(--ink-mid);
-    }
-    .hours-table td:first-child {
-      font-weight: 600;
-      color: var(--ink);
-      width: 42%;
-    }
-    .hours-table .closed {
-      color: var(--ink-lite);
-      font-style: italic;
-    }
-
-    /* Right column — book card */
-    .book-card {
-      background: var(--primary);
-      border-radius: 20px;
-      padding: clamp(2rem, 5vw, 3rem);
-      color: var(--white);
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .book-card::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.08);
-      pointer-events: none;
-    }
-    .book-card::after {
-      content: '';
-      position: absolute;
-      bottom: -40px; left: -30px;
-      width: 140px; height: 140px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.06);
-      pointer-events: none;
-    }
-    .book-card-title {
-      font-family: var(--f-display);
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      font-weight: 400;
-      line-height: 1.2;
-    }
-    .book-card-body {
-      font-size: .95rem;
-      opacity: .88;
-      line-height: 1.65;
-    }
-    .book-card .btn-book {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      background: var(--white);
-      color: var(--primary);
-      font-size: 1rem;
-      font-weight: 700;
-      border-radius: 100px;
-      padding: .85rem 2rem;
-      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-      box-shadow: 0 4px 20px rgba(0,0,0,.12);
-    }
-    .book-card .btn-book:hover {
-      background: var(--soft);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0,0,0,.18);
-    }
-    .ai-note {
-      font-size: .8rem;
-      opacity: .75;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════════════════ */
-    .site-footer {
-      background: var(--ink);
-      color: rgba(255,255,255,.75);
-      padding-block: clamp(2.5rem, 5vw, 4rem);
-    }
-
-    .footer-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    @media (min-width: 640px) {
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-    }
-    @media (min-width: 900px) {
-      .footer-inner { grid-template-columns: 2fr 1fr 1fr; }
-    }
-
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .footer-brand-name {
-      font-family: var(--f-display);
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--white);
-    }
-    .footer-brand-tagline {
-      font-size: .875rem;
-      line-height: 1.6;
-      max-width: 28ch;
-    }
-
-    .footer-col h4 {
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .footer-col address {
-      font-style: normal;
-      font-size: .9rem;
-      line-height: 1.8;
-    }
-    .footer-col a {
-      color: rgba(255,255,255,.85);
-      transition: color var(--transition);
-    }
-    .footer-col a:hover { color: var(--accent); }
-
-    .footer-hours-list {
-      font-size: .875rem;
-      line-height: 2;
-    }
-
-    .footer-bottom {
-      margin-top: 2.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,.1);
-      display: flex;
-      flex-wrap: wrap;
-      gap: .75rem 2rem;
-      justify-content: space-between;
-      align-items: center;
-      font-size: .8rem;
-    }
-    .footer-bottom a {
-      color: var(--accent);
-    }
-    .ai-reception-note {
-      font-size: .8rem;
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      color: rgba(255,255,255,.6);
-    }
-    .ai-dot {
-      width: 7px; height: 7px;
-      background: var(--accent);
-      border-radius: 50%;
-      flex-shrink: 0;
-      box-shadow: 0 0 0 2px rgba(127,209,196,.35);
-      animation: pulse-dot 2.2s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { box-shadow: 0 0 0 2px rgba(127,209,196,.35); }
-      50% { box-shadow: 0 0 0 5px rgba(127,209,196,.12); }
-    }
+    /* ═══ FOOTER ═══ */
+    .foot { background: var(--ink); color: rgba(255,255,255,.74); padding-block: clamp(3rem, 6vw, 4.5rem); }
+    .foot-grid { display: grid; grid-template-columns: 1fr; gap: 2.6rem; }
+    @media (min-width: 680px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .foot-grid { grid-template-columns: 1.6fr 1fr 1fr; } }
+    .foot .name { font-size: 1.18rem; font-weight: 700; color: #fff; letter-spacing: -.02em; margin-bottom: .8rem; }
+    .foot .tag { font-size: .95rem; line-height: 1.6; max-width: 30ch; margin-bottom: 1.3rem; }
+    .foot-ai { display: flex; align-items: center; gap: .55rem; font-size: .86rem; color: rgba(255,255,255,.62); }
+    .foot-ai .live { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; position: relative; }
+    .foot-ai .live::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--accent); opacity: .5; transform: scale(.6); animation: ring 2.6s var(--ease) infinite; }
+    .foot h4 { font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .foot address { font-style: normal; font-size: .95rem; line-height: 1.85; }
+    .foot a { transition: color var(--dur) var(--ease); }
+    .foot a:hover { color: var(--accent); }
+    .foot-hours div { font-size: .95rem; line-height: 1.95; }
+    .foot-bottom { margin-top: 2.8rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); display: flex; flex-wrap: wrap; gap: .7rem 2rem; justify-content: space-between; align-items: center; font-size: .82rem; }
+    .foot-bottom a { color: var(--accent); }
   </style>
 </head>
 
 <body>
 
-  <!-- ═══════════════════════════════════════════════════════
-       HEADER
-  ═══════════════════════════════════════════════════════ -->
-  <header class="site-header" id="top" role="banner">
-    <div class="container">
-      <div class="header-inner">
-
-        <!-- Wordmark / SVG tooth-leaf logo -->
-        <a href="#top" class="wordmark" aria-label="Jativa Family Dental — home">
-          <!-- Tooth + leaf SVG mark -->
-          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" aria-hidden="true" focusable="false">
-            <!-- Tooth silhouette -->
-            <path d="M8 6 C8 4 10 2 13 2 C15 2 16.5 3.5 19 3.5 C21.5 3.5 23 2 25 2 C28 2 30 4 30 6 L30 17 C30 22 28 27 25 30 C23.5 32 22 34.5 21 36 C20.5 37 19.5 37 19 37 C18.5 37 17.5 37 17 36 C16 34.5 14.5 32 13 30 C10 27 8 22 8 17 Z" fill="#E6F4F1" />
-            <path d="M8 6 C8 4 10 2 13 2 C15 2 16.5 3.5 19 3.5 C21.5 3.5 23 2 25 2 C28 2 30 4 30 6 L30 17 C30 22 28 27 25 30 C23.5 32 22 34.5 21 36 C20.5 37 19.5 37 19 37 C18.5 37 17.5 37 17 36 C16 34.5 14.5 32 13 30 C10 27 8 22 8 17 Z" stroke="#1B9E8F" stroke-width="1.8" fill="none" />
-            <!-- Leaf detail inside tooth -->
-            <path d="M19 8 C19 8 14 12 14 18 C14 22 16 24.5 19 26 C22 24.5 24 22 24 18 C24 12 19 8 19 8 Z" fill="#7FD1C4" opacity=".6" />
-            <!-- Shine -->
-            <circle cx="15" cy="10" r="1.5" fill="white" opacity=".7" />
+  <!-- ═══ HEADER ═══ -->
+  <header class="head" id="top">
+    <div class="wrap">
+      <div class="head-in">
+        <a href="#top" class="brand" aria-label="Jativa Family Dental, home">
+          <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <!-- Identity device: continuous arc = tooth crown + reassuring smile curve -->
+            <defs>
+              <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#1B9E8F"/>
+                <stop offset="1" stop-color="#0F6B60"/>
+              </linearGradient>
+            </defs>
+            <path d="M9 13 C9 7.5 13 4 18 4 C20 4 21 5 23.5 5 C26 5 27 4 29 4.6 C32 5.5 33 9 32 13 C30.4 19 31.5 22 29.5 27 C28.6 29.3 27.6 31.5 26.5 33 C25.6 34.3 24.4 34 23.8 32.4 C23 30.4 22.6 27.6 20.5 27.6 C18.4 27.6 18 30.4 17.2 32.4 C16.6 34 15.4 34.3 14.5 33 C12.5 30 11 26 10.4 22"
+              stroke="url(#mg)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M16 12 C16 12 13.5 15 13.5 19 C13.5 22.5 16 24.6 20 26 C24 24.6 26.5 22.5 26.5 19 C26.5 15 24 12 24 12" stroke="#7FD1C4" stroke-width="2" stroke-linecap="round" fill="none"/>
           </svg>
-          <div class="wordmark-text">
-            Jativa Family Dental
-            <span>Clinton, Michigan</span>
-          </div>
+          <span class="name">Jativa Family Dental<b>Clinton, Michigan</b></span>
         </a>
 
-        <!-- Desktop nav -->
-        <nav class="site-nav" aria-label="Main navigation">
+        <nav class="nav" aria-label="Primary">
           <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          <a href="#about">Why us</a>
+          <a href="#contact">Visit</a>
         </nav>
 
-        <!-- CTAs -->
-        <div class="header-ctas">
-          <a href="tel:+15174567471" class="btn btn-outline" aria-label="Call us at (517) 456-7471">
-            <!-- Phone icon -->
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M2 1h3l1.5 3.5-2 1.5a9 9 0 003.5 3.5l1.5-2L13 9v3a1 1 0 01-1 1C5.4 13 1 8.6 1 3a1 1 0 011-2z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="head-cta">
+          <a href="tel:+15174567471" class="btn btn-ghost tnum" aria-label="Call (517) 456-7471">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 2h3l1.3 3.3-1.8 1.3a8.5 8.5 0 003.4 3.4l1.3-1.8L13 12.5V15a1 1 0 01-1 1C6 16 1 11 1 4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Call
           </a>
-          <a href="#contact" class="btn btn-primary" aria-label="Book an appointment">
-            Book
-          </a>
+          <a href="#contact" class="btn btn-primary">Book</a>
         </div>
 
-        <!-- Mobile toggle -->
-        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu" id="menu-btn">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+          <span></span><span></span><span></span>
         </button>
-
-      </div><!-- /header-inner -->
-    </div><!-- /container -->
-
-    <!-- Mobile nav drawer -->
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-      <a href="#services" class="mobile-link">Services</a>
-      <a href="#about" class="mobile-link">About</a>
-      <a href="#contact" class="mobile-link">Contact</a>
-      <a href="tel:+15174567471" class="mobile-link">Call (517) 456-7471</a>
+      </div>
+    </div>
+    <nav class="drawer" id="drawer" aria-label="Mobile">
+      <a href="#services">Services</a>
+      <a href="#about">Why us</a>
+      <a href="#contact">Visit</a>
+      <a href="tel:+15174567471" class="tnum">Call (517) 456-7471</a>
     </nav>
   </header>
 
-  <!-- ═══════════════════════════════════════════════════════
-       HERO
-  ═══════════════════════════════════════════════════════ -->
-  <section class="hero" aria-labelledby="hero-heading">
-    <!-- Background gradient mesh -->
-    <div class="hero-bg" aria-hidden="true"></div>
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div class="hero-grid">
 
-    <!-- Tooth / leaf motif SVG — large background element -->
-    <svg class="hero-motif" viewBox="0 0 420 560" fill="none" aria-hidden="true" focusable="false">
-      <!-- Large abstract tooth curve -->
-      <path d="M60 40 C60 18 82 0 110 0 C135 0 155 20 210 20 C265 20 285 0 310 0 C338 0 360 18 360 40 L360 220 C360 330 320 400 280 440 C255 465 238 495 225 520 C218 535 210 540 210 540 C202 540 194 535 187 520 C174 495 157 465 132 440 C92 400 60 330 60 220 Z"
-        stroke="#1B9E8F" stroke-width="2" fill="rgba(27,158,143,.06)" />
-      <!-- Inner fill curve -->
-      <path d="M100 50 C100 32 118 16 140 16 C162 16 178 32 210 32 C242 32 258 16 280 16 C302 16 320 32 320 50 L320 220 C320 310 290 368 262 398 C243 418 230 442 220 462 C215 472 212 476 210 476 C208 476 205 472 200 462 C190 442 177 418 158 398 C130 368 100 310 100 220 Z"
-        fill="rgba(127,209,196,.12)" />
-      <!-- Leaf vein details -->
-      <path d="M210 80 C210 80 170 140 170 220 C170 280 185 330 210 360 C235 330 250 280 250 220 C250 140 210 80 210 80 Z"
-        fill="rgba(27,158,143,.1)" />
-      <!-- Subtle root lines -->
-      <path d="M190 400 Q195 450 200 480" stroke="rgba(127,209,196,.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 6" />
-      <path d="M230 400 Q225 450 220 480" stroke="rgba(127,209,196,.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 6" />
-      <!-- Decorative dots — cross-hatch flourish -->
-      <circle cx="130" cy="110" r="3" fill="rgba(27,158,143,.15)" />
-      <circle cx="150" cy="80" r="2" fill="rgba(27,158,143,.12)" />
-      <circle cx="290" cy="110" r="3" fill="rgba(27,158,143,.15)" />
-      <circle cx="270" cy="80" r="2" fill="rgba(27,158,143,.12)" />
-    </svg>
-
-    <div class="container">
-      <div class="hero-content reveal">
-        <p class="hero-eyebrow" aria-label="Serving Clinton, Michigan families">Clinton, Michigan</p>
-
-        <h1 class="hero-headline" id="hero-heading">
-          Dentistry that feels<br>
-          <em>calm</em> from the<br>first visit.
-        </h1>
-
-        <p class="hero-sub">
-          Gentle, modern care for the whole family — from toddlers to grandparents.
-          Walk-in emergencies welcome. New patients always accepted.
-        </p>
-
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary btn-lg">
-            <!-- Calendar icon -->
-            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true">
-              <rect x="1.5" y="2.5" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M5 1v3M12 1v3M1.5 6.5h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            Book a visit
-          </a>
-          <a href="tel:+15174567471" class="btn btn-outline btn-lg" aria-label="Call (517) 456-7471">
-            (517) 456-7471
-          </a>
-        </div>
-
-        <div class="hero-trust" aria-label="Trust signals">
-          <div class="hero-trust-item">
-            <!-- Checkmark -->
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <circle cx="9" cy="9" r="8" fill="rgba(27,158,143,.12)" stroke="#1B9E8F" stroke-width="1.3"/>
-              <path d="M5.5 9l2.5 2.5 4-4" stroke="#1B9E8F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            New patients welcome
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Family dentistry in Clinton, MI</p>
+          <h1 id="h1">Care that feels <strong>calm</strong> from the very first visit.</h1>
+          <p class="hero-sub">Gentle, modern dentistry for every age, from a toddler's first checkup to comfortable care for grandparents. New patients always welcome.</p>
+          <div class="hero-ctas">
+            <a href="#contact" class="btn btn-primary btn-lg">
+              <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="3" width="14" height="13" rx="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 1.5v3M12.5 1.5v3M2 7h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Book a visit
+            </a>
+            <a href="tel:+15174567471" class="btn btn-ghost btn-lg tnum" aria-label="Call (517) 456-7471">(517) 456-7471</a>
           </div>
-          <div class="hero-trust-item">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <circle cx="9" cy="9" r="8" fill="rgba(27,158,143,.12)" stroke="#1B9E8F" stroke-width="1.3"/>
-              <path d="M5.5 9l2.5 2.5 4-4" stroke="#1B9E8F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Same-week appointments
-          </div>
-          <div class="hero-trust-item">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <circle cx="9" cy="9" r="8" fill="rgba(27,158,143,.12)" stroke="#1B9E8F" stroke-width="1.3"/>
-              <path d="M5.5 9l2.5 2.5 4-4" stroke="#1B9E8F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Emergency care available
+          <div class="hero-rail" aria-label="At a glance">
+            <span class="rail-item"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 9.2l2.2 2.2 4.4-4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>New patients welcome</span>
+            <span class="rail-item"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 9.2l2.2 2.2 4.4-4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Same-week openings</span>
+            <span class="rail-item"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 9.2l2.2 2.2 4.4-4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Emergency care</span>
           </div>
         </div>
+
+        <!-- identity device, finessed -->
+        <div class="hero-art reveal d2" aria-hidden="true">
+          <div class="art-card">
+            <svg class="art-svg" viewBox="0 0 420 320" fill="none" role="img" aria-label="Calm dentistry line motif">
+              <defs>
+                <linearGradient id="arc" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#1B9E8F"/>
+                  <stop offset="1" stop-color="#0F6B60"/>
+                </linearGradient>
+              </defs>
+              <!-- soft baseline grid -->
+              <g stroke="#E1EFEC" stroke-width="1">
+                <path d="M0 250 H420"/><path d="M0 200 H420"/><path d="M0 150 H420"/>
+              </g>
+              <!-- the calm curve: a single sweeping smile/arch line -->
+              <path d="M20 248 C 70 250, 110 246, 150 210 C 196 168, 224 168, 270 210 C 310 246, 350 250, 400 246"
+                stroke="url(#arc)" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <path d="M20 268 C 90 270, 140 270, 210 268 C 280 270, 330 270, 400 268"
+                stroke="#7FD1C4" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".8"/>
+              <!-- the tooth crown formed by the arch -->
+              <path d="M150 210 C 150 130, 175 86, 210 86 C 245 86, 270 130, 270 210"
+                stroke="url(#arc)" stroke-width="3" stroke-linecap="round" fill="rgba(127,209,196,.14)"/>
+              <path d="M210 110 C 210 110, 188 138, 188 174 C 188 198, 198 212, 210 220 C 222 212, 232 198, 232 174 C 232 138, 210 110, 210 110 Z"
+                fill="rgba(22,136,122,.16)"/>
+              <!-- measured calm: gentle markers -->
+              <circle cx="150" cy="210" r="4" fill="#0F6B60"/>
+              <circle cx="270" cy="210" r="4" fill="#0F6B60"/>
+              <circle cx="210" cy="86" r="4.5" fill="#1B9E8F"/>
+            </svg>
+            <div class="art-cap">
+              <span class="dot"></span>
+              <p><b>Unhurried, all here.</b> Cleanings, crowns, whitening, and same-day relief, under one roof on West Michigan Avenue.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div><!-- /container -->
+    </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════
-       SERVICES
-  ═══════════════════════════════════════════════════════ -->
-  <section class="services" id="services" aria-labelledby="services-heading">
-    <div class="container">
-      <header class="services-header reveal">
-        <p class="section-label">What we offer</p>
-        <h2 class="section-title" id="services-heading">Complete care under one roof</h2>
-        <p class="section-body">
-          From routine checkups to same-day emergencies, our team is equipped
-          to keep your whole family smiling — comfortably.
-        </p>
+  <!-- ═══ SERVICES ═══ -->
+  <section class="band" id="services" aria-labelledby="svc-h">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="kicker">What we do</p>
+        <h2 class="sec-title" id="svc-h">Complete care, kept gentle</h2>
+        <p class="sec-lead">From routine checkups to same-day emergencies, the whole family is looked after by one team that knows you by name.</p>
       </header>
 
-      <div class="services-grid" role="list">
+      <div class="svc-grid">
 
-        <!-- Service 1: New patient exams & cleanings -->
-        <article class="service-card reveal reveal-delay-1" role="listitem">
-          <div class="service-icon" aria-hidden="true">
-            <!-- Clipboard / exam icon -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <rect x="5" y="3" width="14" height="18" rx="2" stroke="#1B9E8F" stroke-width="1.6"/>
-              <path d="M9 3h6a1 1 0 010 2H9a1 1 0 010-2z" stroke="#1B9E8F" stroke-width="1.4" fill="rgba(27,158,143,.15)"/>
-              <path d="M8 10h8M8 14h5" stroke="#1B9E8F" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
+        <!-- lead / featured service -->
+        <article class="svc lead reveal">
+          <div>
+            <svg class="svc-ic" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="6" y="3.5" width="16" height="21" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5h7a1 1 0 010 2h-7a1 1 0 010-2z" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 12h9M9.5 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <h3>New patient exams and cleanings</h3>
+            <p>A thorough welcome exam, digital X-rays if needed, and a gentle professional clean. The unhurried foundation for a lifetime of healthy teeth.</p>
           </div>
-          <h3 class="service-name">New patient exams &amp; cleanings</h3>
-          <p class="service-desc">A thorough welcome exam, digital X-rays if needed, and a gentle professional clean — the foundation of a lifetime of healthy teeth.</p>
+          <a href="#contact" class="btn btn-ghost svc-cta" style="background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.28);">Start here</a>
         </article>
 
-        <!-- Service 2: Fillings & crowns -->
-        <article class="service-card reveal reveal-delay-2" role="listitem">
-          <div class="service-icon" aria-hidden="true">
-            <!-- Tooth with fill icon -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M6 4 C6 2.9 7 2 8.5 2 C9.8 2 10.5 3 12 3 C13.5 3 14.2 2 15.5 2 C17 2 18 2.9 18 4 L18 13 C18 17 16 20 14.5 21.5 C13.5 22.5 13 23 12 23 C11 23 10.5 22.5 9.5 21.5 C8 20 6 17 6 13 Z" stroke="#1B9E8F" stroke-width="1.6" fill="rgba(27,158,143,.1)"/>
-              <path d="M10 10 l1.5 1.5 3-3" stroke="#1B9E8F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="service-name">Fillings &amp; crowns</h3>
-          <p class="service-desc">Tooth-coloured composite fillings and durable porcelain crowns that blend seamlessly — restoring strength without sacrificing appearance.</p>
+        <article class="svc reveal d1">
+          <svg class="svc-ic" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M7 6.5C7 4.6 8.6 3 10.7 3c1.6 0 2.4 1.1 3.3 1.1S16.7 3 18.3 3C20.4 3 22 4.6 22 6.5v8.5c0 4.6-2.4 7.9-4.1 9.6-1 1-1.6 1.4-2.4 1.4s-1.4-.4-2.4-1.4C9.4 22.9 7 19.6 7 15Z" stroke="currentColor" stroke-width="1.6" fill="rgba(22,136,122,.08)"/><path d="M11.5 11.5l2 2 3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Fillings and crowns</h3>
+          <p>Tooth-coloured composite fillings and durable porcelain crowns that blend in. Strength restored without changing how your smile looks.</p>
         </article>
 
-        <!-- Service 3: Teeth whitening -->
-        <article class="service-card reveal reveal-delay-3" role="listitem">
-          <div class="service-icon" aria-hidden="true">
-            <!-- Sparkle / whitening icon -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M6 4 C6 2.9 7 2 8.5 2 C9.8 2 10.5 3 12 3 C13.5 3 14.2 2 15.5 2 C17 2 18 2.9 18 4 L18 13 C18 17 16 20 14.5 21.5 C13.5 22.5 13 23 12 23 C11 23 10.5 22.5 9.5 21.5 C8 20 6 17 6 13 Z" stroke="#1B9E8F" stroke-width="1.6" fill="rgba(127,209,196,.18)"/>
-              <path d="M12 7v2M12 13v2M9 10h2M13 10h2" stroke="#1B9E8F" stroke-width="1.4" stroke-linecap="round"/>
-              <circle cx="12" cy="10" r="1.5" fill="#1B9E8F" opacity=".5"/>
-            </svg>
-          </div>
-          <h3 class="service-name">Teeth whitening</h3>
-          <p class="service-desc">Professional-grade whitening — in-office or custom take-home trays — for results that store kits simply cannot match.</p>
+        <article class="svc reveal d2">
+          <svg class="svc-ic" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 4l1.5 4.2L20 9.7l-3.4 2.9 1.1 4.6L14 14.8l-3.7 2.4 1.1-4.6L8 9.7l4.5-1.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="rgba(127,209,196,.16)"/><path d="M22 18.5l.7 1.9 1.9.7-1.9.7-.7 1.9-.7-1.9-1.9-.7 1.9-.7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          <h3>Teeth whitening</h3>
+          <p>Professional whitening, in-office or with custom take-home trays, for results that drugstore kits simply cannot match.</p>
         </article>
 
-        <!-- Service 4: Emergency dental care -->
-        <article class="service-card reveal reveal-delay-4" role="listitem">
-          <div class="service-icon" aria-hidden="true">
-            <!-- Lightning / emergency icon -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="9" stroke="#1B9E8F" stroke-width="1.6" fill="rgba(27,158,143,.08)"/>
-              <path d="M12 7v5l3 3" stroke="#1B9E8F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="7" r="1" fill="#1B9E8F"/>
-            </svg>
-          </div>
-          <h3 class="service-name">Emergency dental care</h3>
-          <p class="service-desc">Sudden toothache, cracked tooth, lost filling? We reserve time daily for urgent cases. Call us — we will get you seen fast.</p>
+        <article class="svc reveal d1">
+          <svg class="svc-ic" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="10.5" stroke="currentColor" stroke-width="1.6" fill="rgba(22,136,122,.06)"/><path d="M14 8v6l4 2.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Emergency dental care</h3>
+          <p>Sudden toothache, a cracked tooth, a lost filling? We hold time open every day for urgent cases. Call us and we will get you seen fast.</p>
         </article>
 
-        <!-- Service 5: Kids' dentistry -->
-        <article class="service-card reveal reveal-delay-1" role="listitem">
-          <div class="service-icon" aria-hidden="true">
-            <!-- Star / kids icon -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M6 4 C6 2.9 7 2 8.5 2 C9.8 2 10.5 3 12 3 C13.5 3 14.2 2 15.5 2 C17 2 18 2.9 18 4 L18 13 C18 17 16 20 14.5 21.5 C13.5 22.5 13 23 12 23 C11 23 10.5 22.5 9.5 21.5 C8 20 6 17 6 13 Z" stroke="#1B9E8F" stroke-width="1.6" fill="rgba(127,209,196,.15)"/>
-              <path d="M9.5 10 Q12 13 14.5 10" stroke="#1B9E8F" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-              <circle cx="10" cy="8.5" r="1" fill="#1B9E8F"/>
-              <circle cx="14" cy="8.5" r="1" fill="#1B9E8F"/>
-            </svg>
-          </div>
-          <h3 class="service-name">Kids' dentistry</h3>
-          <p class="service-desc">Gentle, patient-paced visits designed to make little ones comfortable with the dentist from the very start — healthy habits that last a lifetime.</p>
+        <article class="svc reveal d2">
+          <svg class="svc-ic" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M7 6.5C7 4.6 8.6 3 10.7 3c1.6 0 2.4 1.1 3.3 1.1S16.7 3 18.3 3C20.4 3 22 4.6 22 6.5v8.5c0 4.6-2.4 7.9-4.1 9.6-1 1-1.6 1.4-2.4 1.4s-1.4-.4-2.4-1.4C9.4 22.9 7 19.6 7 15Z" stroke="currentColor" stroke-width="1.6" fill="rgba(127,209,196,.14)"/><circle cx="11.5" cy="11" r="1.1" fill="currentColor"/><circle cx="16.5" cy="11" r="1.1" fill="currentColor"/><path d="M11 15c1 1.4 5 1.4 6 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <h3>Kids' dentistry</h3>
+          <p>Patient-paced visits built to make little ones comfortable with the dentist from the start, so healthy habits stick for life.</p>
         </article>
 
-      </div><!-- /services-grid -->
-    </div><!-- /container -->
+      </div>
+    </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════
-       ABOUT / WHY US
-  ═══════════════════════════════════════════════════════ -->
-  <section class="about" id="about" aria-labelledby="about-heading">
-    <div class="container">
-      <div class="about-inner">
+  <!-- ═══ ABOUT ═══ -->
+  <section class="band about" id="about" aria-labelledby="ab-h">
+    <div class="wrap">
+      <div class="about-grid">
 
-        <!-- Left: copy -->
         <div>
           <header class="reveal">
-            <p class="section-label">Why Jativa</p>
-            <h2 class="section-title" id="about-heading">Dentistry without<br>the dread</h2>
+            <p class="kicker">Why Jativa</p>
+            <h2 class="sec-title" id="ab-h">Dentistry without the dread</h2>
           </header>
-          <div class="about-copy reveal reveal-delay-1">
-            <p>
-              <strong>Jativa Family Dental was built on a simple belief:</strong> that visiting the dentist
-              should never feel like something to put off. Our team combines modern
-              clinical skill with a genuinely warm, unhurried approach — so every
-              patient, from the anxious adult to the curious six-year-old, leaves
-              feeling cared for, not just treated.
-            </p>
-            <p>
-              We are proud to serve Clinton and the surrounding Lenawee County
-              community as a locally owned practice. That means decisions are made
-              by the people in this office, for the people of this town — not a
-              corporate schedule. When you call, a real person answers. When you
-              need us fast, we find a way.
-            </p>
-            <p>
-              From preventive cleanings to cosmetic whitening to same-day emergency
-              relief, everything your family needs is right here on West Michigan
-              Avenue. <strong>We are always accepting new patients.</strong>
-            </p>
+          <div class="about-copy reveal d1">
+            <p class="pull">When you call, a real person answers. When you need us quickly, <b>we find a way.</b></p>
+            <p><strong>Jativa Family Dental was built on a simple belief:</strong> that going to the dentist should never be something you put off. We pair modern clinical skill with a genuinely warm, unhurried chair-side manner, so every patient, from the nervous adult to the curious six-year-old, leaves feeling cared for, not just treated.</p>
+            <p>We are proud to serve Clinton and the surrounding Lenawee County community as a locally owned practice. Decisions are made by the people in this office, for the people of this town, not by a corporate schedule.</p>
+            <p>From preventive cleanings to cosmetic whitening to same-day emergency relief, everything your family needs is right here on West Michigan Avenue. <strong>We are always accepting new patients.</strong></p>
           </div>
         </div>
 
-        <!-- Right: trust signals -->
-        <div class="trust-signals">
-
-          <div class="trust-card reveal reveal-delay-1">
-            <div class="trust-card-icon" aria-hidden="true">
-              <!-- Heart / locally owned -->
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                <path d="M11 18 C11 18 3 13 3 7.5 A4.5 4.5 0 0111 5 A4.5 4.5 0 0119 7.5 C19 13 11 18 11 18Z" fill="rgba(27,158,143,.15)" stroke="#1B9E8F" stroke-width="1.5" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="trust-card-body">
-              <h3>Locally owned &amp; operated</h3>
-              <p>An independent Clinton practice — no corporate oversight, just neighbors caring for neighbors in Lenawee County.</p>
-            </div>
+        <div class="trust">
+          <div class="trust-row reveal d1">
+            <svg class="trust-ic" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M13 21S4 15.5 4 9.2A4.7 4.7 0 0113 6a4.7 4.7 0 019 3.2C22 15.5 13 21 13 21Z" stroke="currentColor" stroke-width="1.6" fill="rgba(22,136,122,.1)" stroke-linejoin="round"/></svg>
+            <div><h3>Locally owned and run</h3><p>An independent Clinton practice. No corporate oversight, just neighbours caring for neighbours across Lenawee County.</p></div>
           </div>
-
-          <div class="trust-card reveal reveal-delay-2">
-            <div class="trust-card-icon" aria-hidden="true">
-              <!-- Family / people icon -->
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                <circle cx="8" cy="6" r="3" stroke="#1B9E8F" stroke-width="1.5" fill="rgba(27,158,143,.1)"/>
-                <circle cx="15" cy="5" r="2.5" stroke="#1B9E8F" stroke-width="1.4" fill="rgba(27,158,143,.08)"/>
-                <path d="M2 19 C2 15 5 13 8 13 C11 13 14 15 14 19" stroke="#1B9E8F" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                <path d="M14 14 C15.5 13.2 17.5 14.5 19 16 C19.8 16.9 20 18 20 19" stroke="#1B9E8F" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-              </svg>
-            </div>
-            <div class="trust-card-body">
-              <h3>Serving Clinton families</h3>
-              <p>We see patients of every age — from a child's first visit to comprehensive care for grandparents.</p>
-            </div>
+          <div class="trust-row reveal d2">
+            <svg class="trust-ic" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="9.5" cy="8" r="3.2" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="7" r="2.6" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 21c0-4 3-6 6-6s6 2 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 15.5c1.6-.8 3.8.6 5.3 2.1.9.9 1.2 2.1 1.2 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <div><h3>Every age, one practice</h3><p>We see patients of every age, from a child's first visit to comprehensive care for grandparents.</p></div>
           </div>
-
-          <div class="trust-card reveal reveal-delay-3">
-            <div class="trust-card-icon" aria-hidden="true">
-              <!-- Clock / same-week -->
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                <circle cx="11" cy="11" r="9" stroke="#1B9E8F" stroke-width="1.5" fill="rgba(27,158,143,.08)"/>
-                <path d="M11 6v5l3.5 2" stroke="#1B9E8F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="trust-card-body">
-              <h3>Same-week appointments</h3>
-              <p>We keep openings for new patients and urgent needs. Most callers are seen within the week — often sooner.</p>
-            </div>
+          <div class="trust-row reveal d3">
+            <svg class="trust-ic" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M13 7v6.5l4.2 2.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><h3>Seen within the week</h3><p>We keep openings for new patients and urgent needs. Most callers are seen within the week, often sooner.</p></div>
           </div>
+        </div>
 
-        </div><!-- /trust-signals -->
-      </div><!-- /about-inner -->
-    </div><!-- /container -->
+      </div>
+    </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════
-       BOOKING / CONTACT
-  ═══════════════════════════════════════════════════════ -->
-  <section class="contact" id="contact" aria-labelledby="contact-heading">
-    <div class="container">
-
-      <header class="reveal" style="margin-bottom: clamp(2.5rem,5vw,4rem);">
-        <p class="section-label">Book &amp; contact</p>
-        <h2 class="section-title" id="contact-heading">Ready when you are</h2>
-        <p class="section-body">Call, book online, or just stop by. Our AI receptionist is available 24/7 for after-hours booking requests.</p>
+  <!-- ═══ CONTACT / BOOKING ═══ -->
+  <section class="band" id="contact" aria-labelledby="ct-h">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="kicker">Book and visit</p>
+        <h2 class="sec-title" id="ct-h">Ready when you are</h2>
+        <p class="sec-lead">Call, book online, or just stop by. Our AI receptionist is available 24/7 for after-hours booking requests.</p>
       </header>
 
-      <div class="contact-inner">
+      <div class="contact-grid">
 
-        <!-- Left: info -->
-        <div class="contact-info">
-
-          <!-- Call -->
-          <div class="contact-block reveal">
-            <p class="contact-block-label">Phone</p>
-            <a href="tel:+15174567471" class="call-btn-large" aria-label="Call Jativa Family Dental at (517) 456-7471">
-              <!-- Phone SVG -->
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M3 3h5l2 5-2.5 2A11 11 0 0012.5 16L15 13.5l5 2V21a2 2 0 01-2 2C8.5 23 1 15.5 1 7a2 2 0 012-4z" stroke="#1B9E8F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              </svg>
+        <div class="info">
+          <div class="info-block reveal">
+            <p class="lbl">Phone</p>
+            <a href="tel:+15174567471" class="call-big tnum" aria-label="Call Jativa Family Dental at (517) 456-7471">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 3h4l1.8 4.4-2.4 1.8a11 11 0 005 5l1.8-2.4 4.4 1.8V19a2 2 0 01-2 2C9.6 21 3 14.4 3 6.5a2 2 0 01.5-3.5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               (517) 456-7471
             </a>
           </div>
 
-          <!-- Address -->
-          <div class="contact-block reveal reveal-delay-1">
-            <p class="contact-block-label">Location</p>
-            <div class="address-line">
-              <!-- Map pin SVG -->
-              <svg width="20" height="24" viewBox="0 0 20 24" fill="none" aria-hidden="true" style="margin-top:.15rem; flex-shrink:0;">
-                <path d="M10 1C5.58 1 2 4.58 2 9c0 5.25 8 14 8 14s8-8.75 8-14c0-4.42-3.58-8-8-8z" fill="rgba(27,158,143,.15)" stroke="#1B9E8F" stroke-width="1.5"/>
-                <circle cx="10" cy="9" r="2.5" fill="#1B9E8F"/>
-              </svg>
-              <address class="contact-block-value">
-                147 West Michigan Avenue<br>
-                Clinton, MI 49236
-              </address>
+          <div class="info-block reveal d1">
+            <p class="lbl">Find us</p>
+            <div class="addr">
+              <svg width="20" height="24" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M10 1.5C5.9 1.5 2.5 4.9 2.5 9c0 5 7.5 13.5 7.5 13.5S17.5 14 17.5 9c0-4.1-3.4-7.5-7.5-7.5z" stroke="currentColor" stroke-width="1.6" fill="rgba(22,136,122,.1)" stroke-linejoin="round"/><circle cx="10" cy="9" r="2.6" fill="currentColor"/></svg>
+              <address>147 West Michigan Avenue<br>Clinton, MI 49236</address>
             </div>
           </div>
 
-          <!-- Hours -->
-          <div class="contact-block reveal reveal-delay-2">
-            <p class="contact-block-label">Office hours <small style="font-size:.7rem; color:var(--ink-lite); font-style:italic;">(placeholders — update to match actual hours)</small></p>
-            <table class="hours-table" aria-label="Office hours">
+          <div class="info-block reveal d2">
+            <p class="lbl">Office hours</p>
+            <table class="hours tnum" aria-label="Office hours">
               <tbody>
-                <tr><td>Monday</td><td>8:00 AM – 5:00 PM</td></tr>
-                <tr><td>Tuesday</td><td>8:00 AM – 5:00 PM</td></tr>
-                <tr><td>Wednesday</td><td>8:00 AM – 5:00 PM</td></tr>
-                <tr><td>Thursday</td><td>8:00 AM – 5:00 PM</td></tr>
-                <tr><td>Friday</td><td>8:00 AM – 3:00 PM</td></tr>
-                <tr><td>Saturday</td><td class="closed">Closed</td></tr>
-                <tr><td>Sunday</td><td class="closed">Closed</td></tr>
+                <tr><td>Monday</td><td>8:00 AM to 5:00 PM</td></tr>
+                <tr><td>Tuesday</td><td>8:00 AM to 5:00 PM</td></tr>
+                <tr><td>Wednesday</td><td>8:00 AM to 5:00 PM</td></tr>
+                <tr><td>Thursday</td><td>8:00 AM to 5:00 PM</td></tr>
+                <tr><td>Friday</td><td>8:00 AM to 3:00 PM</td></tr>
+                <tr><td>Saturday</td><td class="cl">Closed</td></tr>
+                <tr><td>Sunday</td><td class="cl">Closed</td></tr>
               </tbody>
             </table>
+            <p class="hours-note">Placeholder hours, easy to update to match the actual schedule.</p>
           </div>
+        </div>
 
-        </div><!-- /contact-info -->
-
-        <!-- Right: Book card -->
-        <div class="book-card reveal reveal-delay-2">
-          <h3 class="book-card-title">Book your visit online</h3>
-          <p class="book-card-body">
-            New patient? Routine cleaning? Emergency? Select a time that works
-            for you directly in our online calendar. No hold music, no back-and-forth.
-          </p>
-          <a href="https://cal.com/jativa-family-dental"
-             class="btn-book"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="Book online at cal.com/jativa-family-dental (opens in new tab)">
-            <!-- Calendar icon -->
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <rect x="1.5" y="2.5" width="15" height="14" rx="2" stroke="#1B9E8F" stroke-width="1.5"/>
-              <path d="M5.5 1v3M12.5 1v3M1.5 7h15" stroke="#1B9E8F" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+        <div class="book reveal d1">
+          <h3>Book your visit online</h3>
+          <p>New patient, routine cleaning, or emergency: pick a time that works for you right in our online calendar. No hold music, no back and forth.</p>
+          <a href="https://calendly.com/jativa-family-dental" class="btn-book" target="_blank" rel="noopener" aria-label="Book online at calendly.com (opens in a new tab)">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="3" width="14" height="13" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 1.5v3M12.5 1.5v3M2 7h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             Book online
           </a>
-          <p class="ai-note" aria-live="polite">
-            <!-- Microphone / AI icon -->
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <rect x="4.5" y="1" width="5" height="7" rx="2.5" stroke="rgba(255,255,255,.8)" stroke-width="1.3"/>
-              <path d="M2 7c0 2.76 2.24 5 5 5s5-2.24 5-5" stroke="rgba(255,255,255,.8)" stroke-width="1.3" stroke-linecap="round"/>
-              <path d="M7 12v2" stroke="rgba(255,255,255,.8)" stroke-width="1.3" stroke-linecap="round"/>
-            </svg>
-            Our AI receptionist answers calls &amp; books appointments 24/7 — even after hours.
+          <p class="ai-note">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="1.5" width="6" height="8" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 8a5.5 5.5 0 0011 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M8 13.5V15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Our AI receptionist answers and books appointments 24/7, even after hours.
           </p>
         </div>
 
-      </div><!-- /contact-inner -->
-    </div><!-- /container -->
+      </div>
+    </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════════════════ -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-inner">
-
-        <!-- Brand col -->
-        <div class="footer-brand">
-          <p class="footer-brand-name">Jativa Family Dental</p>
-          <p class="footer-brand-tagline">Gentle, modern dentistry for the whole family.</p>
-          <div class="ai-reception-note" aria-label="AI receptionist available 24 hours">
-            <span class="ai-dot" aria-hidden="true"></span>
-            Bookings handled 24/7 by our AI receptionist.
-          </div>
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <p class="name">Jativa Family Dental</p>
+          <p class="tag">Gentle, modern dentistry for the whole family in Clinton, Michigan.</p>
+          <div class="foot-ai"><span class="live" aria-hidden="true"></span>Bookings handled 24/7 by our AI receptionist.</div>
         </div>
-
-        <!-- Contact col -->
-        <div class="footer-col">
+        <div>
           <h4>Contact</h4>
-          <address>
-            147 West Michigan Avenue<br>
-            Clinton, MI 49236<br><br>
-            <a href="tel:+15174567471">(517) 456-7471</a>
-          </address>
+          <address>147 West Michigan Avenue<br>Clinton, MI 49236<br><br><a href="tel:+15174567471" class="tnum">(517) 456-7471</a></address>
         </div>
-
-        <!-- Hours col -->
-        <div class="footer-col">
+        <div>
           <h4>Hours</h4>
-          <div class="footer-hours-list" aria-label="Business hours">
-            <div>Mon – Thu: 8am – 5pm</div>
-            <div>Friday: 8am – 3pm</div>
-            <div>Sat – Sun: Closed</div>
+          <div class="foot-hours tnum">
+            <div>Mon to Thu, 8am to 5pm</div>
+            <div>Friday, 8am to 3pm</div>
+            <div>Sat and Sun, closed</div>
           </div>
         </div>
-
-      </div><!-- /footer-inner -->
-
-      <div class="footer-bottom">
-        <p>&copy; 2026 Jativa Family Dental. All rights reserved.</p>
-        <p>Site by <a href="#" aria-label="Local Agency">Local Agency</a></p>
       </div>
-    </div><!-- /container -->
+      <div class="foot-bottom">
+        <p>&copy; 2026 Jativa Family Dental. All rights reserved.</p>
+        <p>Site by <a href="#top">Local Agency</a></p>
+      </div>
+    </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════════════════════
-       INLINE JS — header scroll + mobile menu + scroll-reveal
-  ═══════════════════════════════════════════════════════ -->
   <script>
     (function () {
       'use strict';
-
-      // ── Header shadow on scroll ──────────────────────────
-      var header = document.getElementById('top');
-      var lastY = 0;
+      var head = document.getElementById('top');
       window.addEventListener('scroll', function () {
-        var y = window.scrollY;
-        if (y > 10) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-        lastY = y;
+        head.classList.toggle('stuck', window.scrollY > 8);
       }, { passive: true });
 
-      // ── Mobile menu toggle ───────────────────────────────
-      var btn = document.getElementById('menu-btn');
-      var nav = document.getElementById('mobile-nav');
-      if (btn && nav) {
-        btn.addEventListener('click', function () {
-          var open = nav.classList.toggle('open');
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      var burger = document.getElementById('burger');
+      var drawer = document.getElementById('drawer');
+      if (burger && drawer) {
+        burger.addEventListener('click', function () {
+          var open = drawer.classList.toggle('open');
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         });
-        // Close on link click
-        nav.querySelectorAll('a').forEach(function (link) {
-          link.addEventListener('click', function () {
-            nav.classList.remove('open');
-            btn.setAttribute('aria-expanded', 'false');
-            btn.setAttribute('aria-label', 'Open menu');
+        drawer.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            drawer.classList.remove('open');
+            burger.setAttribute('aria-expanded', 'false');
+            burger.setAttribute('aria-label', 'Open menu');
           });
         });
       }
 
-      // ── Scroll-reveal via IntersectionObserver ───────────
+      var els = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
-        var revealEls = document.querySelectorAll('.reveal');
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
           });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        revealEls.forEach(function (el) { observer.observe(el); });
+        }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(function (el) { io.observe(el); });
       } else {
-        // Fallback: show all
-        document.querySelectorAll('.reveal').forEach(function (el) {
-          el.classList.add('visible');
-        });
+        els.forEach(function (el) { el.classList.add('in'); });
       }
     }());
   </script>
 
+<a href="./call/" aria-label="Hear our AI receptionist sample call" style="position:fixed;right:18px;bottom:18px;z-index:99999;display:inline-flex;align-items:center;gap:8px;background:#1B9E8F;color:#fff;text-decoration:none;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:15px;padding:13px 18px;border-radius:999px;box-shadow:0 8px 26px rgba(0,0,0,.24)"><span style="font-size:13px">▶</span> Hear our AI receptionist</a>
 </body>
 </html>

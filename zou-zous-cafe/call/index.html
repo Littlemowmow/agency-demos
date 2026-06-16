@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zou Zou's Café — Hear our AI Receptionist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--p:#6F4E2E;--ink:#2E1F14;--bg:#FBF4E9;--soft:#EFE0CA}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px}
+  .wrap{width:100%;max-width:560px}
+  header{text-align:center;margin:8px 0 18px}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--p);
+    background:var(--soft);padding:6px 13px;border-radius:999px;margin-bottom:12px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--p);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(22px,5vw,30px);margin:0 0 4px}
+  header p{margin:0;color:var(--ink);opacity:.7;font-size:14.5px}
+  .phone{background:#fff;border-radius:22px;box-shadow:0 18px 50px rgba(0,0,0,.13);
+    padding:18px 16px 20px;min-height:340px;display:flex;flex-direction:column;gap:12px;
+    border:1px solid rgba(0,0,0,.05)}
+  .row{display:flex;gap:9px;align-items:flex-end;opacity:0;transform:translateY(8px);
+    animation:in .35s forwards}
+  @keyframes in{to{opacity:1;transform:none}}
+  .row.caller{flex-direction:row-reverse}
+  .av{width:30px;height:30px;border-radius:50%;flex:0 0 30px;display:grid;place-items:center;
+    font-size:12px;font-weight:700;color:#fff}
+  .row.ai .av{background:var(--p)} .row.caller .av{background:#9aa1a8}
+  .bub{max-width:75%;padding:10px 13px;border-radius:15px;font-size:14.5px;line-height:1.45}
+  .row.ai .bub{background:var(--soft);color:var(--ink);border-bottom-left-radius:5px}
+  .row.caller .bub{background:var(--p);color:#fff;border-bottom-right-radius:5px}
+  .who{font-size:11px;opacity:.55;margin:0 4px 3px}
+  .controls{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+  button{font:inherit;font-weight:600;font-size:15px;border:0;border-radius:11px;padding:12px 22px;
+    cursor:pointer;background:var(--p);color:#fff;transition:transform .15s,opacity .15s}
+  button:hover{transform:translateY(-2px)} button:disabled{opacity:.5;cursor:default;transform:none}
+  button.ghost{background:transparent;color:var(--p);border:1.5px solid var(--p)}
+  .note{text-align:center;font-size:13px;opacity:.62;margin:16px auto 0;max-width:48ch;line-height:1.5}
+  .typing .bub{display:inline-flex;gap:4px}
+  .typing span{width:6px;height:6px;border-radius:50%;background:var(--ink);opacity:.4;
+    animation:blink 1s infinite}
+  .typing span:nth-child(2){animation-delay:.2s} .typing span:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,100%{opacity:.25}50%{opacity:.8}}
+</style></head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge"><span class="dot"></span> 24/7 AI Receptionist</div>
+      <h1>Zou Zou's Café</h1>
+      <p>A sample call — tap play and listen to how your phone gets answered, day or night.</p>
+    </header>
+    <div class="phone" id="thread" aria-live="polite"></div>
+    <div class="controls">
+      <button id="play">▶ Play sample call</button>
+      <button id="mute" class="ghost" aria-pressed="false">🔊 Voice on</button>
+    </div>
+    <p class="note">This is a demo. Your real receptionist answers every call 24/7, books straight
+      into your calendar, texts confirmations, and hands off to a human anytime — so you never miss
+      another booking. Built by Rana Web &amp; Voice.</p>
+  </div>
+<script>
+const SCRIPT = [["ai", "Thanks for calling Zou Zou's Caf\u00e9! This is our automated assistant \u2014 I can take an order or reservation, answer questions, or get you to a team member. How can I help?"], ["caller", "I want to set up catering for an office meeting next week."], ["ai", "Happy to help with that. About how many people, and what day?"], ["caller", "Around 12 people, next Wednesday morning."], ["ai", "Got it \u2014 12 people, Wednesday morning. Were you thinking pastries and coffee, or a breakfast spread?"], ["caller", "Pastries and coffee, definitely."], ["ai", "Perfect. Can I get your name and a callback number? Someone from the team will confirm the order and a quote today."], ["caller", "Tom Reilly, seven three four, five five five, three three one two."], ["ai", "Thanks, Tom \u2014 I've logged a catering request for 12, pastries and coffee, Wednesday morning. We'll call you shortly to finalize. Anything else?"], ["caller", "That's it, thanks!"], ["ai", "Great \u2014 talk soon!"]];
+const thread = document.getElementById('thread');
+const playBtn = document.getElementById('play');
+const muteBtn = document.getElementById('mute');
+let muted = false, playing = false, timers = [];
+muteBtn.onclick = () => { muted = !muted; muteBtn.textContent = muted ? '🔇 Voice off' : '🔊 Voice on';
+  muteBtn.setAttribute('aria-pressed', muted); if (muted) speechSynthesis.cancel(); };
+
+function bubble(role, text) {
+  const row = document.createElement('div');
+  row.className = 'row ' + role;
+  const who = role === 'ai' ? 'AI' : 'You';
+  row.innerHTML = `<div class="av">${who}</div><div><div class="who">${role==='ai'?'Receptionist':'Caller'}</div><div class="bub"></div></div>`;
+  row.querySelector('.bub').textContent = text;
+  thread.appendChild(row);
+  thread.scrollTop = thread.scrollHeight;
+}
+function typing() {
+  const row = document.createElement('div');
+  row.className = 'row ai typing';
+  row.innerHTML = `<div class="av">AI</div><div class="bub"><span></span><span></span><span></span></div>`;
+  thread.appendChild(row); thread.scrollTop = thread.scrollHeight; return row;
+}
+function speak(text) {
+  return new Promise(res => {
+    if (muted || !('speechSynthesis' in window)) return res();
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 1.02; u.pitch = 1.0;
+    const vs = speechSynthesis.getVoices();
+    const pref = vs.find(v => /en-US/i.test(v.lang) && /female|samantha|google us/i.test(v.name)) || vs.find(v => /en/i.test(v.lang));
+    if (pref) u.voice = pref;
+    u.onend = res; u.onerror = res; speechSynthesis.speak(u);
+    setTimeout(res, Math.max(2500, text.length * 70)); // safety in case onend never fires
+  });
+}
+async function run() {
+  if (playing) return; playing = true; playBtn.disabled = true; playBtn.textContent = '● Playing…';
+  thread.innerHTML = ''; timers.forEach(clearTimeout); timers = [];
+  for (const [role, text] of SCRIPT) {
+    if (role === 'ai') {
+      const t = typing();
+      await new Promise(r => timers.push(setTimeout(r, 700)));
+      t.remove(); bubble('ai', text); await speak(text);
+      await new Promise(r => timers.push(setTimeout(r, 300)));
+    } else {
+      await new Promise(r => timers.push(setTimeout(r, 600)));
+      bubble('caller', text);
+      await new Promise(r => timers.push(setTimeout(r, Math.max(900, text.length * 45))));
+    }
+  }
+  playing = false; playBtn.disabled = false; playBtn.textContent = '↻ Replay call';
+}
+playBtn.onclick = run;
+if ('speechSynthesis' in window) speechSynthesis.getVoices(); // warm voices
+</script>
+</body></html>

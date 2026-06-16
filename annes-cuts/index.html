@@ -1,4 +1,5 @@
 <!-- Anne's Cuts & More · Generated for outreach demo · 2026-06-16 -->
+<!-- Design Read: Editorial boutique salon landing for design-conscious Clinton clients, warm-chic magazine language, leaning native CSS + Playfair Display + Hanken Grotesk, asymmetric editorial grid. Dials: VARIANCE 8 / MOTION 5 / DENSITY 3. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,994 +8,759 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Anne's Cuts & More — Clinton, Michigan's boutique hair salon. Cuts, color, blowouts, special-occasion styling, and men's grooming. Book online or call anytime." />
-  <title>Anne's Cuts & More · Clinton, MI Hair Salon</title>
+  <meta name="description" content="Anne's Cuts & More is Clinton, Michigan's boutique hair salon. Cuts, color, blowouts, special-occasion styling, and men's grooming. Book online or call anytime." />
+  <title>Anne's Cuts &amp; More · Boutique Hair Salon in Clinton, MI</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* =============================================
-       TOKENS & RESET
-    ============================================= */
+    /* ============================================================
+       TOKENS
+    ============================================================ */
     :root {
-      --bg:      #FBF6F1;
-      --ink:     #2A211E;
-      --primary: #B5654A;
-      --accent:  #D99A7C;
-      --soft:    #F0E2D7;
-      --ink-muted: rgba(42,33,30,0.55);
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body:    'Inter', system-ui, sans-serif;
-      --section-pad-mobile: 80px 24px;
-      --section-pad-desktop: 120px 64px;
-      --max-w: 1200px;
-      --radius: 4px;
-      --transition: 0.25s ease;
+      --bg:        #FBF6F1;
+      --bg-deep:   #F6EDE4;
+      --ink:       #2A211E;
+      --ink-soft:  #5B4D45;
+      --ink-faint: #8A7A70;
+      --primary:   #B5654A;
+      --primary-d: #964E36;
+      --accent:    #D99A7C;
+      --soft:      #F0E2D7;
+      --line:      rgba(42, 33, 30, 0.12);
+      --line-soft: rgba(42, 33, 30, 0.07);
+      --paper-card:#FFFDFB;
+
+      --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-body:    'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+      --maxw: 1240px;
+      --gutter: clamp(22px, 5vw, 64px);
+
+      /* layered, neutral, tinted-to-background elevation */
+      --shadow-1: 0 1px 2px rgba(42, 33, 30, 0.05), 0 8px 24px rgba(42, 33, 30, 0.05);
+      --shadow-2: 0 2px 4px rgba(42, 33, 30, 0.06), 0 18px 44px rgba(42, 33, 30, 0.09);
+
+      --r-sm: 6px;
+      --r-md: 14px;
+      --r-lg: 22px;
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --t: 220ms var(--ease);
+
+      --fig: "tnum" 1, "lnum" 1;
     }
 
+    /* ============================================================
+       RESET
+    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
       background: var(--bg);
       color: var(--ink);
-    }
-
-    body {
       font-family: var(--font-body);
-      line-height: 1.65;
+      font-size: 17px;
+      line-height: 1.6;
+      font-weight: 400;
+      letter-spacing: 0.002em;
       overflow-x: hidden;
-      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-
-    img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
+    h1, h2, h3 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+    svg { display: block; }
+    ::selection { background: var(--accent); color: #fff; }
 
-    /* =============================================
-       FOCUS VISIBILITY (ACCESSIBILITY)
-    ============================================= */
     :focus-visible {
       outline: 2.5px solid var(--primary);
       outline-offset: 3px;
-      border-radius: 2px;
+      border-radius: 3px;
     }
 
-    /* =============================================
-       SCROLL REVEAL
-    ============================================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+    /* ============================================================
+       REVEAL (transform + opacity only)
+    ============================================================ */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: 80ms; }
+    .reveal.d2 { transition-delay: 160ms; }
+    .reveal.d3 { transition-delay: 240ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
     }
 
-    /* =============================================
-       TYPOGRAPHY HELPERS
-    ============================================= */
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-family: var(--font-body);
-      font-size: 0.75rem;
+    /* ============================================================
+       KICKER (named, used sparingly: hero + once)
+    ============================================================ */
+    .kicker {
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--primary);
-      margin-bottom: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
     }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
+    .kicker::before {
+      content: "";
+      width: 26px; height: 1.5px;
       background: var(--primary);
-      opacity: 0.35;
-      max-width: 120px;
+      display: inline-block;
     }
 
-    .ghost-number {
-      font-family: var(--font-display);
-      font-size: clamp(6rem, 14vw, 12rem);
-      font-weight: 700;
-      line-height: 1;
-      color: var(--ink);
-      opacity: 0.06;
-      position: absolute;
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
-    }
-
-    /* =============================================
+    /* ============================================================
        BUTTONS
-    ============================================= */
+    ============================================================ */
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
+      gap: 9px;
       font-family: var(--font-body);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: transform var(--transition), background var(--transition), color var(--transition), box-shadow var(--transition);
-      border: 2px solid transparent;
-      text-decoration: none;
+      letter-spacing: 0.01em;
       line-height: 1;
+      padding: 15px 26px;
+      border-radius: var(--r-sm);
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: transform var(--t), box-shadow var(--t), background var(--t), color var(--t), border-color var(--t);
+      will-change: transform;
     }
-    .btn-filled {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-    .btn-filled:hover {
-      background: #9c5239;
-      border-color: #9c5239;
-      transform: scale(1.02);
-      box-shadow: 0 4px 16px rgba(181,101,74,0.28);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--primary);
-      border-color: var(--primary);
-    }
-    .btn-outline:hover {
-      background: var(--primary);
-      color: #fff;
-      transform: scale(1.02);
-    }
-    .btn-text {
-      background: transparent;
-      color: var(--primary);
-      border: none;
-      padding: 14px 0;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-    .btn-text:hover {
-      color: #9c5239;
-      transform: translateX(3px);
-    }
+    .btn svg { transition: transform var(--t); }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: var(--shadow-1); }
+    .btn-primary:hover { background: var(--primary-d); transform: translateY(-2px); box-shadow: var(--shadow-2); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:hover svg { transform: translateX(3px); }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+    .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+    .btn-quiet { background: transparent; color: var(--primary); padding-inline: 4px; font-weight: 600; }
+    .btn-quiet:hover { color: var(--primary-d); }
+    .btn-quiet:hover svg { transform: translateX(4px); }
 
-    /* =============================================
+    /* ============================================================
        HEADER
-    ============================================= */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg);
+    ============================================================ */
+    .header {
+      position: sticky; top: 0; z-index: 60;
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: saturate(1.2) blur(10px);
+      -webkit-backdrop-filter: saturate(1.2) blur(10px);
       border-bottom: 1px solid transparent;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: border-color var(--t), box-shadow var(--t), background var(--t);
     }
-    .site-header.scrolled {
-      box-shadow: 0 2px 24px rgba(42,33,30,0.1);
-      border-bottom-color: rgba(42,33,30,0.08);
+    .header.stuck { border-bottom-color: var(--line-soft); box-shadow: var(--shadow-1); }
+    .header-in {
+      max-width: var(--maxw); margin-inline: auto;
+      padding: 0 var(--gutter);
+      height: 74px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
     }
-    .header-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .header-logo {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-    }
-    .header-logo svg {
-      height: 52px;
-      width: auto;
-    }
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-    }
-    .header-nav a {
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--ink);
-      transition: color var(--transition);
-    }
-    .header-nav a:hover { color: var(--primary); }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-    .header-actions .btn {
-      padding: 10px 20px;
-      font-size: 0.8rem;
-    }
-
-    /* Mobile nav hide */
-    @media (max-width: 680px) {
-      .header-nav { display: none; }
-      .header-actions .btn-outline { display: none; }
-    }
-
-    /* =============================================
-       HERO
-    ============================================= */
-    .hero {
-      min-height: calc(100vh - 72px);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 80px 24px 80px;
-      gap: 60px;
-    }
-
-    .hero-left {
-      position: relative;
-      z-index: 1;
-    }
-    .hero-eyebrow {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-    .hero-headline {
+    .brand { display: flex; align-items: center; gap: 13px; }
+    .brand-mark { width: 38px; height: 38px; flex-shrink: 0; }
+    .brand-name {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 700;
-      line-height: 1.05;
-      color: var(--ink);
-      margin-bottom: 28px;
+      font-size: 1.32rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      white-space: nowrap;
     }
-    .hero-sub {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--ink-muted);
-      max-width: 420px;
-      margin-bottom: 40px;
+    .brand-name em { font-style: italic; color: var(--primary); font-weight: 500; }
+    .nav { display: flex; align-items: center; gap: 34px; }
+    .nav a {
+      font-size: 0.9rem; font-weight: 500; color: var(--ink-soft);
+      position: relative; transition: color var(--t);
     }
-    .hero-ctas {
-      display: flex;
+    .nav a::after {
+      content: ""; position: absolute; left: 0; bottom: -6px;
+      width: 100%; height: 1.5px; background: var(--primary);
+      transform: scaleX(0); transform-origin: left; transition: transform var(--t);
+    }
+    .nav a:hover { color: var(--ink); }
+    .nav a:hover::after { transform: scaleX(1); }
+    .header-cta { display: flex; align-items: center; gap: 10px; }
+    .header-cta .btn { padding: 11px 19px; font-size: 0.86rem; }
+
+    @media (max-width: 860px) {
+      .nav { display: none; }
+      .header-cta .btn-ghost { display: none; }
+    }
+
+    /* ============================================================
+       HERO  (asymmetric editorial)
+    ============================================================ */
+    .hero {
+      max-width: var(--maxw); margin-inline: auto;
+      padding: clamp(48px, 7vw, 96px) var(--gutter) clamp(64px, 9vw, 120px);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(36px, 6vw, 80px);
       align-items: center;
-      gap: 24px;
+    }
+    .hero-copy { position: relative; z-index: 2; }
+    .hero-copy .kicker { margin-bottom: 26px; }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(3.1rem, 8.4vw, 6rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 26px;
+    }
+    .hero h1 em { font-style: italic; color: var(--primary); font-weight: 500; }
+    .hero-sub {
+      font-size: 1.12rem; line-height: 1.62;
+      color: var(--ink-soft);
+      max-width: 46ch;
+      margin-bottom: 38px;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .hero-meta {
+      margin-top: 40px;
+      display: flex; align-items: center; gap: 22px;
+      font-size: 0.84rem; color: var(--ink-faint);
       flex-wrap: wrap;
     }
+    .hero-meta b { color: var(--ink); font-weight: 600; }
+    .hero-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
 
-    .hero-right {
-      position: relative;
-      height: 520px;
-      overflow: hidden;
+    /* hero visual: layered editorial composition with the scissors identity device */
+    .hero-art { position: relative; aspect-ratio: 4 / 5; min-height: 360px; }
+    .hero-disc {
+      position: absolute; inset: 6% 4% 6% 8%;
+      border-radius: 50% 50% 48% 52% / 52% 48% 52% 48%;
+      background:
+        radial-gradient(120% 120% at 30% 18%, var(--accent) 0%, var(--primary) 58%, var(--primary-d) 100%);
+      box-shadow: var(--shadow-2);
     }
-
-    /* Decorative terracotta circle */
-    .hero-circle {
-      position: absolute;
-      right: -80px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: var(--primary);
-      opacity: 0.12;
+    .hero-disc::after {
+      content: ""; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(70% 60% at 72% 80%, rgba(0,0,0,0.16), transparent 60%);
+      mix-blend-mode: multiply;
     }
-    .hero-circle-outline {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
+    .hero-ring {
+      position: absolute; inset: -2% 12% 14% -2%;
       border: 1.5px solid var(--primary);
-      opacity: 0.25;
+      border-radius: 50%;
+      opacity: 0.4;
     }
-
-    /* Editorial rule lines */
-    .hero-rule {
-      position: absolute;
-      left: 0;
-      height: 1px;
-      background: var(--ink);
-      opacity: 0.15;
-    }
-    .hero-rule-1 { top: 25%; width: 60%; }
-    .hero-rule-2 { top: 72%; width: 40%; }
-
-    /* Ghost 01 */
-    .hero-ghost {
-      position: absolute;
-      font-family: var(--font-display);
-      font-size: clamp(8rem, 20vw, 16rem);
-      font-weight: 700;
-      line-height: 1;
-      color: var(--ink);
-      opacity: 0.06;
-      bottom: 0;
-      right: 0;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* Scissors SVG */
     .hero-scissors {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: absolute; top: 50%; left: 50%;
+      width: clamp(116px, 22vw, 168px); height: auto;
+      transform: translate(-50%, -50%) rotate(-8deg);
+      filter: drop-shadow(0 8px 18px rgba(42, 33, 30, 0.28));
     }
-
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        padding: 60px 24px 60px;
-        gap: 40px;
-      }
-      .hero-right {
-        height: 260px;
-      }
-      .hero-circle { right: -40px; width: 240px; height: 240px; }
-      .hero-circle-outline { right: 10px; width: 180px; height: 180px; }
+    .hero-chip {
+      position: absolute; right: -4%; bottom: 9%;
+      background: var(--paper-card);
+      border: 1px solid var(--line-soft);
+      box-shadow: var(--shadow-2);
+      border-radius: var(--r-md);
+      padding: 15px 20px;
+      max-width: 220px;
     }
-
-    /* =============================================
-       SERVICES
-    ============================================= */
-    .services {
-      background: var(--soft);
-      padding: var(--section-pad-mobile);
-      position: relative;
-      overflow: hidden;
-    }
-    .services-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .services-heading {
+    .hero-chip .num {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: 1.7rem; font-weight: 700; color: var(--primary);
+      line-height: 1; font-variant-numeric: tabular-nums; font-feature-settings: var(--fig);
+    }
+    .hero-chip .lbl { font-size: 0.78rem; color: var(--ink-soft); margin-top: 4px; line-height: 1.35; }
+
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; gap: 44px; padding-top: clamp(40px, 9vw, 60px); }
+      .hero-art { aspect-ratio: 16 / 11; min-height: 280px; max-width: 460px; }
+      .hero-chip { right: 0; }
+    }
+
+    /* ============================================================
+       COMB DIVIDER (identity motif as section rule)
+    ============================================================ */
+    .comb-rule { display: block; width: 100%; height: 14px; color: var(--line); margin: 0; }
+
+    /* ============================================================
+       SERVICES  (editorial price list, no numbers, no side stripes)
+    ============================================================ */
+    .services { background: var(--bg-deep); padding-block: clamp(72px, 10vw, 128px); }
+    .sec-head {
+      display: grid; grid-template-columns: 1fr; gap: 18px;
+      margin-bottom: clamp(40px, 6vw, 68px);
+    }
+    .sec-head h2 {
+      font-family: var(--font-display);
       font-weight: 700;
+      font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -0.015em;
       color: var(--ink);
-      margin-bottom: 52px;
-      position: relative;
-      z-index: 1;
+    }
+    .sec-head h2 em { font-style: italic; color: var(--primary); font-weight: 500; }
+    .sec-head .lead { font-size: 1.05rem; color: var(--ink-soft); max-width: 52ch; }
+    @media (min-width: 820px) {
+      .sec-head { grid-template-columns: 1.3fr 1fr; align-items: end; column-gap: 56px; }
+      .sec-head .lead { justify-self: end; text-align: left; }
     }
 
-    .service-list {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .service-row {
+    .menu { display: grid; gap: 0; }
+    .item {
       display: grid;
-      grid-template-columns: 56px 1fr auto;
-      align-items: center;
-      gap: 20px 24px;
-      padding: 26px 20px;
-      border-bottom: 1px solid rgba(42,33,30,0.1);
-      border-left: 3px solid transparent;
-      transition: transform var(--transition), border-left-color var(--transition), background var(--transition);
-      cursor: default;
-      border-radius: 2px;
-      position: relative;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 10px 28px;
+      padding: 28px 6px;
+      border-bottom: 1px solid var(--line);
+      transition: background var(--t);
     }
-    .service-row:hover {
-      transform: translateY(-2px);
-      border-left-color: var(--primary);
-      background: rgba(255,255,255,0.5);
-    }
-
-    .service-num {
+    .item:first-child { border-top: 1px solid var(--line); }
+    .item:hover { background: color-mix(in srgb, var(--paper-card) 60%, transparent); }
+    .item-main { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    .item-name {
       font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-      opacity: 0.25;
-      line-height: 1;
-      text-align: right;
-    }
-
-    .service-info { }
-    .service-name {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
+      font-size: clamp(1.35rem, 2.6vw, 1.7rem);
       font-weight: 600;
       color: var(--ink);
-      display: block;
+      letter-spacing: -0.01em;
+      transition: color var(--t);
     }
-    .service-desc {
-      font-size: 0.88rem;
-      color: var(--ink-muted);
-      margin-top: 2px;
+    .item:hover .item-name { color: var(--primary); }
+    .item-tag {
+      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--primary); background: var(--soft);
+      padding: 4px 10px; border-radius: 999px;
     }
-
-    .service-price {
+    .item-desc { grid-column: 1 / -1; font-size: 0.99rem; color: var(--ink-soft); max-width: 62ch; margin-top: 4px; }
+    .item-price {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: 1.05rem;
-      color: var(--primary);
+      font-size: 1.28rem;
+      color: var(--ink);
       white-space: nowrap;
-      font-weight: 400;
+      font-variant-numeric: tabular-nums; font-feature-settings: var(--fig);
     }
+    .item-price span { font-style: normal; font-family: var(--font-body); font-size: 0.78rem; color: var(--ink-faint); font-weight: 500; }
+    .menu-foot { margin-top: 30px; font-size: 0.9rem; color: var(--ink-faint); }
 
-    @media (max-width: 500px) {
-      .service-row {
-        grid-template-columns: 40px 1fr;
-      }
-      .service-price {
-        grid-column: 2;
-        text-align: left;
-      }
-    }
+    /* ============================================================
+       ABOUT  (asymmetric, quote + trust, no side stripes)
+    ============================================================ */
+    .about { padding-block: clamp(72px, 10vw, 128px); }
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: clamp(44px, 7vw, 80px); align-items: center; }
+    @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; } }
 
-    @media (min-width: 769px) {
-      .services { padding: var(--section-pad-desktop); }
-    }
-
-    /* =============================================
-       ABOUT
-    ============================================= */
-    .about {
-      padding: var(--section-pad-mobile);
-      position: relative;
-      overflow: hidden;
-    }
-    .about-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 52px;
-      margin-top: 16px;
-    }
-    .about-heading {
+    .about-quote {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
+      font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.22;
+      letter-spacing: -0.01em;
       color: var(--ink);
-      margin-bottom: 28px;
+      position: relative;
+      padding-top: 44px;
     }
-    .about-body p {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--ink-muted);
-      margin-bottom: 20px;
-    }
-    .about-body p:last-child { margin-bottom: 0; }
-
-    .trust-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .trust-item {
-      border-left: 3px solid var(--primary);
-      padding: 18px 20px 18px 24px;
-      background: var(--soft);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      transition: transform var(--transition);
-    }
-    .trust-item:hover {
-      transform: translateX(4px);
-    }
-    .trust-title {
+    .about-quote::before {
+      content: "\201C";
+      position: absolute; top: -18px; left: -6px;
       font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 4px;
+      font-size: 6rem; line-height: 1; color: var(--accent);
+      opacity: 0.5;
     }
-    .trust-desc {
-      font-size: 0.88rem;
-      color: var(--ink-muted);
-      line-height: 1.55;
+    .about-quote cite {
+      display: block; margin-top: 26px;
+      font-family: var(--font-body); font-style: normal;
+      font-size: 0.92rem; font-weight: 600; color: var(--primary);
+      letter-spacing: 0.02em;
     }
+    .about-quote cite span { display: block; color: var(--ink-faint); font-weight: 400; margin-top: 2px; }
 
-    @media (min-width: 769px) {
-      .about { padding: var(--section-pad-desktop); }
-      .about-grid {
-        grid-template-columns: 3fr 2fr;
-        align-items: start;
-      }
+    .about-body h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 4vw, 2.3rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 22px;
     }
+    .about-body p { color: var(--ink-soft); margin-bottom: 18px; max-width: 60ch; }
+    .about-body p:last-of-type { margin-bottom: 0; }
 
-    /* =============================================
+    .trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+    .trust-card {
+      background: var(--paper-card);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-md);
+      padding: 22px 18px;
+      box-shadow: var(--shadow-1);
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .trust-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+    .trust-card svg { width: 26px; height: 26px; color: var(--primary); margin-bottom: 12px; }
+    .trust-card .t { font-family: var(--font-display); font-size: 1.02rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+    .trust-card .d { font-size: 0.82rem; color: var(--ink-faint); margin-top: 5px; line-height: 1.4; }
+    @media (max-width: 560px) { .trust { grid-template-columns: 1fr; } }
+
+    /* ============================================================
        CONTACT / BOOKING
-    ============================================= */
-    .contact {
+    ============================================================ */
+    .contact { background: var(--bg-deep); padding-block: clamp(72px, 10vw, 128px); }
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: stretch; }
+    @media (min-width: 860px) { .contact-grid { grid-template-columns: 1.05fr 0.95fr; gap: 30px; } }
+
+    .panel {
+      background: var(--paper-card);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-2);
+      padding: clamp(28px, 4vw, 44px);
+    }
+    .panel h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.4vw, 2.1rem);
+      font-weight: 700; line-height: 1.08; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 8px;
+    }
+    .panel h3 em { font-style: italic; color: var(--primary); font-weight: 500; }
+    .panel > .pintro { color: var(--ink-soft); font-size: 1rem; margin-bottom: 28px; max-width: 44ch; }
+
+    .call-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 20px;
       background: var(--soft);
-      padding: var(--section-pad-mobile);
-      position: relative;
-      overflow: hidden;
-    }
-    .contact-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .contact-heading {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 52px;
-      text-align: center;
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 52px;
-      align-items: start;
-    }
-    .contact-left {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .contact-call-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--primary);
-      color: #fff;
-      padding: 18px 28px;
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 1.1rem;
-      font-weight: 600;
-      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-      text-decoration: none;
-      align-self: flex-start;
-    }
-    .contact-call-btn:hover {
-      background: #9c5239;
-      transform: scale(1.02);
-      box-shadow: 0 4px 20px rgba(181,101,74,0.3);
-    }
-    .contact-address {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 1rem;
-      color: var(--ink);
-      line-height: 1.55;
-    }
-    .contact-address svg {
-      flex-shrink: 0;
-      margin-top: 3px;
-    }
-    .contact-ai-note {
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--ink-muted);
-      line-height: 1.6;
-    }
-    .contact-book-btn {
-      display: block;
-      background: var(--ink);
-      color: #fff;
-      padding: 18px 28px;
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 600;
-      text-align: center;
-      letter-spacing: 0.04em;
-      transition: background var(--transition), transform var(--transition);
-    }
-    .contact-book-btn:hover {
-      background: #3d2f2b;
-      transform: scale(1.02);
-    }
-
-    /* Hours table */
-    .hours-block {
-      background: var(--bg);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .hours-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--ink);
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid rgba(42,33,30,0.08);
-    }
-    .hours-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .hours-table tr:nth-child(even) td {
-      background: var(--soft);
-    }
-    .hours-table td {
-      padding: 14px 24px;
-      font-size: 0.95rem;
-    }
-    .hours-table td:first-child {
-      font-family: var(--font-display);
-      font-weight: 600;
-      color: var(--ink);
-      width: 48%;
-    }
-    .hours-table td:last-child {
-      color: var(--ink-muted);
-      font-style: italic;
-    }
-    .hours-table tr.closed td {
-      color: rgba(42,33,30,0.35);
-    }
-
-    @media (min-width: 769px) {
-      .contact { padding: var(--section-pad-desktop); }
-      .contact-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    /* =============================================
-       FOOTER
-    ============================================= */
-    .site-footer {
-      background: var(--ink);
-      color: #FBF6F1;
-      padding: 64px 24px 0;
-    }
-    .footer-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    .footer-brand svg {
-      height: 48px;
-      width: auto;
+      border-radius: var(--r-md);
       margin-bottom: 14px;
+      transition: transform var(--t), box-shadow var(--t);
     }
-    .footer-tagline {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--accent);
-      line-height: 1.4;
-    }
-    .footer-nav-title {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .footer-nav ul {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .footer-nav a {
-      font-size: 0.92rem;
-      color: rgba(251,246,241,0.75);
-      transition: color var(--transition);
-    }
-    .footer-nav a:hover { color: #FBF6F1; }
-    .footer-contact-block {
-      font-size: 0.92rem;
-      color: rgba(251,246,241,0.75);
-      line-height: 1.7;
-    }
-    .footer-contact-block a {
-      color: var(--accent);
-    }
-    .footer-contact-block a:hover {
-      color: #fff;
-    }
-    .footer-bottom {
-      margin-top: 52px;
-      border-top: 1px solid rgba(251,246,241,0.12);
-      padding: 20px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .footer-bottom p {
-      font-size: 0.78rem;
-      color: rgba(251,246,241,0.4);
-    }
+    .call-row:hover { transform: translateY(-2px); box-shadow: var(--shadow-1); }
+    .call-row svg { width: 22px; height: 22px; color: var(--primary); flex-shrink: 0; }
+    .call-row .ctx { font-size: 0.78rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+    .call-row .val { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; font-feature-settings: var(--fig); }
 
-    @media (min-width: 769px) {
-      .footer-inner {
-        grid-template-columns: 2fr 1fr 1.5fr;
-        gap: 60px;
-      }
+    .addr-row { display: flex; align-items: flex-start; gap: 16px; padding: 6px 20px 22px; }
+    .addr-row svg { width: 22px; height: 22px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+    .addr-row address { font-style: normal; color: var(--ink-soft); line-height: 1.55; }
+
+    .ai-note {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5;
+      padding: 16px 18px; border-radius: var(--r-md);
+      background: color-mix(in srgb, var(--accent) 16%, var(--paper-card));
+      margin-bottom: 24px;
     }
+    .ai-note svg { width: 20px; height: 20px; color: var(--primary-d); flex-shrink: 0; margin-top: 1px; }
+    .ai-note b { color: var(--ink); font-weight: 600; }
+
+    .book-cta { width: 100%; justify-content: center; padding-block: 17px; font-size: 1rem; }
+
+    /* hours */
+    .panel-hours h3 { margin-bottom: 22px; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours tr { border-bottom: 1px solid var(--line-soft); }
+    .hours tr:last-child { border-bottom: none; }
+    .hours td { padding: 15px 4px; font-size: 0.98rem; vertical-align: baseline; }
+    .hours td:first-child { font-family: var(--font-display); font-weight: 600; color: var(--ink); }
+    .hours td:last-child { text-align: right; color: var(--ink-soft); font-variant-numeric: tabular-nums; font-feature-settings: var(--fig); }
+    .hours tr.off td { color: var(--ink-faint); }
+    .hours tr.now td:first-child::after {
+      content: "Open now"; display: inline-block; margin-left: 10px;
+      font-family: var(--font-body); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--primary-d);
+      background: var(--soft); padding: 3px 8px; border-radius: 999px; vertical-align: middle;
+    }
+    .hours-note { margin-top: 22px; font-size: 0.86rem; color: var(--ink-faint); line-height: 1.5; }
+
+    /* ============================================================
+       FOOTER  (dark; neutral shadows only, no colored glow)
+    ============================================================ */
+    .footer { background: var(--ink); color: #F4E9E0; padding-block: clamp(56px, 7vw, 84px) 30px; }
+    .footer-top { display: grid; grid-template-columns: 1fr; gap: 44px; }
+    @media (min-width: 820px) { .footer-top { grid-template-columns: 1.6fr 1fr 1.3fr; gap: 56px; } }
+
+    .footer-brand .brand-name { color: #F4E9E0; }
+    .footer-brand .brand-name em { color: var(--accent); }
+    .footer-tagline {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 1.15rem; color: var(--accent); margin-top: 18px; line-height: 1.35; max-width: 30ch;
+    }
+    .footer-col h4 {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 11px; }
+    .footer-col a, .footer-col p { font-size: 0.94rem; color: rgba(244, 233, 224, 0.74); line-height: 1.6; transition: color var(--t); }
+    .footer-col a:hover { color: #fff; }
+    .footer-col .accent-link { color: var(--accent); font-weight: 500; }
+    .footer-col .accent-link:hover { color: #fff; }
+    .footer-bottom {
+      margin-top: clamp(44px, 6vw, 64px);
+      padding-top: 22px;
+      border-top: 1px solid rgba(244, 233, 224, 0.14);
+      display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: space-between;
+    }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(244, 233, 224, 0.46); }
   </style>
 </head>
 <body>
 
-  <!-- =============================================
-       HEADER
-  ============================================= -->
-  <header class="site-header" id="site-header">
-    <div class="header-inner">
-
-      <!-- Monogram SVG — stylized decorative A lettermark -->
-      <a href="#" class="header-logo" aria-label="Anne's Cuts & More — home">
-        <svg viewBox="0 0 52 58" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Anne's Cuts monogram">
-          <!-- Outer decorative serif A shape -->
-          <path d="M26 3 L48 52 H38 L32 36 H20 L14 52 H4 L26 3Z" fill="none" stroke="#B5654A" stroke-width="2.2" stroke-linejoin="round"/>
-          <!-- Crossbar -->
-          <path d="M22 30 H30" stroke="#B5654A" stroke-width="2" stroke-linecap="round"/>
-          <!-- Inner fill accent -->
-          <path d="M26 10 L42 48 H35 L29.5 33.5 H22.5 L17 48 H10 Z" fill="#B5654A" opacity="0.12"/>
-          <!-- Small serif foot left -->
-          <path d="M4 52 H12" stroke="#B5654A" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- Small serif foot right -->
-          <path d="M40 52 H48" stroke="#B5654A" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- Top serif -->
-          <path d="M23 5 H29" stroke="#B5654A" stroke-width="1.2" stroke-linecap="round"/>
-          <!-- Decorative dot -->
-          <circle cx="26" cy="2" r="1.5" fill="#B5654A" opacity="0.6"/>
+  <!-- =============== HEADER =============== -->
+  <header class="header" id="header">
+    <div class="header-in">
+      <a href="#home" class="brand" aria-label="Anne's Cuts and More, home">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" role="img" aria-label="Anne's Cuts monogram">
+          <circle cx="20" cy="20" r="19" stroke="#B5654A" stroke-width="1.4" opacity="0.45"/>
+          <!-- open-scissors identity device, miniature -->
+          <path d="M11 11 C14 13, 18 17, 20 20 C22 23, 26 27, 29 29" stroke="#B5654A" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M29 11 C26 13, 22 17, 20 20 C18 23, 14 27, 11 29" stroke="#B5654A" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="11.4" cy="30" r="3" stroke="#B5654A" stroke-width="1.6"/>
+          <circle cx="28.6" cy="30" r="3" stroke="#B5654A" stroke-width="1.6"/>
+          <circle cx="20" cy="20" r="1.5" fill="#B5654A"/>
         </svg>
+        <span class="brand-name">Anne's <em>Cuts</em></span>
       </a>
 
-      <nav class="header-nav" aria-label="Primary navigation">
+      <nav class="nav" aria-label="Primary">
         <a href="#services">Services</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#visit">Visit</a>
       </nav>
 
-      <div class="header-actions">
-        <a href="tel:+15174567624" class="btn btn-outline" aria-label="Call Anne's Cuts">Call</a>
-        <a href="#contact" class="btn btn-filled">Book</a>
+      <div class="header-cta">
+        <a href="tel:+15174567624" class="btn btn-ghost" aria-label="Call Anne's Cuts at 517 456 7624">Call</a>
+        <a href="#visit" class="btn btn-primary">Book a chair</a>
       </div>
-
     </div>
   </header>
 
   <main>
 
-    <!-- =============================================
-         HERO
-    ============================================= -->
-    <section class="hero" aria-label="Hero" id="home">
-      <div class="hero-left reveal">
-        <p class="hero-eyebrow">clinton, michigan &nbsp;&middot;&nbsp; est. 2010</p>
-        <h1 class="hero-headline">Your chair<br/>is&nbsp;waiting.</h1>
-        <p class="hero-sub">Anne's Cuts & More is Clinton's boutique salon for clients who care about the details — a skilled pair of hands, a listening ear, and results that feel like you.</p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-filled">Book Your Chair</a>
-          <a href="#services" class="btn btn-text">See Our Work&nbsp;&rarr;</a>
+    <!-- =============== HERO =============== -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="kicker reveal">Clinton, Michigan &middot; Boutique salon</span>
+        <h1 class="reveal d1" id="hero-title">Your chair<br/>is <em>waiting.</em></h1>
+        <p class="hero-sub reveal d2">A small, deliberate salon for people who care about the details. One skilled pair of hands, a real conversation about your hair, and a result that looks like the best version of you.</p>
+        <div class="hero-actions reveal d3">
+          <a href="#visit" class="btn btn-primary">
+            Book a chair
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#services" class="btn btn-quiet">
+            See the menu
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="hero-meta reveal d3">
+          <span><b>Caring for Clinton</b> since 2010</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>Same-week appointments</span>
         </div>
       </div>
 
-      <div class="hero-right reveal" aria-hidden="true">
-        <!-- Decorative circles -->
-        <div class="hero-circle"></div>
-        <div class="hero-circle-outline"></div>
-        <!-- Editorial rule lines -->
-        <div class="hero-rule hero-rule-1"></div>
-        <div class="hero-rule hero-rule-2"></div>
-        <!-- Ghost number -->
-        <span class="hero-ghost">01</span>
-        <!-- Scissors SVG — actual path data, crossed blades with handle circles -->
-        <div class="hero-scissors">
-          <svg width="130" height="130" viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Blade 1: upper-left to lower-right -->
-            <path d="M20 15 C30 18, 60 58, 65 65 C70 72, 100 112, 110 115"
-                  stroke="#B5654A" stroke-width="2.8" stroke-linecap="round" fill="none"/>
-            <!-- Blade 1 body (elongated diamond) -->
-            <path d="M18 12 L28 20 L67 62 L62 68 L52 60 L13 18 Z"
-                  fill="#B5654A" fill-opacity="0.13" stroke="#B5654A" stroke-width="1.2"/>
-            <!-- Blade 2: upper-right to lower-left -->
-            <path d="M110 15 C100 18, 70 58, 65 65 C60 72, 30 112, 20 115"
-                  stroke="#B5654A" stroke-width="2.8" stroke-linecap="round" fill="none"/>
-            <!-- Blade 2 body (elongated diamond) -->
-            <path d="M112 12 L102 20 L63 62 L68 68 L78 60 L117 18 Z"
-                  fill="#B5654A" fill-opacity="0.13" stroke="#B5654A" stroke-width="1.2"/>
-            <!-- Handle circle left -->
-            <circle cx="22" cy="110" r="10" stroke="#B5654A" stroke-width="2" fill="none"/>
-            <circle cx="22" cy="110" r="4.5" fill="#B5654A" fill-opacity="0.3"/>
-            <!-- Handle circle right -->
-            <circle cx="108" cy="110" r="10" stroke="#B5654A" stroke-width="2" fill="none"/>
-            <circle cx="108" cy="110" r="4.5" fill="#B5654A" fill-opacity="0.3"/>
-            <!-- Center pivot dot -->
-            <circle cx="65" cy="65" r="3.5" fill="#B5654A"/>
-          </svg>
+      <div class="hero-art reveal d2" aria-hidden="true">
+        <div class="hero-ring"></div>
+        <div class="hero-disc"></div>
+        <!-- Identity device: refined open scissors -->
+        <svg class="hero-scissors" viewBox="0 0 140 150" fill="none" role="img" aria-label="Open scissors emblem">
+          <path d="M22 18 C34 26, 56 50, 70 70 C84 90, 106 116, 118 132" stroke="#FBF6F1" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M22 18 C34 26, 56 50, 70 70 C84 90, 106 116, 118 132" stroke="rgba(42,33,30,0.18)" stroke-width="1.1" stroke-linecap="round"/>
+          <path d="M118 18 C106 26, 84 50, 70 70 C56 90, 34 116, 22 132" stroke="#FBF6F1" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M118 18 C106 26, 84 50, 70 70 C56 90, 34 116, 22 132" stroke="rgba(42,33,30,0.18)" stroke-width="1.1" stroke-linecap="round"/>
+          <circle cx="24" cy="132" r="12" stroke="#FBF6F1" stroke-width="3.2"/>
+          <circle cx="116" cy="132" r="12" stroke="#FBF6F1" stroke-width="3.2"/>
+          <circle cx="70" cy="70" r="4.4" fill="#FBF6F1"/>
+        </svg>
+        <div class="hero-chip">
+          <div class="num">4.9</div>
+          <div class="lbl">Loved by neighbors across Lenawee County</div>
         </div>
       </div>
     </section>
 
-    <!-- =============================================
-         SERVICES
-    ============================================= -->
-    <section class="services" id="services" aria-label="Services">
-      <div class="services-inner">
-        <div class="reveal">
-          <div class="section-label">02 &nbsp;&middot;&nbsp; Services</div>
+    <!-- comb-stroke divider (identity motif) -->
+    <svg class="comb-rule" viewBox="0 0 1200 14" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="0" y1="13" x2="1200" y2="13" stroke="currentColor" stroke-width="1"/>
+      <g stroke="currentColor" stroke-width="1">
+        <line x1="60" y1="2" x2="60" y2="13"/><line x1="120" y1="2" x2="120" y2="13"/><line x1="180" y1="2" x2="180" y2="13"/>
+        <line x1="240" y1="2" x2="240" y2="13"/><line x1="300" y1="2" x2="300" y2="13"/><line x1="360" y1="2" x2="360" y2="13"/>
+        <line x1="420" y1="2" x2="420" y2="13"/><line x1="480" y1="2" x2="480" y2="13"/><line x1="540" y1="2" x2="540" y2="13"/>
+        <line x1="600" y1="2" x2="600" y2="13"/><line x1="660" y1="2" x2="660" y2="13"/><line x1="720" y1="2" x2="720" y2="13"/>
+        <line x1="780" y1="2" x2="780" y2="13"/><line x1="840" y1="2" x2="840" y2="13"/><line x1="900" y1="2" x2="900" y2="13"/>
+        <line x1="960" y1="2" x2="960" y2="13"/><line x1="1020" y1="2" x2="1020" y2="13"/><line x1="1080" y1="2" x2="1080" y2="13"/>
+        <line x1="1140" y1="2" x2="1140" y2="13"/>
+      </g>
+    </svg>
+
+    <!-- =============== SERVICES =============== -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal" id="services-title">What we do, <em>and do well.</em></h2>
+          <p class="lead reveal d1">Honest pricing, no upsell theatre. Every visit starts with a quick consult so the price you hear is the price you pay.</p>
         </div>
-        <span class="ghost-number" style="top:-20px; right:-20px;" aria-hidden="true">02</span>
 
-        <h2 class="services-heading reveal">What we do best.</h2>
-
-        <div class="service-list reveal">
-
-          <div class="service-row">
-            <span class="service-num">01</span>
-            <div class="service-info">
-              <span class="service-name">Cuts &amp; Styling</span>
-              <span class="service-desc">Precision cuts tailored to your face shape, texture, and lifestyle</span>
+        <div class="menu">
+          <article class="item reveal">
+            <div class="item-main">
+              <span class="item-name">Cuts &amp; Styling</span>
+              <span class="item-tag">Most booked</span>
             </div>
-            <span class="service-price">from $45</span>
-          </div>
+            <span class="item-price">$45<span>&nbsp;and up</span></span>
+            <p class="item-desc">Precision cuts shaped to your face, your texture, and the five minutes you actually have in the morning.</p>
+          </article>
 
-          <div class="service-row">
-            <span class="service-num">02</span>
-            <div class="service-info">
-              <span class="service-name">Color &amp; Highlights</span>
-              <span class="service-desc">Full color, balayage, foil highlights, and gloss treatments</span>
+          <article class="item reveal">
+            <div class="item-main">
+              <span class="item-name">Color &amp; Highlights</span>
             </div>
-            <span class="service-price">from $85</span>
-          </div>
+            <span class="item-price">$85<span>&nbsp;and up</span></span>
+            <p class="item-desc">Full color, hand-painted balayage, foils, and glossing. We talk through upkeep before we ever pick up a brush.</p>
+          </article>
 
-          <div class="service-row">
-            <span class="service-num">03</span>
-            <div class="service-info">
-              <span class="service-name">Blowouts</span>
-              <span class="service-desc">Smooth, voluminous, lasting — ready for whatever's next</span>
+          <article class="item reveal">
+            <div class="item-main">
+              <span class="item-name">Blowouts</span>
             </div>
-            <span class="service-price">from $40</span>
-          </div>
+            <span class="item-price">$40<span>&nbsp;and up</span></span>
+            <p class="item-desc">Smooth, full, and built to last. The good-hair-day you book on purpose.</p>
+          </article>
 
-          <div class="service-row">
-            <span class="service-num">04</span>
-            <div class="service-info">
-              <span class="service-name">Special-Occasion Styling</span>
-              <span class="service-desc">Updos, braids, and event-ready looks for weddings and beyond</span>
+          <article class="item reveal">
+            <div class="item-main">
+              <span class="item-name">Special-Occasion Styling</span>
+              <span class="item-tag">By appointment</span>
             </div>
-            <span class="service-price">from $95</span>
-          </div>
+            <span class="item-price">$95<span>&nbsp;and up</span></span>
+            <p class="item-desc">Updos, braids, and event-ready looks for weddings, galas, and the photos you will keep forever.</p>
+          </article>
 
-          <div class="service-row">
-            <span class="service-num">05</span>
-            <div class="service-info">
-              <span class="service-name">Men's Grooming</span>
-              <span class="service-desc">Clean cuts, fades, and beard work with a relaxed, attentive touch</span>
+          <article class="item reveal">
+            <div class="item-main">
+              <span class="item-name">Men's Grooming</span>
             </div>
-            <span class="service-price">from $35</span>
-          </div>
-
+            <span class="item-price">$35<span>&nbsp;and up</span></span>
+            <p class="item-desc">Clean cuts, sharp fades, and beard work with a relaxed, unhurried touch.</p>
+          </article>
         </div>
+
+        <p class="menu-foot reveal">Prices are starting points; your stylist confirms the exact quote at consult. New to us? Just say so when you book.</p>
       </div>
     </section>
 
-    <!-- =============================================
-         ABOUT
-    ============================================= -->
-    <section class="about" id="about" aria-label="About Anne's Cuts">
-      <div class="about-inner">
-        <div class="reveal">
-          <div class="section-label">03 &nbsp;&middot;&nbsp; About</div>
-        </div>
-        <span class="ghost-number" style="top:-10px; left:-30px;" aria-hidden="true">03</span>
-
+    <!-- =============== ABOUT =============== -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap">
         <div class="about-grid">
-          <div class="about-body reveal">
-            <h2 class="about-heading">Clinton's boutique<br/>salon since 2010.</h2>
-            <p>Anne's Cuts & More has been a fixture in Clinton, Michigan for over a decade — not because we're the biggest salon in the county, but because we're intentionally not. We keep the schedule small and the attention high, so every client who sits in our chair gets a stylist who's fully present.</p>
-            <p>Our team takes the time to understand your hair, your habits, and what you're actually going for — not just what's trending. Whether you're coming in for a shape-up or a full color transformation, you'll leave feeling like yourself, only sharper.</p>
-          </div>
+          <blockquote class="about-quote reveal">
+            We keep the schedule small on purpose, so the person in our chair gets a stylist who is fully present.
+            <cite>Anne<span>Owner &amp; lead stylist</span></cite>
+          </blockquote>
 
-          <div class="trust-stack reveal">
-            <div class="trust-item">
-              <div class="trust-title">Locally Owned</div>
-              <div class="trust-desc">Serving Clinton &amp; surrounding communities since 2010</div>
-            </div>
-            <div class="trust-item">
-              <div class="trust-title">Same-Week Appointments</div>
-              <div class="trust-desc">Most clients book within 3–5 days</div>
-            </div>
-            <div class="trust-item">
-              <div class="trust-title">Personalized Service</div>
-              <div class="trust-desc">Stylists who remember your name — and your last color</div>
+          <div class="about-body reveal d1">
+            <h3 id="about-title">A neighborhood salon, not a factory.</h3>
+            <p>Anne's Cuts &amp; More has been part of Clinton for more than a decade, and not because we are the biggest salon in the county. We are intentionally not. Fewer chairs means more attention, and more attention is the whole point.</p>
+            <p>Our team takes the time to learn your hair, your routine, and what you are actually going for, not just what is trending this season. You leave looking like yourself, only sharper.</p>
+
+            <div class="trust">
+              <div class="trust-card reveal d1">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 21V10l9-7 9 7v11h-6v-7H9v7H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                <div class="t">Locally owned</div>
+                <div class="d">Serving Clinton and the towns around it since 2010</div>
+              </div>
+              <div class="trust-card reveal d2">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div class="t">Same-week chairs</div>
+                <div class="d">Most clients book within three to five days</div>
+              </div>
+              <div class="trust-card reveal d3">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.6 5.5 6 .9-4.3 4.3 1 6L12 17l-5.3 2.7 1-6L3.4 9.4l6-.9L12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                <div class="t">They remember you</div>
+                <div class="d">Your name, your last color, the way you like it</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- =============================================
-         CONTACT / BOOKING
-    ============================================= -->
-    <section class="contact" id="contact" aria-label="Book your appointment">
-      <div class="contact-inner">
-        <div class="reveal">
-          <div class="section-label">04 &nbsp;&middot;&nbsp; Book Your Chair</div>
+    <!-- comb-stroke divider -->
+    <svg class="comb-rule" viewBox="0 0 1200 14" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="0" y1="13" x2="1200" y2="13" stroke="currentColor" stroke-width="1"/>
+      <g stroke="currentColor" stroke-width="1">
+        <line x1="60" y1="2" x2="60" y2="13"/><line x1="120" y1="2" x2="120" y2="13"/><line x1="180" y1="2" x2="180" y2="13"/>
+        <line x1="240" y1="2" x2="240" y2="13"/><line x1="300" y1="2" x2="300" y2="13"/><line x1="360" y1="2" x2="360" y2="13"/>
+        <line x1="420" y1="2" x2="420" y2="13"/><line x1="480" y1="2" x2="480" y2="13"/><line x1="540" y1="2" x2="540" y2="13"/>
+        <line x1="600" y1="2" x2="600" y2="13"/><line x1="660" y1="2" x2="660" y2="13"/><line x1="720" y1="2" x2="720" y2="13"/>
+        <line x1="780" y1="2" x2="780" y2="13"/><line x1="840" y1="2" x2="840" y2="13"/><line x1="900" y1="2" x2="900" y2="13"/>
+        <line x1="960" y1="2" x2="960" y2="13"/><line x1="1020" y1="2" x2="1020" y2="13"/><line x1="1080" y1="2" x2="1080" y2="13"/>
+        <line x1="1140" y1="2" x2="1140" y2="13"/>
+      </g>
+    </svg>
+
+    <!-- =============== CONTACT / BOOKING =============== -->
+    <section class="contact" id="visit" aria-labelledby="visit-title">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 class="reveal" id="visit-title">Ready when <em>you are.</em></h2>
+          <p class="lead reveal d1">Book online in under a minute, or call and talk to a real voice. Either way, your chair is held the moment you confirm.</p>
         </div>
-        <span class="ghost-number" style="top:-20px; right:-20px;" aria-hidden="true">04</span>
 
-        <h2 class="contact-heading reveal">Ready for your next look?</h2>
+        <div class="contact-grid">
 
-        <div class="contact-grid reveal">
+          <div class="panel reveal">
+            <h3>Two easy ways <em>to book.</em></h3>
+            <p class="pintro">Pick whatever feels easier. We answer the phone day or night.</p>
 
-          <div class="contact-left">
-            <!-- Call button with SVG phone icon -->
-            <a href="tel:+15174567624" class="contact-call-btn" aria-label="Call Anne's Cuts at 517-456-7624">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02L6.62 10.79z" fill="currentColor"/>
-              </svg>
-              (517) 456-7624
+            <a href="tel:+15174567624" class="call-row" aria-label="Call Anne's Cuts at 517 456 7624">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.5 0 1 .4 1 1V20c0 .5-.5 1-1 1-9.4 0-17-7.6-17-17 0-.5.5-1 1-1H8c.5 0 1 .5 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.8 2.2z" fill="currentColor"/></svg>
+              <span>
+                <span class="ctx">Call or text</span><br/>
+                <span class="val">(517) 456-7624</span>
+              </span>
             </a>
 
-            <!-- Address with map-pin icon -->
-            <div class="contact-address">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-top:2px;">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#B5654A"/>
-              </svg>
-              <address style="font-style:normal;">
+            <div class="addr-row">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.7"/></svg>
+              <address>
                 123 West Michigan Avenue<br/>
                 Clinton, MI 49236
               </address>
             </div>
 
-            <p class="contact-ai-note">Our AI receptionist answers 24/7 — call anytime to book or ask questions.</p>
+            <div class="ai-note">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span><b>Our AI receptionist answers 24/7.</b> Call any hour to book, reschedule, or ask a quick question, even after we have gone home for the night.</span>
+            </div>
 
-            <a href="https://cal.com/annes-cuts" target="_blank" rel="noopener noreferrer" class="contact-book-btn">
-              Book Online
+            <a href="https://calendly.com/annes-cuts" target="_blank" rel="noopener noreferrer" class="btn btn-primary book-cta">
+              Book online
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
 
-          <!-- Hours -->
-          <div class="hours-block">
-            <div class="hours-title">Salon Hours</div>
-            <table class="hours-table" aria-label="Salon hours">
+          <div class="panel panel-hours reveal d1">
+            <h3>Salon hours</h3>
+            <table class="hours" aria-label="Salon hours">
               <tbody>
-                <tr class="closed">
-                  <td>Monday</td>
-                  <td>Closed</td>
-                </tr>
-                <tr>
-                  <td>Tue – Fri</td>
-                  <td>9:00 AM – 6:00 PM</td>
-                </tr>
-                <tr>
-                  <td>Saturday</td>
-                  <td>9:00 AM – 4:00 PM</td>
-                </tr>
-                <tr class="closed">
-                  <td>Sunday</td>
-                  <td>Closed</td>
-                </tr>
+                <tr class="off"><td>Monday</td><td>Closed</td></tr>
+                <tr class="now"><td>Tuesday</td><td>9:00 to 6:00</td></tr>
+                <tr><td>Wednesday</td><td>9:00 to 6:00</td></tr>
+                <tr><td>Thursday</td><td>9:00 to 6:00</td></tr>
+                <tr><td>Friday</td><td>9:00 to 6:00</td></tr>
+                <tr><td>Saturday</td><td>9:00 to 4:00</td></tr>
+                <tr class="off"><td>Sunday</td><td>Closed</td></tr>
               </tbody>
             </table>
+            <p class="hours-note">Hours shown are a sample and easy to edit. Holiday hours vary; the 24/7 line always has the current schedule.</p>
           </div>
 
         </div>
@@ -1003,106 +769,74 @@
 
   </main>
 
-  <!-- =============================================
-       FOOTER
-  ============================================= -->
-  <footer class="site-footer" aria-label="Site footer">
-    <div class="footer-inner">
+  <!-- =============== FOOTER =============== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#home" class="brand" aria-label="Anne's Cuts and More, home">
+            <svg class="brand-mark" viewBox="0 0 40 40" fill="none" role="img" aria-label="Anne's Cuts monogram">
+              <circle cx="20" cy="20" r="19" stroke="#D99A7C" stroke-width="1.4" opacity="0.55"/>
+              <path d="M11 11 C14 13, 18 17, 20 20 C22 23, 26 27, 29 29" stroke="#D99A7C" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M29 11 C26 13, 22 17, 20 20 C18 23, 14 27, 11 29" stroke="#D99A7C" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="11.4" cy="30" r="3" stroke="#D99A7C" stroke-width="1.6"/>
+              <circle cx="28.6" cy="30" r="3" stroke="#D99A7C" stroke-width="1.6"/>
+              <circle cx="20" cy="20" r="1.5" fill="#D99A7C"/>
+            </svg>
+            <span class="brand-name">Anne's <em>Cuts</em></span>
+          </a>
+          <p class="footer-tagline">"Your chair is waiting."</p>
+        </div>
 
-      <!-- Brand -->
-      <div class="footer-brand">
-        <svg viewBox="0 0 52 58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Anne's Cuts monogram" role="img">
-          <path d="M26 3 L48 52 H38 L32 36 H20 L14 52 H4 L26 3Z" fill="none" stroke="#D99A7C" stroke-width="2.2" stroke-linejoin="round"/>
-          <path d="M22 30 H30" stroke="#D99A7C" stroke-width="2" stroke-linecap="round"/>
-          <path d="M26 10 L42 48 H35 L29.5 33.5 H22.5 L17 48 H10 Z" fill="#D99A7C" opacity="0.15"/>
-          <path d="M4 52 H12" stroke="#D99A7C" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M40 52 H48" stroke="#D99A7C" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M23 5 H29" stroke="#D99A7C" stroke-width="1.2" stroke-linecap="round"/>
-          <circle cx="26" cy="2" r="1.5" fill="#D99A7C" opacity="0.7"/>
-        </svg>
-        <p class="footer-tagline">"Your chair is waiting."</p>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#visit">Visit &amp; hours</a></li>
+            <li><a href="https://calendly.com/annes-cuts" target="_blank" rel="noopener" class="accent-link">Book online</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Find us</h4>
+          <p>123 West Michigan Avenue<br/>Clinton, MI 49236</p>
+          <p style="margin-top:14px;"><a href="tel:+15174567624" class="accent-link">(517) 456-7624</a></p>
+          <p style="margin-top:14px;">Tuesday to Friday, 9 to 6<br/>Saturday, 9 to 4</p>
+        </div>
       </div>
 
-      <!-- Nav -->
-      <div class="footer-nav">
-        <p class="footer-nav-title">Navigate</p>
-        <ul>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="https://cal.com/annes-cuts" target="_blank" rel="noopener">Book Online</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact block -->
-      <div class="footer-contact-block">
-        <p class="footer-nav-title">Find Us</p>
-        <p>123 West Michigan Avenue<br/>Clinton, MI 49236</p>
-        <br/>
-        <p><a href="tel:+15174567624">(517) 456-7624</a></p>
-        <br/>
-        <p style="font-style:italic; font-size:0.85rem; opacity:0.65;">Open Tue–Fri 9–6 &nbsp;&middot;&nbsp; Sat 9–4</p>
-      </div>
-
-    </div>
-
-    <div style="max-width:var(--max-w); margin:0 auto; padding:0 24px;">
       <div class="footer-bottom">
-        <p>&copy; 2026 Anne's Cuts &amp; More &nbsp;&middot;&nbsp; 123 W Michigan Ave, Clinton MI &nbsp;&middot;&nbsp; (517) 456-7624</p>
-        <p>Bookings handled 24/7 by our AI receptionist. &nbsp;&middot;&nbsp; Site by Local Agency</p>
+        <p>&copy; 2026 Anne's Cuts &amp; More. 123 W Michigan Ave, Clinton MI.</p>
+        <p>Bookings handled 24/7 by our AI receptionist. Site by Local Agency.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-      // ── Sticky header scroll shadow ──────────────────────
-      var header = document.getElementById('site-header');
-      var scrollThreshold = 20;
-
+    (function () {
+      var header = document.getElementById('header');
       function onScroll() {
-        if (window.scrollY > scrollThreshold) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
+        if (window.scrollY > 12) header.classList.add('stuck');
+        else header.classList.remove('stuck');
       }
-
       window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll(); // run once on load
+      onScroll();
 
-      // ── Scroll reveal (IntersectionObserver) ─────────────
-      var revealEls = document.querySelectorAll('.reveal');
-
+      var els = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
-        var revealObserver = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target);
-              }
-            });
-          },
-          {
-            threshold: 0.12,
-            rootMargin: '0px 0px -40px 0px'
-          }
-        );
-
-        revealEls.forEach(function (el) {
-          revealObserver.observe(el);
-        });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+        els.forEach(function (el) { io.observe(el); });
       } else {
-        // Fallback: show all immediately
-        revealEls.forEach(function (el) {
-          el.classList.add('visible');
-        });
+        els.forEach(function (el) { el.classList.add('in'); });
       }
-
-    });
+    })();
   </script>
 
+<a href="./call/" aria-label="Hear our AI receptionist sample call" style="position:fixed;right:18px;bottom:18px;z-index:99999;display:inline-flex;align-items:center;gap:8px;background:#B5654A;color:#fff;text-decoration:none;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:15px;padding:13px 18px;border-radius:999px;box-shadow:0 8px 26px rgba(0,0,0,.24)"><span style="font-size:13px">▶</span> Hear our AI receptionist</a>
 </body>
 </html>

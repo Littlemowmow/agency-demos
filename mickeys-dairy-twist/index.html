@@ -1,4 +1,5 @@
 <!-- Mickey's Dairy Twist | generated for outreach demo | 2026-06-16 -->
+<!-- Design Read: local ice cream shop landing page for Saline MI families + summer visitors, playful-retro-joyful vibe, leaning toward Baloo 2 display + Quicksand body, scalloped edges, layered soft shadows, motivated IntersectionObserver reveal. VARIANCE: 7 / MOTION: 5 / DENSITY: 4 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,32 +8,48 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Mickey's Dairy Twist — Soft-serve summers in Saline. Real soft-serve, hand-dipped cones, sundaes, shakes, and more on West Michigan Ave, Saline MI." />
+  <meta name="description" content="Mickey's Dairy Twist - Soft-serve summers in Saline. Real soft-serve, hand-dipped cones, sundaes, shakes, and more at 703 West Michigan Ave, Saline MI." />
   <title>Mickey's Dairy Twist | Saline, MI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ─── Reset & Tokens ─────────────────────────────────────────── */
+    /* ─── Reset ──────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ─── Tokens ─────────────────────────────────────────────────── */
     :root {
-      --bg:      #FFF7FB;
-      --ink:     #3A2238;
-      --primary: #FF7AA2;
-      --accent:  #5FC9E8;
-      --soft:    #FFE3EE;
-      --pop:     #FFD23F;
-      --white:   #FFFFFF;
-      --radius:  16px;
-      --shadow:  0 4px 24px rgba(58,34,56,.10);
-      --shadow-lg: 0 8px 40px rgba(58,34,56,.16);
+      /* Brand palette */
+      --bg:       #FFF7FB;
+      --ink:      #3A2238;
+      --ink-muted: #6B4D67;
+      --primary:  #FF7AA2;   /* pink — backgrounds only */
+      --accent:   #5FC9E8;   /* sky  — backgrounds only */
+      --pop:      #FFD23F;   /* yellow — backgrounds only */
+      --soft:     #FFE3EE;
+      --white:    #FFFFFF;
+
+      /* Elevation */
+      --shadow-xs: 0 1px 3px rgba(58,34,56,.06), 0 4px 12px rgba(58,34,56,.06);
+      --shadow-sm: 0 1px 3px rgba(58,34,56,.05), 0 8px 24px rgba(58,34,56,.08);
+      --shadow-md: 0 2px 4px rgba(58,34,56,.05), 0 12px 32px rgba(58,34,56,.09);
+      --shadow-lg: 0 4px 8px rgba(58,34,56,.06), 0 20px 48px rgba(58,34,56,.10);
+
+      /* Radii — one consistent system */
+      --r-sm:  12px;
+      --r-md:  20px;
+      --r-lg:  28px;
+      --r-pill: 999px;
+
+      /* Type */
+      --font-display: 'Baloo 2', cursive;
+      --font-body:    'Quicksand', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: var(--font-body);
       font-size: 16px;
       background: var(--bg);
       color: var(--ink);
@@ -40,74 +57,97 @@
       overflow-x: hidden;
     }
 
-    h1,h2,h3,h4 { font-family: 'Baloo 2', cursive; line-height: 1.2; }
-
-    /* ─── Scroll Reveal ──────────────────────────────────────────── */
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .6s ease, transform .6s ease;
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      line-height: 1.15;
+      color: var(--ink);
     }
-    [data-reveal].revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    [data-reveal-delay="1"] { transition-delay: .1s; }
-    [data-reveal-delay="2"] { transition-delay: .2s; }
-    [data-reveal-delay="3"] { transition-delay: .3s; }
-    [data-reveal-delay="4"] { transition-delay: .4s; }
-    [data-reveal-delay="5"] { transition-delay: .5s; }
 
-    /* ─── Utility ────────────────────────────────────────────────── */
+    /* ─── Utilities ─────────────────────────────────────────────── */
     .container {
       width: 92%;
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .sr-only {
       position: absolute; width: 1px; height: 1px;
       padding: 0; margin: -1px; overflow: hidden;
       clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
 
+    /* ─── Reduced-motion baseline ────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+
+    /* ─── Scroll Reveal ──────────────────────────────────────────── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1);
+    }
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-reveal-delay="1"] { transition-delay: .08s; }
+    [data-reveal-delay="2"] { transition-delay: .16s; }
+    [data-reveal-delay="3"] { transition-delay: .24s; }
+    [data-reveal-delay="4"] { transition-delay: .32s; }
+    [data-reveal-delay="5"] { transition-delay: .40s; }
+
     /* ─── Buttons ────────────────────────────────────────────────── */
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 26px;
-      border-radius: 50px;
-      font-family: 'Baloo 2', cursive;
+      padding: 13px 28px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-display);
       font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
       border: none;
       text-decoration: none;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      transition: transform .2s cubic-bezier(.16,1,.3,1), box-shadow .2s cubic-bezier(.16,1,.3,1);
       white-space: nowrap;
+      line-height: 1;
     }
     .btn:focus-visible {
       outline: 3px solid var(--ink);
       outline-offset: 3px;
     }
+    .btn:active {
+      transform: scale(.97);
+    }
+
+    /* Pink button: ink text on pink bg — contrast OK (#3A2238 on #FF7AA2 = ~4.9:1) */
     .btn-pink {
       background: var(--primary);
       color: var(--ink);
     }
     .btn-pink:hover {
-      background: #ff5d8f;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255,122,162,.4);
+      box-shadow: var(--shadow-md);
     }
+
+    /* Yellow button: ink text on yellow bg — contrast OK (#3A2238 on #FFD23F = ~7.2:1) */
     .btn-pop {
       background: var(--pop);
       color: var(--ink);
     }
     .btn-pop:hover {
-      background: #ffc800;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255,210,63,.5);
+      box-shadow: var(--shadow-md);
     }
+
+    /* Outline button */
     .btn-outline {
       background: transparent;
       color: var(--ink);
@@ -118,25 +158,16 @@
       color: var(--white);
       transform: translateY(-2px);
     }
+
+    /* White outline (on colored sections) */
     .btn-outline-white {
       background: transparent;
       color: var(--white);
-      border: 2.5px solid var(--white);
+      border: 2.5px solid rgba(255,255,255,.8);
     }
     .btn-outline-white:hover {
-      background: var(--white);
-      color: var(--ink);
+      background: rgba(255,255,255,.15);
       transform: translateY(-2px);
-    }
-
-    @media (max-width: 480px) {
-      .btn-pink, .btn-pop {
-        animation: pulse 2.5s ease-in-out infinite;
-      }
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,122,162,.4); }
-      50% { box-shadow: 0 0 0 10px rgba(255,122,162,0); }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -147,21 +178,24 @@
       top: 0;
       z-index: 100;
       background: var(--bg);
-      border-bottom: 2px solid var(--primary);
-      transition: background .3s ease, backdrop-filter .3s ease, box-shadow .3s ease;
+      border-bottom: 1.5px solid rgba(255,122,162,.2);
+      transition: box-shadow .25s ease;
     }
     #site-header.scrolled {
-      background: rgba(255,247,251,.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 2px 20px rgba(58,34,56,.12);
+      background: rgba(255,247,251,.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-sm);
     }
+
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0;
+      padding: 16px 0;
     }
+
+    /* Wordmark */
     .wordmark {
       display: flex;
       align-items: center;
@@ -170,16 +204,18 @@
       color: var(--ink);
     }
     .wordmark-text {
-      font-family: 'Baloo 2', cursive;
-      font-size: 1.25rem;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
       font-weight: 800;
       color: var(--ink);
       line-height: 1;
     }
-    .wordmark-text span {
+    .wordmark-text em {
+      font-style: normal;
       color: var(--primary);
     }
 
+    /* Desktop nav */
     .header-nav {
       display: flex;
       align-items: center;
@@ -192,15 +228,16 @@
       margin-right: 16px;
     }
     .nav-links a {
-      font-family: 'Poppins', sans-serif;
+      font-family: var(--font-body);
       font-size: .9rem;
       font-weight: 600;
-      color: var(--ink);
+      color: var(--ink-muted);
       text-decoration: none;
-      transition: color .2s;
+      transition: color .18s;
     }
-    .nav-links a:hover { color: var(--primary); }
+    .nav-links a:hover { color: var(--ink); }
 
+    /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -209,7 +246,7 @@
       border: none;
       cursor: pointer;
       padding: 6px;
-      border-radius: 8px;
+      border-radius: var(--r-sm);
     }
     .hamburger:focus-visible { outline: 3px solid var(--ink); }
     .hamburger span {
@@ -218,22 +255,23 @@
       height: 2.5px;
       background: var(--ink);
       border-radius: 2px;
-      transition: transform .3s, opacity .3s;
+      transition: transform .25s, opacity .25s;
     }
     .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
     .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
     .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
+    /* Mobile nav */
     #mobile-nav {
       display: none;
       flex-direction: column;
-      gap: 12px;
-      padding: 16px 0 20px;
+      gap: 10px;
+      padding: 14px 0 18px;
       border-top: 1px solid var(--soft);
     }
     #mobile-nav.open { display: flex; }
     #mobile-nav a {
-      font-family: 'Poppins', sans-serif;
+      font-family: var(--font-body);
       font-weight: 600;
       color: var(--ink);
       text-decoration: none;
@@ -257,202 +295,246 @@
        2. HERO
     ═══════════════════════════════════════════════════════════════ */
     #hero {
-      background: linear-gradient(135deg, var(--bg) 0%, #FFE3EE 60%, #ffd6ea 100%);
-      padding: 80px 0 0;
+      background: var(--bg);
+      padding: 72px 0 0;
       overflow: hidden;
+      position: relative;
     }
+
+    /* Subtle sunburst background */
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,210,63,.22) 0%, rgba(255,122,162,.10) 50%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
     .hero-inner {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      gap: 40px;
-      padding-bottom: 0;
+      gap: 48px;
     }
+
     .hero-copy { padding-bottom: 80px; }
+
     .hero-kicker {
       display: inline-block;
       background: var(--pop);
       color: var(--ink);
-      font-family: 'Baloo 2', cursive;
+      font-family: var(--font-display);
       font-weight: 700;
-      font-size: .85rem;
-      letter-spacing: .06em;
+      font-size: .8rem;
+      letter-spacing: .07em;
       text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 50px;
-      margin-bottom: 18px;
-    }
-    .hero-h1 {
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      color: var(--ink);
-      font-weight: 800;
+      padding: 5px 16px;
+      border-radius: var(--r-pill);
       margin-bottom: 20px;
-      max-width: 520px;
+    }
+
+    .hero-h1 {
+      font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 22px;
+      max-width: 540px;
+      text-wrap: balance;
     }
     .hero-h1 em {
       font-style: normal;
       color: var(--primary);
     }
+
     .hero-sub {
       font-size: 1.05rem;
-      color: var(--ink);
+      color: var(--ink-muted);
       max-width: 440px;
-      margin-bottom: 36px;
-      opacity: .85;
+      margin-bottom: 38px;
+      line-height: 1.7;
     }
+
     .hero-ctas {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
     }
 
+    /* Hero visual */
     .hero-visual {
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      padding-bottom: 0;
+      position: relative;
     }
 
-    /* Soft-serve SVG styling */
     .softserve-hero {
       width: 100%;
-      max-width: 380px;
+      max-width: 360px;
       height: auto;
-      filter: drop-shadow(0 20px 60px rgba(255,122,162,.35));
+      filter: drop-shadow(0 24px 48px rgba(58,34,56,.14)) drop-shadow(0 4px 8px rgba(58,34,56,.08));
     }
 
-    /* Wave divider below hero */
-    .hero-wave {
+    /* Decorative polka dots behind cone */
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* Scalloped wave below hero */
+    .hero-scallop {
       display: block;
       width: 100%;
       margin-top: -2px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 800px) {
       .hero-inner {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 32px;
       }
-      .hero-visual {
-        order: -1;
-        justify-content: center;
-      }
-      .softserve-hero { max-width: 220px; }
-      .hero-h1 { max-width: 100%; }
-      .hero-sub { max-width: 100%; }
+      .hero-visual { order: -1; }
+      .softserve-hero { max-width: 200px; }
+      .hero-h1 { max-width: 100%; margin: 0 auto 22px; }
+      .hero-sub { max-width: 100%; margin: 0 auto 38px; }
       .hero-ctas { justify-content: center; }
-      .hero-copy { padding-bottom: 40px; }
+      .hero-copy { padding-bottom: 0; }
     }
 
     /* ═══════════════════════════════════════════════════════════════
        3. MENU / FLAVORS
     ═══════════════════════════════════════════════════════════════ */
     #menu {
-      padding: 80px 0 90px;
       background: var(--white);
-    }
-    .section-label {
-      display: inline-block;
-      font-family: 'Baloo 2', cursive;
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-    .section-title {
-      font-size: clamp(1.7rem, 3.5vw, 2.25rem);
-      color: var(--ink);
-      margin-bottom: 14px;
-    }
-    .section-sub {
-      font-size: 1rem;
-      color: var(--ink);
-      opacity: .7;
-      max-width: 480px;
-      margin-bottom: 48px;
+      padding: 80px 0 96px;
     }
 
-    .menu-cards {
+    .section-head {
+      margin-bottom: 52px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.8vw, 2.5rem);
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+    .section-sub {
+      font-size: 1.02rem;
+      color: var(--ink-muted);
+      max-width: 480px;
+      line-height: 1.65;
+    }
+
+    /* Asymmetric menu grid: 2 tall on left, 3 on right */
+    .menu-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+
+    .menu-feature {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    .menu-secondary {
+      grid-column: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
     }
 
     .menu-card {
-      border-radius: 20px;
-      padding: 28px 20px 24px;
+      border-radius: var(--r-md);
+      padding: 28px 24px 26px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      box-shadow: var(--shadow);
-      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: var(--shadow-xs);
+      transition: transform .22s cubic-bezier(.16,1,.3,1), box-shadow .22s cubic-bezier(.16,1,.3,1);
       position: relative;
       overflow: hidden;
     }
     .menu-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-lg);
     }
-    .menu-card:focus-within { outline: 3px solid var(--ink); }
 
-    .menu-card--pink { background: #FFE3EE; }
-    .menu-card--sky  { background: #DFF4FB; }
-    .menu-card--pop  { background: #FFF8DB; }
-    .menu-card--mint { background: #E6FAF4; }
-    .menu-card--lav  { background: #EFE9FF; }
+    .menu-card--pink  { background: #FFE8F0; }
+    .menu-card--sky   { background: #DFF4FB; }
+    .menu-card--pop   { background: #FFF6D6; }
+    .menu-card--mint  { background: #E2F8F1; }
+    .menu-card--lilac { background: #EEE7FF; }
+
+    /* Feature card is taller */
+    .menu-card.menu-feature-card {
+      min-height: 340px;
+      justify-content: space-between;
+    }
 
     .card-icon {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
-    .card-icon--lg svg { width: 64px; height: 64px; }
-    .card-icon--md svg { width: 52px; height: 52px; }
-    .card-icon--sm svg { width: 44px; height: 44px; }
+    .card-icon svg { display: block; }
 
     .menu-card h3 {
-      font-size: 1.05rem;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--ink);
       margin-bottom: 8px;
-      line-height: 1.3;
+      line-height: 1.25;
     }
     .menu-card p {
-      font-size: .85rem;
-      color: var(--ink);
-      opacity: .75;
+      font-size: .88rem;
+      color: var(--ink-muted);
       flex-grow: 1;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
-    .card-btn {
-      font-family: 'Baloo 2', cursive;
-      font-size: .8rem;
+
+    .card-link {
+      font-family: var(--font-display);
+      font-size: .82rem;
       font-weight: 700;
       color: var(--ink);
       text-decoration: none;
-      border-bottom: 2px solid currentColor;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 2px solid var(--ink);
       padding-bottom: 1px;
-      transition: opacity .2s;
+      transition: opacity .18s;
     }
-    .card-btn:hover { opacity: .6; }
-    .card-btn:focus-visible { outline: 3px solid var(--ink); border-radius: 2px; }
+    .card-link:hover { opacity: .6; }
+    .card-link:focus-visible { outline: 3px solid var(--ink); border-radius: 2px; }
 
-    /* Mobile scroll */
-    @media (max-width: 900px) {
-      .menu-cards {
-        grid-template-columns: repeat(3, 260px);
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 16px;
-        gap: 14px;
+    /* Mobile: single column scroll */
+    @media (max-width: 840px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
       }
-      .menu-card { scroll-snap-align: start; }
+      .menu-feature { grid-column: 1; grid-row: auto; }
+      .menu-secondary {
+        grid-column: 1;
+        grid-template-columns: 1fr 1fr;
+      }
+      .menu-card.menu-feature-card { min-height: auto; }
     }
-    @media (max-width: 540px) {
-      .menu-cards {
-        grid-template-columns: repeat(5, 220px);
-      }
+    @media (max-width: 520px) {
+      .menu-secondary { grid-template-columns: 1fr; }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -461,71 +543,80 @@
     #about {
       background: var(--white);
       position: relative;
-      padding: 0 0 90px;
+      padding: 0 0 96px;
     }
 
-    .about-scallop {
+    /* Scalloped top edge */
+    .scallop-edge {
       display: block;
       width: 100%;
-      margin-bottom: 60px;
     }
 
     .about-inner {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 60px;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 72px;
       align-items: start;
     }
 
-    .about-copy .section-label { margin-bottom: 8px; }
-    .about-copy .section-title { margin-bottom: 20px; }
+    .about-copy .section-title { margin-bottom: 22px; }
     .about-copy p {
       font-size: 1rem;
-      color: var(--ink);
-      opacity: .82;
-      margin-bottom: 18px;
+      color: var(--ink-muted);
+      margin-bottom: 20px;
+      line-height: 1.7;
+      max-width: 62ch;
     }
 
-    .about-badges {
+    /* Trust pillars */
+    .trust-pillars {
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      justify-content: center;
+      gap: 16px;
     }
 
-    .badge {
-      padding: 20px 28px;
-      border-radius: 16px;
-      font-family: 'Baloo 2', cursive;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--ink);
+    .pillar {
       display: flex;
       align-items: center;
-      gap: 14px;
-      box-shadow: var(--shadow);
+      gap: 16px;
+      padding: 18px 22px;
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-xs);
     }
-    .badge--pop   { background: var(--pop); }
-    .badge--pink  { background: var(--primary); }
-    .badge--soft  { background: var(--soft); }
-    .badge-stamp {
-      width: 44px;
-      height: 44px;
+    .pillar--pop   { background: var(--pop); }
+    .pillar--pink  { background: var(--soft); }
+    .pillar--sky   { background: #DFF4FB; }
+
+    .pillar-icon {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: rgba(58,34,56,.12);
+      background: rgba(58,34,56,.1);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
-    .badge-text-group { display: flex; flex-direction: column; }
-    .badge-title { font-size: 1rem; font-weight: 800; line-height: 1.2; }
-    .badge-sub { font-size: .78rem; font-weight: 500; opacity: .7; }
+
+    .pillar-body {}
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .pillar-sub {
+      font-size: .78rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
 
     @media (max-width: 768px) {
-      .about-inner { grid-template-columns: 1fr; gap: 36px; }
-      .about-badges { flex-direction: row; flex-wrap: wrap; }
-      .badge { flex: 1; min-width: 200px; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .trust-pillars { flex-direction: row; flex-wrap: wrap; }
+      .pillar { flex: 1; min-width: 200px; }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -533,107 +624,144 @@
     ═══════════════════════════════════════════════════════════════ */
     #contact {
       position: relative;
+    }
+
+    .contact-band {
+      background: var(--primary);
+      position: relative;
       overflow: hidden;
     }
-    .contact-gradient {
-      background: linear-gradient(135deg, #FF7AA2 0%, #c45eb5 50%, #5FC9E8 100%);
-      position: relative;
-    }
-    .contact-overlay {
+
+    /* Subtle dot pattern on pink band */
+    .contact-band::before {
+      content: '';
       position: absolute;
       inset: 0;
-      background: rgba(58,34,56,.62);
+      background-image: radial-gradient(circle, rgba(58,34,56,.08) 1px, transparent 1px);
+      background-size: 28px 28px;
       pointer-events: none;
     }
-    .contact-wave-top {
+
+    .contact-scallop-top {
       display: block;
       width: 100%;
       position: relative;
       z-index: 1;
     }
+
     .contact-body {
       position: relative;
       z-index: 2;
-      padding: 60px 0 80px;
+      padding: 56px 0 72px;
     }
-    .contact-body .section-title { color: var(--white); margin-bottom: 6px; }
-    .contact-body .section-label { color: var(--pop); margin-bottom: 8px; }
-    .contact-body > .container > p {
-      color: rgba(255,255,255,.85);
-      margin-bottom: 50px;
+
+    .contact-headline {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+
+    .contact-lead {
       font-size: 1rem;
+      color: var(--ink);
+      opacity: .75;
+      margin-bottom: 52px;
+      max-width: 480px;
     }
 
     .contact-cols {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
-      gap: 60px;
+      gap: 64px;
       align-items: start;
     }
-    .contact-info { color: var(--white); }
+
+    .contact-info {}
+
     .contact-row {
       display: flex;
       align-items: flex-start;
       gap: 14px;
-      margin-bottom: 22px;
+      margin-bottom: 26px;
     }
     .contact-row svg { flex-shrink: 0; margin-top: 2px; }
+
     .contact-row-text h4 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 1rem;
+      font-family: var(--font-display);
+      font-size: .95rem;
       font-weight: 700;
-      margin-bottom: 3px;
-      color: var(--white);
+      margin-bottom: 4px;
+      color: var(--ink);
     }
     .contact-row-text p,
     .contact-row-text a {
       font-size: .95rem;
-      color: rgba(255,255,255,.87);
+      color: var(--ink);
+      opacity: .8;
       text-decoration: none;
     }
-    .contact-row-text a:hover { text-decoration: underline; }
+    .contact-row-text a:hover { opacity: 1; text-decoration: underline; }
+
     .contact-note {
-      font-size: .82rem;
-      color: rgba(255,255,255,.7);
-      margin-top: 6px;
+      font-size: .8rem;
+      color: var(--ink);
+      opacity: .6;
+      margin-top: 5px;
       font-style: italic;
     }
-    .contact-info .btn { margin-top: 28px; }
 
-    /* Hours table */
+    /* Hours card */
     .hours-card {
-      background: rgba(255,255,255,.13);
-      border: 1.5px solid rgba(255,255,255,.25);
-      border-radius: 20px;
-      padding: 28px 28px 24px;
-      backdrop-filter: blur(8px);
+      background: var(--white);
+      border-radius: var(--r-lg);
+      padding: 30px 30px 26px;
+      box-shadow: var(--shadow-md);
     }
     .hours-card h4 {
-      font-family: 'Baloo 2', cursive;
+      font-family: var(--font-display);
       font-size: 1.15rem;
       font-weight: 800;
-      color: var(--white);
-      margin-bottom: 18px;
+      color: var(--ink);
+      margin-bottom: 20px;
     }
-    .hours-table { width: 100%; border-collapse: collapse; }
-    .hours-table tr { border-bottom: 1px solid rgba(255,255,255,.15); }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hours-table tr {
+      border-bottom: 1px solid rgba(58,34,56,.08);
+    }
     .hours-table tr:last-child { border-bottom: none; }
     .hours-table td {
       padding: 10px 0;
       font-size: .92rem;
-      color: rgba(255,255,255,.9);
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
     }
-    .hours-table td:first-child { font-weight: 600; padding-right: 24px; }
-    .hours-table .closed { color: rgba(255,255,255,.5); }
+    .hours-table td:first-child {
+      font-weight: 600;
+      padding-right: 28px;
+    }
+    .hours-table .closed { color: var(--ink-muted); opacity: .65; }
     .hours-note {
       font-size: .78rem;
-      color: rgba(255,255,255,.6);
+      color: var(--ink-muted);
       font-style: italic;
-      margin-top: 16px;
+      margin-top: 14px;
     }
 
     @media (max-width: 768px) {
-      .contact-cols { grid-template-columns: 1fr; gap: 36px; }
+      .contact-cols { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* Bottom scallop wave into footer */
+    .contact-scallop-bottom {
+      display: block;
+      width: 100%;
+      position: relative;
+      z-index: 1;
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -642,60 +770,74 @@
     footer {
       background: var(--ink);
       color: rgba(255,255,255,.75);
-      padding: 52px 0 36px;
+      padding: 56px 0 36px;
     }
+
     .footer-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 40px;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 44px;
     }
-    .footer-brand .wordmark-text { font-size: 1.1rem; color: var(--white); }
-    .footer-brand .wordmark-text span { color: var(--primary); }
+
+    .footer-brand .wordmark-text {
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+    .footer-brand .wordmark-text em { color: var(--primary); }
+
     .footer-tagline {
       font-size: .85rem;
-      color: rgba(255,255,255,.55);
-      margin-top: 10px;
+      color: rgba(255,255,255,.5);
+      margin-top: 12px;
       font-style: italic;
     }
+
     .footer-col h5 {
-      font-family: 'Baloo 2', cursive;
-      font-size: .95rem;
+      font-family: var(--font-display);
+      font-size: .92rem;
       font-weight: 700;
       color: var(--white);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    .footer-col p, .footer-col a {
+    .footer-col p,
+    .footer-col a {
       font-size: .88rem;
-      color: rgba(255,255,255,.65);
+      color: rgba(255,255,255,.6);
       text-decoration: none;
       line-height: 1.9;
       display: block;
     }
     .footer-col a:hover { color: var(--primary); }
-    .footer-bottom {
+
+    .footer-divider {
+      border: none;
       border-top: 1px solid rgba(255,255,255,.1);
-      padding-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
     }
-    .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.4); }
-    .footer-bottom a { color: rgba(255,255,255,.4); text-decoration: none; }
+    .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.38); }
+    .footer-bottom a { color: rgba(255,255,255,.38); text-decoration: none; }
     .footer-bottom a:hover { color: var(--primary); }
+
     .footer-ai-note {
-      font-size: .78rem;
-      color: rgba(255,255,255,.35);
+      font-size: .75rem;
+      color: rgba(255,255,255,.3);
       font-style: italic;
       text-align: center;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     @media (max-width: 640px) {
       .footer-inner { grid-template-columns: 1fr; gap: 28px; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
 
   </style>
@@ -708,24 +850,22 @@
 <header id="site-header" role="banner">
   <div class="container">
     <div class="header-inner">
-      <a href="#" class="wordmark" aria-label="Mickey's Dairy Twist — home">
-        <!-- Soft-serve swirl wordmark icon -->
+
+      <!-- Wordmark -->
+      <a href="#" class="wordmark" aria-label="Mickey's Dairy Twist - home">
+        <!-- Soft-serve swirl icon -->
         <svg width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <!-- Cone -->
-          <polygon points="8,28 28,28 18,44" fill="#3A2238" opacity=".9"/>
+          <polygon points="8,28 28,28 18,44" fill="#3A2238" opacity=".88"/>
           <line x1="18" y1="28" x2="18" y2="44" stroke="#FFF7FB" stroke-width="1.2"/>
-          <line x1="13" y1="28" x2="10.5" y2="38" stroke="#FFF7FB" stroke-width=".8" opacity=".5"/>
-          <line x1="23" y1="28" x2="25.5" y2="38" stroke="#FFF7FB" stroke-width=".8" opacity=".5"/>
-          <!-- Swirl body -->
+          <line x1="13" y1="28" x2="10.5" y2="38" stroke="#FFF7FB" stroke-width=".8" opacity=".45"/>
+          <line x1="23" y1="28" x2="25.5" y2="38" stroke="#FFF7FB" stroke-width=".8" opacity=".45"/>
           <ellipse cx="18" cy="26" rx="10" ry="3.5" fill="#FF7AA2"/>
-          <!-- Swirl turns bottom to top -->
           <path d="M8,24 Q4,20 10,17 Q16,14 22,17 Q28,20 24,23" stroke="#FF7AA2" stroke-width="5" fill="none" stroke-linecap="round"/>
           <path d="M9,17 Q5,13 11,10 Q17,7 22,10 Q27,13 23,16" stroke="#ffaac4" stroke-width="4.5" fill="none" stroke-linecap="round"/>
           <path d="M10,10 Q7,7 13,4 Q18,1.5 22,5 Q24.5,7.5 22,9" stroke="#FFD23F" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          <!-- Tip dot -->
           <circle cx="21" cy="5" r="2.2" fill="#FF7AA2"/>
         </svg>
-        <span class="wordmark-text">Mickey's <span>Dairy Twist</span></span>
+        <span class="wordmark-text">Mickey's <em>Dairy Twist</em></span>
       </a>
 
       <!-- Desktop nav -->
@@ -735,8 +875,8 @@
           <li><a href="#about">Our Story</a></li>
           <li><a href="#contact">Find Us</a></li>
         </ul>
-        <a href="tel:+17344706253" class="btn btn-pink" aria-label="Call Mickey's Dairy Twist">Call Us</a>
-        <a href="#contact" class="btn btn-pop" style="margin-left:8px;">Order Now</a>
+        <a href="tel:+17344706253" class="btn btn-outline" aria-label="Call Mickey's Dairy Twist at (734) 470-6253">Call Us</a>
+        <a href="https://calendly.com/mickeys-dairy-twist" class="btn btn-pink" target="_blank" rel="noopener" aria-label="Book online at Mickey's Dairy Twist" style="margin-left:8px;">Book Online</a>
       </nav>
 
       <!-- Hamburger (mobile) -->
@@ -751,42 +891,57 @@
       <a href="#about" class="mobile-link">Our Story</a>
       <a href="#contact" class="mobile-link">Find Us</a>
       <div class="mobile-btns">
-        <a href="tel:+17344706253" class="btn btn-pink" aria-label="Call Mickey's Dairy Twist">Call Us</a>
-        <a href="#contact" class="btn btn-pop">Order Now</a>
+        <a href="tel:+17344706253" class="btn btn-outline" aria-label="Call Mickey's Dairy Twist">Call Us</a>
+        <a href="https://calendly.com/mickeys-dairy-twist" class="btn btn-pink" target="_blank" rel="noopener">Book Online</a>
       </div>
     </nav>
   </div>
 </header>
 
+<main>
+
 <!-- ═══════════════════════════════════════════════════════════════
      2. HERO
 ══════════════════════════════════════════════════════════════════ -->
-<main>
 <section id="hero" aria-labelledby="hero-heading">
   <div class="container">
     <div class="hero-inner">
+
       <div class="hero-copy" data-reveal>
         <span class="hero-kicker">Saline's Favorite Sweet Stop</span>
-        <h1 class="hero-h1" id="hero-heading">Soft-serve <em>summers</em> in Saline.</h1>
-        <p class="hero-sub">Mickey's Dairy Twist has been scooping joy on West Michigan Ave since the neighborhood needed it. Real soft-serve, made fresh, served with a smile.</p>
+        <h1 class="hero-h1" id="hero-heading">
+          Soft-serve <em>summers</em><br>in Saline.
+        </h1>
+        <p class="hero-sub">
+          Real soft-serve, scooped fresh on West Michigan Ave. Come for the cone, stay for the smile.
+        </p>
         <div class="hero-ctas">
-          <a href="https://cal.com/mickeys-dairy-twist" class="btn btn-pink" target="_blank" rel="noopener" aria-label="Book party catering or place an order at Mickey's Dairy Twist">Order / Party Catering</a>
-          <a href="tel:+17344706253" class="btn btn-outline" aria-label="Call Mickey's Dairy Twist at (734) 470-6253">Call Us: (734) 470-6253</a>
+          <a href="https://calendly.com/mickeys-dairy-twist" class="btn btn-pink" target="_blank" rel="noopener" aria-label="Book party catering or order at Mickey's Dairy Twist">Book or Order</a>
+          <a href="tel:+17344706253" class="btn btn-outline" aria-label="Call Mickey's Dairy Twist at (734) 470-6253">(734) 470-6253</a>
         </div>
       </div>
 
       <div class="hero-visual" data-reveal data-reveal-delay="2">
-        <!-- Hero soft-serve cone SVG — tall, beautiful, multi-turn swirl -->
+        <!-- Decorative polka dots -->
+        <svg class="hero-dots" viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;opacity:.35;">
+          <circle cx="30" cy="60" r="6" fill="#FFD23F"/>
+          <circle cx="350" cy="40" r="4" fill="#FF7AA2"/>
+          <circle cx="380" cy="180" r="7" fill="#FFD23F"/>
+          <circle cx="20" cy="250" r="5" fill="#5FC9E8"/>
+          <circle cx="370" cy="310" r="5" fill="#FF7AA2"/>
+          <circle cx="50" cy="400" r="4" fill="#FFD23F"/>
+          <circle cx="330" cy="440" r="6" fill="#5FC9E8"/>
+          <circle cx="200" cy="30" r="3" fill="#FF7AA2"/>
+          <circle cx="120" cy="450" r="4" fill="#FFD23F"/>
+        </svg>
+
+        <!-- Hero soft-serve cone SVG -->
         <svg class="softserve-hero" viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated soft-serve ice cream cone">
           <defs>
             <linearGradient id="swirl-grad" x1="60" y1="50" x2="240" y2="380" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#FFD23F"/>
               <stop offset="35%" stop-color="#FF7AA2"/>
-              <stop offset="100%" stop-color="#c44e8a"/>
-            </linearGradient>
-            <linearGradient id="swirl-grad2" x1="80" y1="60" x2="220" y2="360" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#FFE3EE"/>
-              <stop offset="100%" stop-color="#FF7AA2"/>
+              <stop offset="100%" stop-color="#d45e9a"/>
             </linearGradient>
             <linearGradient id="cone-grad" x1="60" y1="270" x2="240" y2="500" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#5a3040"/>
@@ -797,119 +952,61 @@
               <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
             </linearGradient>
           </defs>
-
-          <!-- ── CONE ── -->
-          <path d="M72,282 L228,282 L152,498 Z" fill="url(#cone-grad)" stroke="#3A2238" stroke-width="2"/>
-          <!-- Cone light sheen -->
+          <!-- Cone body -->
+          <path d="M72,282 L228,282 L152,498 Z" fill="url(#cone-grad)"/>
           <path d="M100,282 L152,498 L120,282 Z" fill="url(#cone-light)"/>
-          <!-- Cone waffle grid lines - vertical -->
+          <!-- Waffle lines vertical -->
           <line x1="152" y1="282" x2="152" y2="498" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
           <line x1="120" y1="282" x2="140" y2="430" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
           <line x1="184" y1="282" x2="165" y2="430" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
-          <line x1="96" y1="282" x2="130" y2="400" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
-          <line x1="208" y1="282" x2="174" y2="400" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
-          <!-- Cone waffle grid lines - horizontal -->
+          <line x1="96" y1="282" x2="130" y2="400" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+          <line x1="208" y1="282" x2="174" y2="400" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+          <!-- Waffle lines horizontal -->
           <line x1="78" y1="300" x2="222" y2="300" stroke="rgba(255,255,255,.13)" stroke-width="1"/>
-          <line x1="88" y1="325" x2="215" y2="325" stroke="rgba(255,255,255,.11)" stroke-width="1"/>
-          <line x1="100" y1="355" x2="205" y2="355" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-          <line x1="113" y1="390" x2="193" y2="390" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
-          <line x1="128" y1="428" x2="178" y2="428" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-
-          <!-- ── SOFT-SERVE SWIRL (bottom base ellipse to tip) ── -->
-          <!-- Base collar -->
-          <ellipse cx="150" cy="282" rx="78" ry="18" fill="url(#swirl-grad)" stroke="#3A2238" stroke-width="2"/>
-
-          <!-- Swirl turn 1 — wide bottom -->
-          <path d="
-            M72,264
-            C60,248 62,230 80,218
-            C100,204 130,202 152,208
-            C174,214 196,224 210,240
-            C222,254 222,270 210,280
-          " stroke="url(#swirl-grad)" stroke-width="34" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Swirl turn 1 highlight -->
-          <path d="
-            M76,262
-            C66,248 68,232 84,221
-            C104,208 132,206 152,212
-          " stroke="rgba(255,255,255,.22)" stroke-width="10" fill="none" stroke-linecap="round"/>
-
+          <line x1="88" y1="325" x2="215" y2="325" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+          <line x1="100" y1="355" x2="205" y2="355" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+          <line x1="113" y1="390" x2="193" y2="390" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+          <!-- Swirl base collar -->
+          <ellipse cx="150" cy="282" rx="78" ry="18" fill="url(#swirl-grad)"/>
+          <!-- Swirl turn 1 -->
+          <path d="M72,264 C60,248 62,230 80,218 C100,204 130,202 152,208 C174,214 196,224 210,240 C222,254 222,270 210,280" stroke="url(#swirl-grad)" stroke-width="34" fill="none" stroke-linecap="round"/>
+          <path d="M76,262 C66,248 68,232 84,221 C104,208 132,206 152,212" stroke="rgba(255,255,255,.22)" stroke-width="10" fill="none" stroke-linecap="round"/>
           <!-- Swirl turn 2 -->
-          <path d="
-            M82,210
-            C68,194 72,172 92,160
-            C114,146 142,146 162,155
-            C182,164 196,180 196,200
-            C196,216 188,228 172,234
-            C158,238 142,236 130,228
-          " stroke="url(#swirl-grad)" stroke-width="30" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="
-            M86,208
-            C74,193 78,174 96,163
-            C116,150 142,150 160,158
-          " stroke="rgba(255,255,255,.2)" stroke-width="9" fill="none" stroke-linecap="round"/>
-
+          <path d="M82,210 C68,194 72,172 92,160 C114,146 142,146 162,155 C182,164 196,180 196,200 C196,216 188,228 172,234 C158,238 142,236 130,228" stroke="url(#swirl-grad)" stroke-width="30" fill="none" stroke-linecap="round"/>
+          <path d="M86,208 C74,193 78,174 96,163 C116,150 142,150 160,158" stroke="rgba(255,255,255,.20)" stroke-width="9" fill="none" stroke-linecap="round"/>
           <!-- Swirl turn 3 -->
-          <path d="
-            M96,154
-            C82,138 86,116 106,104
-            C126,92 154,92 170,104
-            C184,114 186,132 178,148
-            C170,162 156,170 140,170
-            C128,170 116,164 110,154
-          " stroke="url(#swirl-grad)" stroke-width="26" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="
-            M100,152
-            C88,137 92,118 110,107
-            C128,96 154,97 168,108
-          " stroke="rgba(255,255,255,.18)" stroke-width="8" fill="none" stroke-linecap="round"/>
-
+          <path d="M96,154 C82,138 86,116 106,104 C126,92 154,92 170,104 C184,114 186,132 178,148 C170,162 156,170 140,170 C128,170 116,164 110,154" stroke="url(#swirl-grad)" stroke-width="26" fill="none" stroke-linecap="round"/>
+          <path d="M100,152 C88,137 92,118 110,107 C128,96 154,97 168,108" stroke="rgba(255,255,255,.18)" stroke-width="8" fill="none" stroke-linecap="round"/>
           <!-- Swirl turn 4 -->
-          <path d="
-            M110,100
-            C100,84 106,64 122,54
-            C138,44 160,46 170,60
-            C178,72 176,90 166,100
-            C158,108 146,112 136,110
-            C126,108 118,102 114,94
-          " stroke="url(#swirl-grad)" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="
-            M114,98
-            C105,83 110,66 124,57
-            C140,47 160,50 168,63
-          " stroke="rgba(255,255,255,.16)" stroke-width="7" fill="none" stroke-linecap="round"/>
-
-          <!-- Swirl turn 5 — narrowing -->
-          <path d="
-            M120,50
-            C114,36 118,20 130,13
-            C142,6 156,10 162,22
-            C166,32 162,46 152,52
-            C144,58 134,56 128,50
-          " stroke="url(#swirl-grad)" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="
-            M123,48
-            C118,36 122,22 132,15
-            C142,8 154,12 159,22
-          " stroke="rgba(255,255,255,.15)" stroke-width="6" fill="none" stroke-linecap="round"/>
-
+          <path d="M110,100 C100,84 106,64 122,54 C138,44 160,46 170,60 C178,72 176,90 166,100 C158,108 146,112 136,110 C126,108 118,102 114,94" stroke="url(#swirl-grad)" stroke-width="22" fill="none" stroke-linecap="round"/>
+          <path d="M114,98 C105,83 110,66 124,57 C140,47 160,50 168,63" stroke="rgba(255,255,255,.16)" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <!-- Swirl turn 5 -->
+          <path d="M120,50 C114,36 118,20 130,13 C142,6 156,10 162,22 C166,32 162,46 152,52 C144,58 134,56 128,50" stroke="url(#swirl-grad)" stroke-width="18" fill="none" stroke-linecap="round"/>
+          <path d="M123,48 C118,36 122,22 132,15 C142,8 154,12 159,22" stroke="rgba(255,255,255,.15)" stroke-width="6" fill="none" stroke-linecap="round"/>
           <!-- Swirl tip -->
-          <path d="
-            M132,12
-            C130,4 136,-2 142,0
-            C148,2 150,10 148,16
-          " stroke="url(#swirl-grad)" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <!-- Tip dot / cherry -->
-          <circle cx="144" cy="2" r="8" fill="#FFD23F" stroke="#3A2238" stroke-width="1.5"/>
-          <circle cx="142" cy="0" r="3.5" fill="#ff5555"/>
+          <path d="M132,12 C130,4 136,-2 142,0 C148,2 150,10 148,16" stroke="url(#swirl-grad)" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <!-- Cherry on top -->
+          <circle cx="144" cy="2" r="8" fill="#FFD23F"/>
+          <circle cx="142" cy="0" r="3.5" fill="#ff5c5c"/>
         </svg>
       </div>
     </div>
   </div>
 
-  <!-- Wave transition -->
-  <svg class="hero-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M0,35 C200,80 400,0 600,40 C800,80 1000,10 1200,45 C1320,65 1380,50 1440,35 L1440,70 L0,70 Z" fill="#ffffff"/>
+  <!-- Scalloped bottom edge of hero -->
+  <svg class="hero-scallop" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="
+      M0,20
+      C60,60 120,60 180,20
+      C240,-20 300,-20 360,20
+      C420,60 480,60 540,20
+      C600,-20 660,-20 720,20
+      C780,60 840,60 900,20
+      C960,-20 1020,-20 1080,20
+      C1140,60 1200,60 1260,20
+      C1320,-20 1380,-20 1440,20
+      L1440,90 L0,90 Z
+    " fill="#ffffff"/>
   </svg>
 </section>
 
@@ -918,148 +1015,119 @@
 ══════════════════════════════════════════════════════════════════ -->
 <section id="menu" aria-labelledby="menu-heading">
   <div class="container">
-    <div data-reveal>
-      <span class="section-label">What We Scoop</span>
+
+    <div class="section-head" data-reveal>
       <h2 class="section-title" id="menu-heading">What's on the Menu</h2>
-      <p class="section-sub">Classic flavors, fresh every day. There's something for every sweet tooth at Mickey's.</p>
+      <p class="section-sub">Classic flavors, scooped fresh every day. Something for every sweet tooth.</p>
     </div>
 
-    <div class="menu-cards" role="list">
+    <!-- Asymmetric 2-column grid: feature card left + 2x2 grid right -->
+    <div class="menu-grid">
 
-      <!-- Card 1: Soft-serve & twists -->
-      <article class="menu-card menu-card--pink" role="listitem" data-reveal data-reveal-delay="1">
-        <div class="card-icon card-icon--lg" aria-hidden="true">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="twirl1" x1="10" y1="5" x2="54" y2="58" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#FFD23F"/>
-                <stop offset="100%" stop-color="#FF7AA2"/>
-              </linearGradient>
-            </defs>
-            <!-- Twist swirl icon -->
-            <path d="M32,60 L20,44 L44,44 Z" fill="#3A2238"/>
-            <ellipse cx="32" cy="44" rx="12" ry="3.5" fill="url(#twirl1)"/>
-            <path d="M20,40 C14,34 16,24 24,20 C32,16 40,20 42,28 C44,34 40,40 34,42" stroke="url(#twirl1)" stroke-width="7" fill="none" stroke-linecap="round"/>
-            <path d="M24,20 C18,14 20,6 28,4 C36,2 42,8 40,16" stroke="#ffaac4" stroke-width="6" fill="none" stroke-linecap="round"/>
-            <circle cx="40" cy="16" r="4" fill="#FFD23F" stroke="#3A2238" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <h3>Soft-Serve &amp; Twists</h3>
-        <p>The classic — choose vanilla, chocolate, or a twist! Swirled fresh, every single order.</p>
-        <a href="https://cal.com/mickeys-dairy-twist" class="card-btn" target="_blank" rel="noopener" aria-label="See today's soft-serve flavors at Mickey's">See today's flavors</a>
-      </article>
+      <!-- Feature card: Soft-Serve (tall, spanning full left column) -->
+      <div class="menu-feature">
+        <article class="menu-card menu-card--pink menu-feature-card" data-reveal>
+          <div>
+            <div class="card-icon" aria-hidden="true">
+              <!-- Refined soft-serve swirl icon -->
+              <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="icon-grad-1" x1="10" y1="5" x2="62" y2="66" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#FFD23F"/>
+                    <stop offset="100%" stop-color="#FF7AA2"/>
+                  </linearGradient>
+                </defs>
+                <path d="M28,68 L18,50 L50,50 Z" fill="#3A2238"/>
+                <ellipse cx="34" cy="50" rx="16" ry="4.5" fill="url(#icon-grad-1)"/>
+                <path d="M18,46 C10,38 14,26 24,22 C34,18 44,22 48,30 C52,38 46,46 38,48" stroke="url(#icon-grad-1)" stroke-width="9" fill="none" stroke-linecap="round"/>
+                <path d="M22,22 C14,14 18,4 28,2 C38,-1 48,6 46,16" stroke="#ffaac4" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <circle cx="46" cy="16" r="5" fill="#FFD23F"/>
+              </svg>
+            </div>
+            <h3>Soft-Serve &amp; Twists</h3>
+            <p>The classic we're famous for. Vanilla, chocolate, or a swirled twist - churned fresh each morning for that perfect ribbon.</p>
+          </div>
+          <a href="https://calendly.com/mickeys-dairy-twist" class="card-link" target="_blank" rel="noopener" aria-label="See soft-serve flavors at Mickey's Dairy Twist">
+            See today's flavors
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M8 4l3 3-3 3" stroke="#3A2238" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+      </div>
 
-      <!-- Card 2: Hand-dipped cones -->
-      <article class="menu-card menu-card--sky" role="listitem" data-reveal data-reveal-delay="2">
-        <div class="card-icon card-icon--md" aria-hidden="true">
-          <svg width="52" height="64" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="dip1" x1="0" y1="0" x2="52" y2="40" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#5FC9E8"/>
-                <stop offset="100%" stop-color="#3A2238"/>
-              </linearGradient>
-            </defs>
-            <!-- Scoop -->
-            <circle cx="26" cy="22" r="18" fill="#5FC9E8" stroke="#3A2238" stroke-width="2"/>
-            <!-- Dip coating -->
-            <path d="M10,28 Q8,36 12,38 Q26,46 40,38 Q44,36 42,28" fill="#3A2238" opacity=".85"/>
-            <!-- Drip details -->
-            <path d="M16,36 Q14,42 16,46" stroke="#3A2238" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
-            <path d="M36,37 Q38,44 36,48" stroke="#3A2238" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
-            <!-- Cone -->
-            <path d="M14,34 L26,63 L38,34 Z" fill="#c8883a" stroke="#3A2238" stroke-width="1.5"/>
-            <line x1="26" y1="34" x2="26" y2="63" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
-            <line x1="18" y1="34" x2="22" y2="54" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
-            <line x1="34" y1="34" x2="30" y2="54" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
-          </svg>
-        </div>
-        <h3>Hand-Dipped Cones</h3>
-        <p>Your scoop, your shell. Pick from sprinkles, chocolate shell dip, and more coatings.</p>
-        <a href="https://cal.com/mickeys-dairy-twist" class="card-btn" target="_blank" rel="noopener" aria-label="See hand-dipped cone options at Mickey's">See today's flavors</a>
-      </article>
+      <!-- 2x2 grid of secondary items -->
+      <div class="menu-secondary">
 
-      <!-- Card 3: Sundaes & banana splits -->
-      <article class="menu-card menu-card--pop" role="listitem" data-reveal data-reveal-delay="3">
-        <div class="card-icon card-icon--lg" aria-hidden="true">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cup -->
-            <path d="M14,28 L18,58 L46,58 L50,28 Z" fill="#FFD23F" stroke="#3A2238" stroke-width="2"/>
-            <line x1="32" y1="28" x2="32" y2="58" stroke="rgba(58,34,56,.1)" stroke-width="1"/>
-            <!-- Scoops -->
-            <circle cx="22" cy="25" r="11" fill="#FF7AA2" stroke="#3A2238" stroke-width="1.8"/>
-            <circle cx="38" cy="23" r="11" fill="#5FC9E8" stroke="#3A2238" stroke-width="1.8"/>
-            <!-- Whipped cream top -->
-            <path d="M18,18 C18,10 26,6 32,10 C38,6 46,10 46,18" stroke="#FFF7FB" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <!-- Cherry -->
-            <circle cx="32" cy="6" r="4.5" fill="#ff4466" stroke="#3A2238" stroke-width="1.5"/>
-            <line x1="32" y1="2" x2="36" y2="-2" stroke="#3A2238" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Spoon -->
-            <path d="M48,40 L56,32 M56,32 C58,30 60,28 58,26 C56,24 54,26 56,28" stroke="#3A2238" stroke-width="2" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Sundaes &amp; Banana Splits</h3>
-        <p>Hot fudge, caramel, strawberry — piled high with whip, nuts, and a cherry on top.</p>
-        <a href="https://cal.com/mickeys-dairy-twist" class="card-btn" target="_blank" rel="noopener" aria-label="See sundae and banana split options at Mickey's">See today's flavors</a>
-      </article>
+        <!-- Hand-dipped cones -->
+        <article class="menu-card menu-card--sky" data-reveal data-reveal-delay="1">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="52" height="60" viewBox="0 0 52 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="20" r="16" fill="#5FC9E8"/>
+              <path d="M12,26 Q10,34 14,36 Q26,44 38,36 Q42,34 40,26" fill="#3A2238" opacity=".8"/>
+              <path d="M16,34 Q14,40 16,44" stroke="#3A2238" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
+              <path d="M34,35 Q36,42 34,46" stroke="#3A2238" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
+              <path d="M16,32 L26,59 L36,32 Z" fill="#c8883a"/>
+              <line x1="26" y1="32" x2="26" y2="59" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+            </svg>
+          </div>
+          <h3>Hand-Dipped Cones</h3>
+          <p>Your scoop, your shell. Chocolate dip, sprinkles, and more coatings.</p>
+          <a href="https://calendly.com/mickeys-dairy-twist" class="card-link" target="_blank" rel="noopener" aria-label="See hand-dipped cone options">See options</a>
+        </article>
 
-      <!-- Card 4: Shakes & malts -->
-      <article class="menu-card menu-card--mint" role="listitem" data-reveal data-reveal-delay="4">
-        <div class="card-icon card-icon--md" aria-hidden="true">
-          <svg width="52" height="68" viewBox="0 0 52 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Straw -->
-            <rect x="34" y="2" width="5" height="30" rx="2.5" fill="#FF7AA2" stroke="#3A2238" stroke-width="1"/>
-            <!-- Cup body -->
-            <path d="M8,20 L12,64 L40,64 L44,20 Z" fill="#FFF7FB" stroke="#3A2238" stroke-width="2"/>
-            <!-- Liquid fill -->
-            <path d="M9.5,28 L13,64 L39,64 L42.5,28 Z" fill="#5FC9E8" opacity=".55"/>
-            <!-- Whip top -->
-            <ellipse cx="26" cy="20" rx="18" ry="6" fill="#FFE3EE" stroke="#3A2238" stroke-width="1.5"/>
-            <path d="M12,18 Q18,12 26,16 Q34,12 40,18" stroke="#FFF7FB" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <!-- Bubbles -->
-            <circle cx="16" cy="40" r="2.5" fill="rgba(255,255,255,.6)" stroke="rgba(95,201,232,.5)" stroke-width="1"/>
-            <circle cx="30" cy="48" r="2" fill="rgba(255,255,255,.5)" stroke="rgba(95,201,232,.4)" stroke-width="1"/>
-            <circle cx="22" cy="55" r="1.5" fill="rgba(255,255,255,.5)" stroke="rgba(95,201,232,.4)" stroke-width=".8"/>
-          </svg>
-        </div>
-        <h3>Shakes &amp; Malts</h3>
-        <p>Hand-spun thick shakes and old-fashioned malts. Vanilla, chocolate, strawberry, and seasonal specials.</p>
-        <a href="https://cal.com/mickeys-dairy-twist" class="card-btn" target="_blank" rel="noopener" aria-label="See shake and malt options at Mickey's">See today's flavors</a>
-      </article>
+        <!-- Sundaes & banana splits -->
+        <article class="menu-card menu-card--pop" data-reveal data-reveal-delay="2">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12,24 L16,52 L40,52 L44,24 Z" fill="#FFD23F"/>
+              <circle cx="20" cy="21" r="10" fill="#FF7AA2"/>
+              <circle cx="34" cy="20" r="10" fill="#5FC9E8"/>
+              <path d="M14,16 C14,8 22,4 28,8 C34,4 42,8 42,16" stroke="#FFF7FB" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <circle cx="28" cy="4" r="4" fill="#ff4466"/>
+            </svg>
+          </div>
+          <h3>Sundaes &amp; Splits</h3>
+          <p>Hot fudge, caramel, strawberry piled high with whip and a cherry on top.</p>
+          <a href="https://calendly.com/mickeys-dairy-twist" class="card-link" target="_blank" rel="noopener" aria-label="See sundae options">See options</a>
+        </article>
 
-      <!-- Card 5: Flurries & floats -->
-      <article class="menu-card menu-card--lav" role="listitem" data-reveal data-reveal-delay="5">
-        <div class="card-icon card-icon--md" aria-hidden="true">
-          <svg width="52" height="68" viewBox="0 0 52 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="float-grad" x1="0" y1="0" x2="52" y2="68" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#FFD23F"/>
-                <stop offset="100%" stop-color="#5FC9E8"/>
-              </linearGradient>
-            </defs>
-            <!-- Straw 1 -->
-            <rect x="28" y="1" width="4" height="26" rx="2" fill="#FFD23F" stroke="#3A2238" stroke-width="1"/>
-            <!-- Straw 2 -->
-            <rect x="20" y="3" width="4" height="24" rx="2" fill="#FF7AA2" stroke="#3A2238" stroke-width="1"/>
-            <!-- Glass -->
-            <path d="M6,22 L10,64 L42,64 L46,22 Z" fill="rgba(255,255,255,.7)" stroke="#3A2238" stroke-width="2"/>
-            <!-- Soda fill -->
-            <path d="M7.5,30 L11,64 L41,64 L44.5,30 Z" fill="url(#float-grad)" opacity=".45"/>
-            <!-- Ice cream scoop floating -->
-            <circle cx="26" cy="24" r="13" fill="#FF7AA2" stroke="#3A2238" stroke-width="1.8"/>
-            <path d="M14,24 C14,17 20,14 26,14" stroke="rgba(255,255,255,.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <!-- Bubbles -->
-            <circle cx="14" cy="44" r="3" fill="rgba(255,255,255,.65)" stroke="rgba(95,201,232,.5)" stroke-width="1"/>
-            <circle cx="36" cy="36" r="2.2" fill="rgba(255,255,255,.55)" stroke="rgba(95,201,232,.4)" stroke-width="1"/>
-            <circle cx="24" cy="52" r="2.5" fill="rgba(255,255,255,.6)" stroke="rgba(95,201,232,.45)" stroke-width="1"/>
-            <circle cx="38" cy="50" r="1.8" fill="rgba(255,255,255,.5)" stroke="rgba(95,201,232,.4)" stroke-width=".8"/>
-          </svg>
-        </div>
-        <h3>Flurries &amp; Floats</h3>
-        <p>Mix-in flurries packed with candy and toppings, or a creamy root beer float that hits different.</p>
-        <a href="https://cal.com/mickeys-dairy-twist" class="card-btn" target="_blank" rel="noopener" aria-label="See flurry and float options at Mickey's">See today's flavors</a>
-      </article>
+        <!-- Shakes & malts -->
+        <article class="menu-card menu-card--mint" data-reveal data-reveal-delay="3">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="48" height="60" viewBox="0 0 48 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="30" y="2" width="5" height="26" rx="2.5" fill="#FF7AA2"/>
+              <path d="M6,18 L10,58 L38,58 L42,18 Z" fill="#FFF7FB" stroke="#3A2238" stroke-width="1.5"/>
+              <path d="M7.5,26 L11,58 L37,58 L40.5,26 Z" fill="#5FC9E8" opacity=".5"/>
+              <ellipse cx="24" cy="18" rx="18" ry="6" fill="#FFE3EE" stroke="#3A2238" stroke-width="1.2"/>
+              <circle cx="14" cy="36" r="2" fill="rgba(255,255,255,.7)"/>
+              <circle cx="28" cy="44" r="1.5" fill="rgba(255,255,255,.6)"/>
+            </svg>
+          </div>
+          <h3>Shakes &amp; Malts</h3>
+          <p>Hand-spun thick shakes and old-school malts. Seasonal specials always available.</p>
+          <a href="https://calendly.com/mickeys-dairy-twist" class="card-link" target="_blank" rel="noopener" aria-label="See shake options">See options</a>
+        </article>
 
+        <!-- Flurries & floats -->
+        <article class="menu-card menu-card--lilac" data-reveal data-reveal-delay="4">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="48" height="60" viewBox="0 0 48 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="26" y="2" width="4" height="22" rx="2" fill="#FFD23F"/>
+              <rect x="18" y="4" width="4" height="20" rx="2" fill="#FF7AA2"/>
+              <path d="M4,20 L8,58 L40,58 L44,20 Z" fill="rgba(255,255,255,.7)" stroke="#3A2238" stroke-width="1.5"/>
+              <path d="M5.5,28 L9,58 L39,58 L42.5,28 Z" fill="#5FC9E8" opacity=".38"/>
+              <circle cx="24" cy="22" r="12" fill="#FF7AA2"/>
+              <circle cx="16" cy="40" r="2.5" fill="rgba(255,255,255,.7)"/>
+              <circle cx="34" cy="34" r="2" fill="rgba(255,255,255,.6)"/>
+            </svg>
+          </div>
+          <h3>Flurries &amp; Floats</h3>
+          <p>Mix-in flurries or a creamy root beer float that hits different on a hot day.</p>
+          <a href="https://calendly.com/mickeys-dairy-twist" class="card-link" target="_blank" rel="noopener" aria-label="See flurry and float options">See options</a>
+        </article>
+
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -1067,84 +1135,75 @@
      4. ABOUT
 ══════════════════════════════════════════════════════════════════ -->
 <section id="about" aria-labelledby="about-heading">
-  <!-- Scalloped / wave top edge -->
-  <svg class="about-scallop" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="
-      M0,0 L0,40
-      C60,72 120,72 180,40
-      C240,8  300,8  360,40
-      C420,72 480,72 540,40
-      C600,8  660,8  720,40
-      C780,72 840,72 900,40
-      C960,8  1020,8 1080,40
-      C1140,72 1200,72 1260,40
-      C1320,8  1380,8 1440,40
-      L1440,0 Z
-    " fill="#ffffff"/>
+
+  <!-- Scalloped transition from white menu section -->
+  <svg class="scallop-edge" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;background:#fff;">
     <path d="
       M0,40
       C60,72 120,72 180,40
-      C240,8  300,8  360,40
+      C240,8 300,8 360,40
       C420,72 480,72 540,40
-      C600,8  660,8  720,40
+      C600,8 660,8 720,40
       C780,72 840,72 900,40
-      C960,8  1020,8 1080,40
+      C960,8 1020,8 1080,40
       C1140,72 1200,72 1260,40
-      C1320,8  1380,8 1440,40
+      C1320,8 1380,8 1440,40
       L1440,80 L0,80 Z
     " fill="#FFF7FB"/>
   </svg>
 
-  <div class="container">
+  <div class="container" style="padding-bottom: 96px;">
     <div class="about-inner">
+
       <div class="about-copy">
-        <span class="section-label" data-reveal>Our Story</span>
         <h2 class="section-title" id="about-heading" data-reveal>A Saline Summer Tradition</h2>
-        <p data-reveal>There's a moment every summer when the air smells like sunscreen and fresh-cut grass, and the only thing that makes sense is a soft-serve cone from Mickey's. We've been that moment for Saline families for years — a friendly walk-up window on West Michigan Ave where the ice cream is real, the smiles are genuine, and the line moves fast because we've been doing this long enough to know what we're doing.</p>
-        <p data-reveal data-reveal-delay="1">Mickey's Dairy Twist is family-owned and proud of it. Every day we open those windows, we're doing it fresh — real soft-serve mix, not pre-made hard-pack, churned right here so the texture is exactly what a summer cone should be. From banana splits big enough to share to hand-spun malts that take you straight back to 1962, this is the real thing. Come find us. We'll be here.</p>
+        <p data-reveal>There's a moment every summer when the air smells like sunscreen and fresh-cut grass, and the only thing that makes sense is a soft-serve cone from Mickey's. We've been that moment for Saline families for years: a friendly walk-up window on West Michigan Ave where the ice cream is real, the smiles are genuine, and the line moves fast.</p>
+        <p data-reveal data-reveal-delay="1">Mickey's Dairy Twist is family-owned and proud of it. Every day we open those windows, we're doing it fresh. Real soft-serve mix, not pre-made hard-pack, churned right here so the texture is exactly what a summer cone should be. From banana splits big enough to share to hand-spun malts that take you straight back to 1962, this is the real thing. Come find us.</p>
       </div>
 
-      <div class="about-badges" data-reveal data-reveal-delay="2">
-        <div class="badge badge--pop">
-          <div class="badge-stamp" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12,2 L14.4,8.8 L21.6,8.8 L15.6,13.2 L18,20 L12,15.6 L6,20 L8.4,13.2 L2.4,8.8 L9.6,8.8 Z" fill="#3A2238" opacity=".7"/>
+      <!-- Trust pillars -->
+      <div class="trust-pillars" data-reveal data-reveal-delay="2">
+        <div class="pillar pillar--pop">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M11,2 L13.2,8.1 L19.8,8.1 L14.3,12.1 L16.5,18.4 L11,14.4 L5.5,18.4 L7.7,12.1 L2.2,8.1 L8.8,8.1 Z" fill="#3A2238" opacity=".7"/>
             </svg>
           </div>
-          <div class="badge-text-group">
-            <span class="badge-title">Saline Summer Tradition</span>
-            <span class="badge-sub">A neighborhood fixture for years</span>
+          <div class="pillar-body">
+            <div class="pillar-title">Saline Summer Tradition</div>
+            <div class="pillar-sub">A neighborhood fixture for years</div>
           </div>
         </div>
 
-        <div class="badge badge--pink">
-          <div class="badge-stamp" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="8" r="4" stroke="#3A2238" stroke-width="2" fill="none"/>
-              <path d="M4,20 C4,15 8,12 12,12 C16,12 20,15 20,20" stroke="#3A2238" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <circle cx="6" cy="10" r="3" stroke="#3A2238" stroke-width="1.5" fill="none"/>
-              <circle cx="18" cy="10" r="3" stroke="#3A2238" stroke-width="1.5" fill="none"/>
+        <div class="pillar pillar--pink">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <circle cx="11" cy="7" r="3.5" stroke="#3A2238" stroke-width="1.8" fill="none"/>
+              <path d="M4,19 C4,14 7,11 11,11 C15,11 18,14 18,19" stroke="#3A2238" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <circle cx="5.5" cy="9" r="2.5" stroke="#3A2238" stroke-width="1.4" fill="none"/>
+              <circle cx="16.5" cy="9" r="2.5" stroke="#3A2238" stroke-width="1.4" fill="none"/>
             </svg>
           </div>
-          <div class="badge-text-group">
-            <span class="badge-title">Family-Owned &amp; Operated</span>
-            <span class="badge-sub">Neighbors serving neighbors</span>
+          <div class="pillar-body">
+            <div class="pillar-title">Family-Owned &amp; Operated</div>
+            <div class="pillar-sub">Neighbors serving neighbors</div>
           </div>
         </div>
 
-        <div class="badge badge--soft">
-          <div class="badge-stamp" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12,2 C8,2 5,6 5,10 C5,16 12,22 12,22 C12,22 19,16 19,10 C19,6 16,2 12,2 Z" stroke="#3A2238" stroke-width="2" fill="none"/>
-              <path d="M9,10 L11,12 L15,8" stroke="#3A2238" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="pillar pillar--sky">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M11,2 C7.5,2 4.5,5 4.5,8.5 C4.5,14 11,20 11,20 C11,20 17.5,14 17.5,8.5 C17.5,5 14.5,2 11,2 Z" stroke="#3A2238" stroke-width="1.8" fill="none"/>
+              <path d="M8,9 L10,11 L14,7" stroke="#3A2238" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <div class="badge-text-group">
-            <span class="badge-title">Real Soft-Serve, Made Fresh Daily</span>
-            <span class="badge-sub">No shortcuts, no compromises</span>
+          <div class="pillar-body">
+            <div class="pillar-title">Real Soft-Serve, Fresh Daily</div>
+            <div class="pillar-sub">No shortcuts, no compromises</div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1153,26 +1212,37 @@
      5. BOOKING / CONTACT
 ══════════════════════════════════════════════════════════════════ -->
 <section id="contact" aria-labelledby="contact-heading">
-  <!-- Wave top -->
-  <svg class="contact-wave-top" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;margin-bottom:-1px;">
-    <path d="M0,0 L0,30 C360,70 720,0 1080,40 C1260,60 1380,30 1440,20 L1440,0 Z" fill="#FFF7FB"/>
+
+  <!-- Scalloped top into pink band -->
+  <svg class="contact-scallop-top" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;background:#FFF7FB;">
+    <path d="
+      M0,40
+      C60,8 120,8 180,40
+      C240,72 300,72 360,40
+      C420,8 480,8 540,40
+      C600,72 660,72 720,40
+      C780,8 840,8 900,40
+      C960,72 1020,72 1080,40
+      C1140,8 1200,8 1260,40
+      C1320,72 1380,72 1440,40
+      L1440,80 L0,80 Z
+    " fill="#FF7AA2"/>
   </svg>
 
-  <div class="contact-gradient">
-    <div class="contact-overlay" aria-hidden="true"></div>
+  <div class="contact-band">
     <div class="contact-body">
       <div class="container">
-        <span class="section-label" data-reveal>Come Find Us</span>
-        <h2 class="section-title" id="contact-heading" data-reveal>Find Us &amp; Place Your Order</h2>
-        <p data-reveal>Swing by the window, call ahead, or book party catering online. We make it easy.</p>
+
+        <h2 class="contact-headline" id="contact-heading" data-reveal>Find Us &amp; Book</h2>
+        <p class="contact-lead" data-reveal>Swing by the window, call ahead, or book party catering online. We make it easy.</p>
 
         <div class="contact-cols">
           <div class="contact-info" data-reveal>
-            <!-- Address -->
+
             <div class="contact-row">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <path d="M14,2 C9,2 5,6 5,11 C5,18 14,26 14,26 C14,26 23,18 23,11 C23,6 19,2 14,2 Z" fill="rgba(255,255,255,.25)" stroke="white" stroke-width="1.8"/>
-                <circle cx="14" cy="11" r="3.5" fill="white"/>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                <path d="M13,2 C8.5,2 5,5.5 5,10 C5,16.5 13,24 13,24 C13,24 21,16.5 21,10 C21,5.5 17.5,2 13,2 Z" fill="rgba(58,34,56,.15)" stroke="#3A2238" stroke-width="1.6"/>
+                <circle cx="13" cy="10" r="3" fill="#3A2238"/>
               </svg>
               <div class="contact-row-text">
                 <h4>Address</h4>
@@ -1180,40 +1250,41 @@
               </div>
             </div>
 
-            <!-- Phone -->
             <div class="contact-row">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <rect x="7" y="3" width="14" height="22" rx="3" fill="rgba(255,255,255,.2)" stroke="white" stroke-width="1.8"/>
-                <circle cx="14" cy="21" r="1.5" fill="white"/>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                <rect x="6" y="2" width="14" height="22" rx="3" fill="rgba(58,34,56,.15)" stroke="#3A2238" stroke-width="1.6"/>
+                <circle cx="13" cy="20" r="1.5" fill="#3A2238"/>
               </svg>
               <div class="contact-row-text">
                 <h4>Phone</h4>
                 <a href="tel:+17344706253" aria-label="Call Mickey's Dairy Twist at (734) 470-6253">(734) 470-6253</a>
-                <p class="contact-note">Our AI receptionist answers 24/7 for seasonal hours &amp; party order inquiries.</p>
+                <p class="contact-note">Our AI receptionist answers 24/7 for seasonal hours and party order inquiries.</p>
               </div>
             </div>
 
-            <a href="https://cal.com/mickeys-dairy-twist" class="btn btn-pop" target="_blank" rel="noopener" aria-label="Book party catering or place order at Mickey's Dairy Twist" style="margin-top:28px;">
-              Order / Party Catering
-            </a>
+            <div style="margin-top: 32px;">
+              <a href="https://calendly.com/mickeys-dairy-twist" class="btn btn-pop" target="_blank" rel="noopener" aria-label="Book party catering or order online at Mickey's Dairy Twist">
+                Book Online
+              </a>
+            </div>
           </div>
 
-          <!-- Hours table -->
+          <!-- Hours card -->
           <div class="hours-card" data-reveal data-reveal-delay="2">
             <h4>Seasonal Hours</h4>
             <table class="hours-table" aria-label="Mickey's Dairy Twist hours of operation">
               <tbody>
                 <tr>
-                  <td>Mon – Thu</td>
-                  <td>12:00 PM – 9:00 PM</td>
+                  <td>Mon - Thu</td>
+                  <td>12:00 PM - 9:00 PM</td>
                 </tr>
                 <tr>
-                  <td>Fri – Sat</td>
-                  <td>12:00 PM – 10:00 PM</td>
+                  <td>Fri - Sat</td>
+                  <td>12:00 PM - 10:00 PM</td>
                 </tr>
                 <tr>
                   <td>Sunday</td>
-                  <td>12:00 PM – 9:00 PM</td>
+                  <td>12:00 PM - 9:00 PM</td>
                 </tr>
                 <tr>
                   <td class="closed">Off-season</td>
@@ -1221,16 +1292,28 @@
                 </tr>
               </tbody>
             </table>
-            <p class="hours-note">Hours subject to change — call or check social media for daily updates.</p>
+            <p class="hours-note">Hours subject to change. Call or check social media for daily updates.</p>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
-  <!-- Wave bottom -->
-  <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;width:100%;margin-top:-1px;">
-    <path d="M0,50 L0,25 C360,-10 720,60 1080,20 C1260,0 1380,35 1440,50 Z" fill="#3A2238"/>
+  <!-- Scalloped bottom edge into footer -->
+  <svg class="contact-scallop-bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;background:#FF7AA2;">
+    <path d="
+      M0,40
+      C60,72 120,72 180,40
+      C240,8 300,8 360,40
+      C420,72 480,72 540,40
+      C600,8 660,8 720,40
+      C780,72 840,72 900,40
+      C960,8 1020,8 1080,40
+      C1140,72 1200,72 1260,40
+      C1320,8 1380,8 1440,40
+      L1440,80 L0,80 Z
+    " fill="#3A2238"/>
   </svg>
 </section>
 
@@ -1240,19 +1323,20 @@
 <footer role="contentinfo">
   <div class="container">
     <div class="footer-inner">
+
       <div class="footer-brand">
-        <a href="#" class="wordmark" aria-label="Mickey's Dairy Twist — back to top">
+        <a href="#" class="wordmark" aria-label="Mickey's Dairy Twist - back to top">
           <svg width="28" height="34" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <polygon points="8,28 28,28 18,44" fill="rgba(255,255,255,.6)"/>
+            <polygon points="8,28 28,28 18,44" fill="rgba(255,255,255,.55)"/>
             <ellipse cx="18" cy="26" rx="10" ry="3.5" fill="#FF7AA2"/>
             <path d="M8,24 Q4,20 10,17 Q16,14 22,17 Q28,20 24,23" stroke="#FF7AA2" stroke-width="5" fill="none" stroke-linecap="round"/>
             <path d="M9,17 Q5,13 11,10 Q17,7 22,10 Q27,13 23,16" stroke="#ffaac4" stroke-width="4.5" fill="none" stroke-linecap="round"/>
             <path d="M10,10 Q7,7 13,4 Q18,1.5 22,5 Q24.5,7.5 22,9" stroke="#FFD23F" stroke-width="3.5" fill="none" stroke-linecap="round"/>
             <circle cx="21" cy="5" r="2.2" fill="#FF7AA2"/>
           </svg>
-          <span class="wordmark-text">Mickey's <span>Dairy Twist</span></span>
+          <span class="wordmark-text">Mickey's <em>Dairy Twist</em></span>
         </a>
-        <p class="footer-tagline">"Soft-serve summers in Saline."</p>
+        <p class="footer-tagline">Soft-serve summers in Saline.</p>
       </div>
 
       <div class="footer-col">
@@ -1263,20 +1347,24 @@
       </div>
 
       <div class="footer-col">
-        <h5>Order &amp; Catering</h5>
-        <a href="https://cal.com/mickeys-dairy-twist" target="_blank" rel="noopener" aria-label="Book online at Mickey's Dairy Twist">Book Online</a>
+        <h5>Order &amp; Book</h5>
+        <a href="https://calendly.com/mickeys-dairy-twist" target="_blank" rel="noopener" aria-label="Book online at Mickey's Dairy Twist">Book Online</a>
         <a href="#menu">Our Menu</a>
         <a href="#about">Our Story</a>
       </div>
+
     </div>
+
+    <hr class="footer-divider"/>
 
     <div class="footer-bottom">
       <p>&copy; 2026 Mickey's Dairy Twist. All rights reserved.</p>
       <p><a href="#" aria-label="Site built by Local Agency">Site by Local Agency</a></p>
     </div>
-    <p class="footer-ai-note">Bookings &amp; inquiries handled 24/7 by our AI receptionist.</p>
+    <p class="footer-ai-note">Bookings and inquiries handled 24/7 by our AI receptionist.</p>
   </div>
 </footer>
+
 </main>
 
 <script>
@@ -1285,24 +1373,18 @@
     var btn = document.getElementById('hamburger-btn');
     var nav = document.getElementById('mobile-nav');
     if (!btn || !nav) return;
-
     var links = nav.querySelectorAll('.mobile-link');
-
     btn.addEventListener('click', function() {
       var expanded = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!expanded));
       nav.classList.toggle('open', !expanded);
     });
-
-    // Close on link click
     links.forEach(function(link) {
       link.addEventListener('click', function() {
         btn.setAttribute('aria-expanded', 'false');
         nav.classList.remove('open');
       });
     });
-
-    // Close on outside click
     document.addEventListener('click', function(e) {
       if (!btn.contains(e.target) && !nav.contains(e.target)) {
         btn.setAttribute('aria-expanded', 'false');
@@ -1311,16 +1393,12 @@
     });
   })();
 
-  // ─── Sticky header scroll effect ─────────────────────────────
+  // ─── Sticky header scroll class ─────────────────────────────
   (function() {
     var header = document.getElementById('site-header');
     if (!header) return;
     function onScroll() {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
+      header.classList.toggle('scrolled', window.scrollY > 50);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -1328,14 +1406,17 @@
 
   // ─── Scroll reveal (IntersectionObserver) ────────────────────
   (function() {
-    if (!('IntersectionObserver' in window)) {
-      // Fallback: just show everything
+    // Respect prefers-reduced-motion
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.querySelectorAll('[data-reveal]').forEach(function(el) {
         el.classList.add('revealed');
       });
       return;
     }
-
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('[data-reveal]').forEach(function(el) { el.classList.add('revealed'); });
+      return;
+    }
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
@@ -1343,8 +1424,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
+    }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
     document.querySelectorAll('[data-reveal]').forEach(function(el) {
       observer.observe(el);
     });
@@ -1360,12 +1440,12 @@
         if (!target) return;
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Move focus for accessibility
         target.setAttribute('tabindex', '-1');
         target.focus({ preventScroll: true });
       });
     });
   })();
 </script>
+<a href="./call/" aria-label="Hear our AI receptionist sample call" style="position:fixed;right:18px;bottom:18px;z-index:99999;display:inline-flex;align-items:center;gap:8px;background:#FF7AA2;color:#fff;text-decoration:none;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:15px;padding:13px 18px;border-radius:999px;box-shadow:0 8px 26px rgba(0,0,0,.24)"><span style="font-size:13px">▶</span> Hear our AI receptionist</a>
 </body>
 </html>
